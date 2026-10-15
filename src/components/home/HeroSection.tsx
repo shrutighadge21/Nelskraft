@@ -25,20 +25,25 @@ const SLIDES: HeroSlide[] = [
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Automatic slideshow advancing every 5 seconds continuously (1 -> 2 -> 3 -> 1...)
+  // Slideshow advances automatically only when not paused by hover or user selection
   useEffect(() => {
+    if (isPaused) return;
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
-    }, 5000);
+    }, 7000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isPaused]);
 
   return (
     <section
       className="relative w-full min-h-[560px] md:min-h-[640px] lg:h-[86vh] max-h-[880px] overflow-hidden flex items-center bg-[#fbfbfb]"
       aria-label="Nelskraft Homepage Hero"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* Background Slideshow - 100% natural colors, full contrast & vivid details */}
       <div className="absolute inset-0 z-0">
@@ -104,15 +109,23 @@ export default function HeroSection() {
             Supplying durable refractory bricks, low-emission biomass fuels, and verified mineral raw materials engineered for severe industrial applications across India.
           </p>
 
-          {/* Subtle Visual Slide Progress Indicator */}
-          <div className="flex items-center gap-2 mt-8 pointer-events-none" aria-hidden="true">
-            {SLIDES.map((_, index) => (
-              <span
+          {/* Interactive Slide Selection Indicator */}
+          <div className="flex items-center gap-2.5 mt-8 z-30" role="tablist" aria-label="Hero slide switcher">
+            {SLIDES.map((slide, index) => (
+              <button
                 key={index}
-                className={`h-1.5 rounded-full transition-all duration-500 ${
+                type="button"
+                role="tab"
+                aria-selected={index === currentSlide}
+                aria-label={`Go to slide ${index + 1}: ${slide.alt}`}
+                onClick={() => {
+                  setCurrentSlide(index);
+                  setIsPaused(true);
+                }}
+                className={`h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#54a937] ${
                   index === currentSlide
-                    ? "w-7 bg-[#54a937]"
-                    : "w-2 bg-[#454545]/25"
+                    ? "w-8 bg-[#54a937]"
+                    : "w-2.5 bg-[#454545]/30 hover:bg-[#454545]/60"
                 }`}
               />
             ))}

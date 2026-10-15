@@ -53,6 +53,7 @@ export default function WhyChooseSection() {
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 80%",
+            once: true,
           },
           opacity: 0,
           y: 28,
@@ -66,6 +67,7 @@ export default function WhyChooseSection() {
           scrollTrigger: {
             trigger: blocksRef.current,
             start: "top 78%",
+            once: true,
           },
           opacity: 0,
           y: 32,

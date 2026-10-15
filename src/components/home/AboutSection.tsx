@@ -83,41 +83,30 @@ const CATEGORIES = [
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
     if (prefersReducedMotion) return;
 
     const ctx = gsap.context(() => {
-      // Subtle entrance animation on scroll
-      if (imageRef.current) {
-        gsap.from(imageRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-          },
-          opacity: 0,
-          y: 20,
-          duration: 0.75,
-          ease: "power2.out",
-        });
-      }
-
+      // Right Text Column Entrance
       if (textRef.current) {
         gsap.from(textRef.current.children, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 82%",
-          },
           opacity: 0,
-          y: 18,
-          duration: 0.7,
+          y: 20,
+          duration: 0.65,
           stagger: 0.08,
           ease: "power2.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            once: true,
+          },
         });
       }
     }, sectionRef);
@@ -129,15 +118,12 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative pt-8 sm:pt-12 md:pt-14 pb-14 sm:pb-16 md:pb-20 bg-[#FAF9F6] text-[#202522]"
+      className="relative pt-8 sm:pt-12 md:pt-14 pb-14 sm:pb-16 md:pb-20 bg-[#FAF9F6] text-[#202522] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-          {/* LEFT COLUMN: New About Us Image */}
-          <div
-            ref={imageRef}
-            className="lg:col-span-5 relative w-full aspect-[16/11] sm:aspect-[16/10] lg:aspect-[4/3.8] rounded-2xl overflow-hidden border border-[#e8e6df] shadow-xs bg-white"
-          >
+          {/* LEFT COLUMN: About Us Image */}
+          <div className="lg:col-span-5 relative w-full aspect-[16/11] sm:aspect-[16/10] lg:aspect-[4/3.8] rounded-2xl overflow-hidden border border-[#e8e6df] shadow-xs bg-[#EDEBE4]">
             <Image
               src="/images/about-refractory-new.jpg"
               alt="Industrial refractory bricks, curved kiln blocks, and materials stacked on wooden pallets in manufacturing facility"
@@ -177,18 +163,18 @@ export default function AboutSection() {
               {CATEGORIES.map((cat) => (
                 <div
                   key={cat.title}
-                  className="flex sm:flex-col items-start gap-3.5 sm:gap-2.5"
+                  className="group/col flex sm:flex-col items-start gap-3.5 sm:gap-2.5 transition-transform duration-200 hover:-translate-y-0.5"
                 >
                   {/* Small Circular Icon Badge */}
                   <div
-                    className={`w-11 h-11 rounded-full ${cat.bgColor} border ${cat.borderColor} flex items-center justify-center ${cat.iconColor} flex-shrink-0`}
+                    className={`w-11 h-11 rounded-full ${cat.bgColor} border ${cat.borderColor} flex items-center justify-center ${cat.iconColor} flex-shrink-0 transition-transform duration-200 group-hover/col:scale-110 shadow-2xs`}
                   >
                     {cat.icon}
                   </div>
 
                   {/* Category Title & Short Description */}
                   <div>
-                    <h3 className="text-sm sm:text-[15px] font-bold text-[#202522] leading-snug">
+                    <h3 className="text-sm sm:text-[15px] font-bold text-[#202522] group-hover/col:text-[#2d6b1f] transition-colors leading-snug">
                       {cat.title}
                     </h3>
                     <p className="text-xs text-[#555555] font-normal leading-relaxed mt-1">
@@ -202,7 +188,7 @@ export default function AboutSection() {
             {/* Learn More About Us Button */}
             <Link
               href="/about"
-              className="inline-flex items-center gap-2 bg-[#3e7828] hover:bg-[#346622] text-white px-6 py-2.5 rounded-lg text-sm font-semibold tracking-wide shadow-xs hover:shadow-md transition-all duration-200 group"
+              className="inline-flex items-center gap-2 bg-[#2d6b1f] hover:bg-[#235518] text-white px-6 py-2.5 rounded-lg text-sm font-semibold tracking-wide shadow-xs hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
             >
               <span>Learn More About Us</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />

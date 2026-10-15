@@ -1,151 +1,217 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, ChevronRight, ShieldCheck } from "lucide-react";
 import Logo from "./Logo";
 import { COMPANY_DETAILS, PRODUCT_CATEGORIES } from "@/data/catalogue";
 
 export default function Footer() {
+  const currentYear = 2026;
+
   return (
-    <footer className="bg-[#24352F] text-[#D1DCD6]">
-      {/* Main Footer Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          {/* Column 1: Brand & Tagline */}
-          <div className="lg:col-span-4 space-y-4 lg:border-r lg:border-white/10 lg:pr-8">
-            <Logo variant="light" />
-            <div className="pt-2 text-xs font-bold tracking-[0.15em] text-[#9db3a8] uppercase space-y-1">
-              <p>BUILDING DURABILITY.</p>
-              <p>ENABLING SUSTAINABILITY.</p>
+    <footer className="bg-[#0B130E] text-[#D8E2DC] border-t border-[#1C2C24]">
+      {/* Main Footer Body with 4 Aligned Columns and Thin Understated Vertical Separators */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-0">
+          
+          {/* ═══════ COLUMN 1 — COMPANY ═══════ */}
+          <div className="lg:col-span-4 lg:pr-10 lg:border-r lg:border-white/10 flex flex-col justify-between">
+            <div className="space-y-4">
+              {/* Existing Official Logo */}
+              <Logo variant="light" />
+
+              {/* Tagline in Subtle Brand Green */}
+              <div className="pt-1">
+                <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-[#78c454]">
+                  Building Durability. Enabling Sustainability.
+                </p>
+              </div>
+
+              {/* Concise Company Description */}
+              <p className="text-xs text-[#B4C2BA] leading-relaxed max-w-sm pt-1">
+                Supplying high-performance refractory products, sustainable biomass
+                fuels, and verified mineral materials engineered for severe
+                high-temperature industrial operations across India.
+              </p>
             </div>
-            <p className="text-xs text-[#D1DCD6] leading-relaxed max-w-sm pt-2">
-              Supplying high-performance refractory materials, sustainable
-              biomass fuels, and specialized industrial minerals with stringent
-              quality control and reliable delivery.
-            </p>
+
+            {/* Verified Company Credentials */}
+            <div className="pt-6 mt-6 border-t border-white/10 text-[11px] text-[#8EA096] font-mono space-y-1">
+              <div className="flex items-center gap-1.5 text-[#B4C2BA]">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#54a937] flex-shrink-0" />
+                <span className="font-sans font-semibold">Registered Entity</span>
+              </div>
+              <div className="tracking-wide">CIN: {COMPANY_DETAILS.cin}</div>
+              <div className="tracking-wide">GSTIN: {COMPANY_DETAILS.gstin}</div>
+            </div>
           </div>
 
-          {/* Column 2: Quick Links */}
-          <div className="lg:col-span-2 lg:border-r lg:border-white/10 lg:pr-4">
-            <h4 className="text-sm font-bold tracking-wider text-white mb-4">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5 text-xs text-[#D1DCD6]">
+          {/* ═══════ COLUMN 2 — QUICK LINKS ═══════ */}
+          <div className="lg:col-span-2 lg:px-8 lg:border-r lg:border-white/10">
+            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+              <span className="w-2.5 h-[2px] bg-[#54a937]" />
+              <span>QUICK LINKS</span>
+            </h3>
+
+            <ul className="space-y-3.5 text-xs text-[#B4C2BA]">
               <li>
                 <Link
                   href="/"
-                  className="hover:text-[#78A85A] transition-colors"
+                  className="group flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  Home
+                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                  <span>Home</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="hover:text-[#78A85A] transition-colors"
+                  className="group flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  About
+                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                  <span>About Us</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/products"
-                  className="hover:text-[#78A85A] transition-colors"
+                  className="group flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  Products
+                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                  <span>Products</span>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="hover:text-[#78A85A] transition-colors"
+                  className="group flex items-center gap-2 hover:text-white transition-colors"
                 >
-                  Contact
+                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                  <span>Contact Us</span>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Product Categories */}
-          <div className="lg:col-span-3 lg:border-r lg:border-white/10 lg:pr-6">
-            <h4 className="text-sm font-bold tracking-wider text-white mb-4">
-              Products
-            </h4>
-            <ul className="space-y-2.5 text-xs text-[#D1DCD6]">
+          {/* ═══════ COLUMN 3 — PRODUCTS ═══════ */}
+          <div className="lg:col-span-3 lg:px-8 lg:border-r lg:border-white/10">
+            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+              <span className="w-2.5 h-[2px] bg-[#54a937]" />
+              <span>PRODUCTS</span>
+            </h3>
+
+            <ul className="space-y-3.5 text-xs text-[#B4C2BA]">
               {PRODUCT_CATEGORIES.map((cat) => (
                 <li key={cat.id}>
                   <Link
                     href={`/products?category=${cat.id}`}
-                    className="hover:text-[#78A85A] transition-colors"
+                    className="group flex items-center gap-2 hover:text-white transition-colors"
                   >
-                    {cat.title}
+                    <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                    <span>{cat.title}</span>
                   </Link>
                 </li>
               ))}
-              <li className="pt-3 text-[11px] text-[#9db3a8] border-t border-white/5 space-y-0.5">
-                <div>CIN: {COMPANY_DETAILS.cin}</div>
-                <div>GST: {COMPANY_DETAILS.gstin}</div>
+              <li>
+                <Link
+                  href="/products"
+                  className="group flex items-center gap-2 text-[#78c454] hover:text-white font-medium transition-colors pt-2"
+                >
+                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                  <span>Explore Full Catalogue</span>
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Get in Touch */}
-          <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold tracking-wider text-white mb-4">
-              Get in Touch
-            </h4>
-            <ul className="space-y-3.5 text-xs text-[#D1DCD6]">
+          {/* ═══════ COLUMN 4 — GET IN TOUCH ═══════ */}
+          <div className="lg:col-span-3 lg:pl-8">
+            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+              <span className="w-2.5 h-[2px] bg-[#54a937]" />
+              <span>GET IN TOUCH</span>
+            </h3>
+
+            <ul className="space-y-4 text-xs text-[#B4C2BA]">
+              {/* Phone */}
               <li>
                 <a
                   href={`tel:${COMPANY_DETAILS.phone}`}
-                  className="flex items-start gap-2.5 hover:text-[#78A85A] transition-colors group"
+                  className="flex items-start gap-3 group hover:text-white transition-all duration-200 active:scale-[0.99]"
                 >
-                  <Phone className="w-4 h-4 text-[#78A85A] flex-shrink-0 mt-0.5" />
-                  <span className="group-hover:underline text-white font-medium">
-                    {COMPANY_DETAILS.phoneDisplay}
-                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#54a937] group-hover:bg-[#2d6b1f] group-hover:text-white group-hover:scale-105 transition-all duration-200 flex-shrink-0 mt-0.5">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
+                      Phone Number
+                    </span>
+                    <span className="text-white font-medium text-xs sm:text-[13px] group-hover:text-[#78c454] transition-colors">
+                      {COMPANY_DETAILS.phoneDisplay}
+                    </span>
+                  </div>
                 </a>
               </li>
+
+              {/* Email */}
               <li>
                 <a
                   href={`mailto:${COMPANY_DETAILS.email}`}
-                  className="flex items-start gap-2.5 hover:text-[#78A85A] transition-colors group"
+                  className="flex items-start gap-3 group hover:text-white transition-all duration-200 active:scale-[0.99]"
                 >
-                  <Mail className="w-4 h-4 text-[#78A85A] flex-shrink-0 mt-0.5" />
-                  <span className="group-hover:underline text-white font-medium">
-                    {COMPANY_DETAILS.email}
-                  </span>
+                  <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#54a937] group-hover:bg-[#2d6b1f] group-hover:text-white group-hover:scale-105 transition-all duration-200 flex-shrink-0 mt-0.5">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
+                      Email Address
+                    </span>
+                    <span className="text-white font-medium text-xs sm:text-[13px] group-hover:text-[#78c454] transition-colors">
+                      {COMPANY_DETAILS.email}
+                    </span>
+                  </div>
                 </a>
               </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#78A85A] flex-shrink-0 mt-0.5" />
-                <span className="leading-relaxed text-[#D1DCD6]">
-                  {COMPANY_DETAILS.address.full}
-                </span>
+
+              {/* Verified Address */}
+              <li className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-[#54a937] flex-shrink-0 mt-0.5">
+                  <MapPin className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5">
+                    Head Office
+                  </span>
+                  <p className="leading-relaxed text-[#B4C2BA] text-xs">
+                    {COMPANY_DETAILS.address.full}
+                  </p>
+                </div>
               </li>
             </ul>
           </div>
+
         </div>
       </div>
 
-      {/* Bottom Copyright Strip */}
-      <div className="bg-[#1B2924] border-t border-white/10 py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#a2b5ab]">
+      {/* ═══════ SEPARATE SLIM BOTTOM STRIP ═══════ */}
+      <div className="bg-[#060B08] border-t border-white/10 py-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8EA096]">
+          {/* Copyright notice */}
           <div>
-            © 2024 Nelskraft Refractory Pvt. Ltd. All rights reserved.
+            © {currentYear} Nelskraft Refractory Pvt. Ltd. All rights reserved.
           </div>
 
-          <div className="space-x-3">
+          {/* Legal and compliance links */}
+          <div className="flex items-center gap-4 text-xs">
             <Link
               href="/privacy"
               className="hover:text-white transition-colors"
             >
               Privacy Policy
             </Link>
-            <span>|</span>
+            <span className="text-white/20">•</span>
             <Link
               href="/terms"
               className="hover:text-white transition-colors"
             >
-              Terms & Conditions
+              Terms &amp; Conditions
             </Link>
           </div>
         </div>

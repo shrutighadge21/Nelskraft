@@ -6,7 +6,6 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, Truck, Layers } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import FallingLeaves from "./FallingLeaves";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,7 +18,7 @@ const CATEGORIES = [
     title: "Refractory Products",
     description:
       "Refractory bricks, powders, mortars and castables for industrial applications.",
-    image: "/images/about-refractory-new.jpg",
+    image: "/images/cat-refractory.jpg",
     alt: "Industrial refractory firebricks, powders, and high-temperature furnace lining components",
     href: "/products?category=refractory-products",
     iconBg: "bg-[#f8ede6] border-[#ecdcd0] text-[#984629]",
@@ -68,7 +67,7 @@ const CATEGORIES = [
   },
   {
     number: "03",
-    id: "industrial-minerals",
+    id: "mineral-materials",
     title: "Industrial Minerals",
     description:
       "Ball clay, silica sand and other mineral raw materials for industrial applications.",
@@ -123,52 +122,86 @@ export default function ProductCategoriesSection() {
     ).matches;
     if (prefersReducedMotion) return;
 
+    // Helper to check if element is already within or near viewport
+    const isAlreadyInView = (el: HTMLElement | null) => {
+      if (!el || typeof window === "undefined") return false;
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
     const ctx = gsap.context(() => {
       // Header entrance animation
       if (headerRef.current) {
-        gsap.from(headerRef.current, {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-          opacity: 0,
-          y: 28,
-          duration: 0.8,
-          ease: "power2.out",
-        });
+        if (isAlreadyInView(headerRef.current)) {
+          gsap.set(headerRef.current, { opacity: 1, y: 0, clearProps: "all" });
+        } else {
+          gsap.from(headerRef.current, {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: "power2.out",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
       }
 
       // Sequential cards entrance animation
+      // CRITICAL FIX: If already in view on mount or refresh, ensure full opacity immediately
       if (cardsRef.current) {
-        gsap.from(cardsRef.current.children, {
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 78%",
-          },
-          opacity: 0,
-          y: 35,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out",
-        });
+        if (isAlreadyInView(cardsRef.current)) {
+          gsap.set(cardsRef.current.children, { opacity: 1, y: 0, clearProps: "all" });
+        } else {
+          gsap.from(cardsRef.current.children, {
+            opacity: 0,
+            y: 25,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: cardsRef.current,
+              start: "top 85%",
+              once: true,
+            },
+          });
+        }
       }
 
       // Banner reveal
       if (bannerRef.current) {
-        gsap.from(bannerRef.current, {
-          scrollTrigger: {
-            trigger: bannerRef.current,
-            start: "top 85%",
-          },
-          opacity: 0,
-          y: 25,
-          duration: 0.8,
-          ease: "power2.out",
-        });
+        if (isAlreadyInView(bannerRef.current)) {
+          gsap.set(bannerRef.current, { opacity: 1, y: 0, clearProps: "all" });
+        } else {
+          gsap.from(bannerRef.current, {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: "power2.out",
+            clearProps: "all",
+            scrollTrigger: {
+              trigger: bannerRef.current,
+              start: "top 88%",
+              once: true,
+            },
+          });
+        }
       }
     }, sectionRef);
 
-    return () => ctx.revert();
+    // Refresh ScrollTrigger positions after page assets settle
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -178,9 +211,6 @@ export default function ProductCategoriesSection() {
       suppressHydrationWarning
       className="relative pb-14 md:pb-18 pt-8 md:pt-12 bg-[#FAF9F6] text-[#202522] overflow-hidden"
     >
-      {/* Falling Green Leaves Layer strictly behind Product Categories */}
-      <FallingLeaves />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         {/* Section Header */}
         <div
@@ -221,7 +251,7 @@ export default function ProductCategoriesSection() {
             <Link
               key={cat.id}
               href={cat.href}
-              className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#e8e6df] shadow-xs hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#54a937]"
+              className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#e8e6df] shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#54a937]"
             >
               {/* Card Image Container with Numbered Marker & Overlapping Icon Badge */}
               <div className="relative aspect-[16/11] w-full overflow-hidden bg-[#f0eee9]">
@@ -230,11 +260,11 @@ export default function ProductCategoriesSection() {
                   alt={cat.alt}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
                 />
 
                 {/* Numbered Marker Badge (Upper-Right) */}
-                <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-xs text-[#202522] font-mono text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-gray-100">
+                <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-xs text-[#202522] font-mono text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-gray-100 transition-colors group-hover:border-[#54a937]/40">
                   {cat.number}
                 </div>
 
@@ -249,7 +279,7 @@ export default function ProductCategoriesSection() {
               {/* Card Body */}
               <div className="pt-6 p-7 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="font-sans text-xl sm:text-[1.35rem] font-bold text-[#202522] group-hover:text-[#984629] transition-colors mb-2.5">
+                  <h3 className="font-sans text-xl sm:text-[1.35rem] font-bold text-[#202522] group-hover:text-[#2d6b1f] transition-colors duration-200 mb-2.5">
                     {cat.title}
                   </h3>
                   <p className="text-sm text-[#454545] font-normal leading-relaxed mb-6">
@@ -259,9 +289,9 @@ export default function ProductCategoriesSection() {
 
                 {/* Explore Products Action Link */}
                 <div className="pt-2 flex items-center">
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#3e7828] group-hover:text-[#2d581d] transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2d6b1f] group-hover:text-[#235518] transition-colors">
                     <span>Explore Products</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
                   </span>
                 </div>
               </div>

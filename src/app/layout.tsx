@@ -51,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} scroll-smooth`}>
+    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
       <body className="min-h-screen flex flex-col font-sans bg-white text-gray-900 antialiased selection:bg-[#54a937]/20 selection:text-[#000d15]">
         <Header />
         <main className="flex-1">{children}</main>

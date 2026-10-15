@@ -3,284 +3,548 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
-  Shield,
-  Target,
-  Workflow,
-  BarChart3,
-  CheckCircle,
+  ShieldCheck,
+  Search,
+  Layers,
+  Truck,
+  ChevronDown,
 } from "lucide-react";
 import { COMPANY_DETAILS } from "@/data/catalogue";
 
 export const metadata: Metadata = {
   title: "About Us | Nelskraft Refractory Pvt. Ltd.",
   description:
-    "Learn about Nelskraft Refractory Pvt. Ltd., our mission, specialized advisory team, strict quality controls, and our commitment to building durability and enabling sustainability.",
+    "Learn about Nelskraft Refractory Pvt. Ltd. — Built on Materials, Driven by Reliability. Discover our refractory solutions, biomass fuels, and industrial minerals.",
 };
 
-const PILLARS = [
+const OFFERINGS = [
   {
-    icon: Target,
-    title: "Customer-Centric Focus",
+    id: "refractory",
+    title: "Refractory Materials",
     description:
-      "Deeply understanding client technical constraints and operational demands to deliver tailored refractory and thermal solutions.",
+      "High-alumina bricks, mortars, and castables engineered for extreme thermal environments up to 1700°C.",
+    image: "/images/cat-refractory.jpg",
+    link: "/products#refractory-products",
   },
   {
-    icon: Shield,
-    title: "Strict Quality Control",
+    id: "biomass",
+    title: "Biomass Fuels",
     description:
-      "Rigorous chemical characterization, laboratory testing (XRF, thermal limits), and consistent grade standards across all supplies.",
+      "Clean-burning biomass pellets and de-oiled cashew shell cake delivering high calorific combustion efficiency.",
+    image: "/images/cat-biomass.jpg",
+    link: "/products#biomass-fuels",
   },
   {
-    icon: Workflow,
-    title: "Robust Supply Chain Network",
+    id: "minerals",
+    title: "Industrial Minerals",
     description:
-      "Process-oriented logistics and year-round availability ensuring seamless supply for continuous industrial plant operations.",
+      "High-plasticity ball clay and graded silica sand with strict chemical consistency for ceramics and metallurgy.",
+    image: "/images/cat-minerals.jpg",
+    link: "/products#mineral-materials",
+  },
+];
+
+const APPROACH_STAGES = [
+  {
+    step: "01",
+    title: "Understand Requirements",
+    description:
+      "Evaluating operating temperatures, thermal cycling, and chemical exposure conditions of your plant.",
+    icon: Search,
   },
   {
-    icon: BarChart3,
-    title: "Evidence-Based MIS Reports",
+    step: "02",
+    title: "Recommend Suitable Materials",
     description:
-      "Dedicated relationship managers providing timely Management Information System reports to facilitate data-driven decision making.",
+      "Selecting precise Al₂O₃ percentages, grain distributions, or calorific fuel specifications.",
+    icon: Layers,
+  },
+  {
+    step: "03",
+    title: "Support Your Supply Needs",
+    description:
+      "Ensuring dependable batch dispatches, quality certificates, and proactive logistical coordination.",
+    icon: Truck,
+  },
+];
+
+const APPLICATIONS = [
+  {
+    title: "Steel & Metallurgy",
+    subtitle: "Furnace linings, ladles & tundish setups",
+    image: "/images/app-furnace.jpg",
+    link: "/products#refractory-products",
+  },
+  {
+    title: "Power & Steam Boilers",
+    subtitle: "Boiler beds, bed materials & biomass fuel",
+    image: "/images/app-boiler.jpg",
+    link: "/products#biomass-fuels",
+  },
+  {
+    title: "Ceramics & Glass Kilns",
+    subtitle: "Kiln furniture, ball clay & refractory blocks",
+    image: "/images/app-ceramic.jpg",
+    link: "/products#mineral-materials",
+  },
+  {
+    title: "Foundries & Metal Casting",
+    subtitle: "Crucible linings, ramming mass & silica sand",
+    image: "/images/app-industrial.jpg",
+    link: "/products#refractory-products",
   },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="bg-white text-[#000d15]">
-      {/* Page Header Banner */}
-      <section className="relative py-20 md:py-28 bg-[#000d15] text-white overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-40">
+    <div className="bg-white text-[#1c242c] overflow-x-hidden font-sans">
+      {/* ========================================================= */}
+      {/* SECTION 2: DARK INDUSTRIAL HERO                           */}
+      {/* ========================================================= */}
+      <section className="relative min-h-[90vh] lg:min-h-[92vh] bg-[#121c17] text-white flex items-center overflow-hidden">
+        {/* Right-Side Industrial Photograph with Left Gradient Blend */}
+        <div className="absolute right-0 top-0 bottom-0 w-full lg:w-3/5 z-0">
           <Image
             src="/images/hero-industrial.jpg"
-            alt="Nelskraft industrial background"
+            alt="Nelskraft industrial refractory plant and thermal facility"
             fill
-            sizes="100vw"
             priority
-            className="object-cover object-center"
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="object-cover object-center opacity-40 lg:opacity-65"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/60" />
+          {/* Subtle horizontal gradient to blend with left text area */}
+          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-[#121c17] via-[#121c17]/85 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-[#9bd71d] mb-4">
-              <span className="w-6 h-[2px] bg-[#9bd71d]" />
-              <span>Corporate Profile</span>
+        {/* Content Container */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 w-full">
+          <div className="max-w-2xl lg:max-w-3xl">
+            {/* Eyebrow Label */}
+            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.22em] uppercase text-[#78a85a] mb-5">
+              <span className="w-5 h-[2px] bg-[#78a85a]" />
+              <span>ABOUT US</span>
             </div>
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6">
-              About Nelskraft
+
+            {/* Main Editorial Headline */}
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.12] mb-6">
+              Built on Materials. <br className="hidden sm:inline" />
+              Driven by <span className="text-[#54a937]">Reliability.</span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed">
-              A professionally managed company dedicated to building durability
-              and enabling sustainability across high-temperature industries.
+
+            {/* Short Company Introduction */}
+            <p className="text-base sm:text-lg text-gray-300 font-normal leading-relaxed max-w-xl mb-10">
+              Nelskraft Refractory Pvt. Ltd. supplies high-performance refractory
+              materials, clean biomass fuels, and specialized industrial minerals
+              engineered to power, protect, and sustain heavy industry.
             </p>
+
+            {/* Scroll Indicator */}
+            <div className="inline-flex items-center gap-3 text-xs tracking-widest uppercase text-gray-400 font-medium">
+              <span className="w-7 h-[1px] bg-gray-500" />
+              <span>Scroll to explore</span>
+              <ChevronDown className="w-3.5 h-3.5 text-[#54a937] animate-bounce" />
+            </div>
           </div>
+        </div>
+
+        {/* Narrow Vertical Numbered Navigation Detail (Right Edge) */}
+        <div className="hidden xl:flex absolute right-8 top-1/2 -translate-y-1/2 z-20 flex-col items-center gap-6 text-[11px] font-mono tracking-widest text-white/50 select-none">
+          <div className="w-[1px] h-12 bg-white/20" />
+          <span className="text-[#54a937] font-bold">01</span>
+          <span>02</span>
+          <span>03</span>
+          <span>04</span>
+          <div className="w-[1px] h-12 bg-white/20" />
         </div>
       </section>
 
-      {/* Main Company Story Section */}
-      <section className="py-20 md:py-28 bg-white">
+      {/* ========================================================= */}
+      {/* SECTION 3: WHO WE ARE (Asymmetric Layout, Overlapping)     */}
+      {/* ========================================================= */}
+      <section className="py-20 sm:py-28 bg-[#FAF9F6] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Visual Wall Image */}
-            <div className="lg:col-span-6 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-              <Image
-                src="/images/about-wall.jpg"
-                alt="Nelskraft Refractory corporate entrance"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-center"
-              />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left Column: Numeral, Heading & Narrative */}
+            <div className="lg:col-span-6 relative z-10">
+              {/* Large Faint "01" Numeral */}
+              <span className="text-8xl sm:text-9xl font-serif font-black text-gray-200/80 select-none -mb-8 sm:-mb-10 block pointer-events-none">
+                01
+              </span>
 
-            {/* Narrative */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-[#54a937]">
-                <span className="w-6 h-[2px] bg-[#54a937]" />
-                <span>Who We Are</span>
+              {/* Eyebrow Label */}
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#54a937] mb-3">
+                <span className="w-4 h-[2px] bg-[#54a937]" />
+                <span>WHO WE ARE</span>
               </div>
 
-              <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-[#000d15] leading-snug">
-                Building Lasting Value Through Materials & Technical Integrity
+              {/* Heading */}
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[#000d15] leading-[1.18] mb-6">
+                Supplying Materials for a{" "}
+                <span className="text-[#54a937]">Stronger Tomorrow.</span>
               </h2>
 
-              <p className="text-base text-gray-600 leading-relaxed">
-                Nelskraft Refractory Pvt Ltd is a professionally managed legal
-                entity focused on customer-centric objectives that involve
-                understanding client needs and preferences while delivering
-                exceptional service.
+              {/* Company Introduction */}
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4">
+                Nelskraft Refractory Pvt. Ltd. is a customer-centric industrial material
+                supplier based in Pune, Maharashtra. We provide essential thermal and
+                mineral solutions across refractory manufacturing, clean boiler combustion,
+                and ceramic casting.
+              </p>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
+                With a focus on technical integrity, strict batch sampling, and dependable
+                delivery schedules, we help industrial operators protect their thermal
+                assets, reduce maintenance downtime, and transition toward sustainable energy.
               </p>
 
-              <p className="text-base text-gray-600 leading-relaxed">
-                Our mission is to create value for our customers and earn
-                recognition both domestically and internationally as a unique
-                company with distinct qualities, products, and services.
-              </p>
+              {/* Rounded Green Action Button */}
+              <div>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 bg-[#54a937] hover:bg-[#438b29] text-white px-7 py-3.5 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <span>Learn More About Us</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
 
-              <div className="pt-2 border-t border-gray-100">
-                <blockquote className="border-l-4 border-[#54a937] pl-4 italic text-sm text-gray-700 font-medium">
-                  “Our business plan and operations are led by a team of
-                  experienced professionals in the various product areas we
-                  offer.”
-                </blockquote>
+            {/* Right Column: Two Overlapping Organically Cropped Images */}
+            <div className="lg:col-span-6 relative mt-6 lg:mt-0">
+              {/* Decorative Green Curved Accent Behind Images */}
+              <div className="absolute -top-6 -right-6 w-72 h-72 rounded-full border-2 border-[#54a937]/30 pointer-events-none" />
+              <div className="absolute -bottom-6 -left-6 w-48 h-48 rounded-full bg-[#54a937]/5 pointer-events-none" />
+
+              <div className="relative w-full aspect-[4/3.4] sm:aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-200/80 bg-white">
+                <Image
+                  src="/images/about-refractory-new.jpg"
+                  alt="Industrial refractory bricks, curved kiln blocks, and materials stacked in manufacturing facility"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  className="object-cover object-center"
+                />
+
+                {/* Floating Info Label Top Right */}
+                <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-md border border-gray-200/90 rounded-xl px-3.5 py-2 shadow-lg flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#54a937] animate-pulse" />
+                  <span className="text-[11px] font-bold text-[#000d15] tracking-wide">
+                    Al₂O₃ Up to 70%
+                  </span>
+                </div>
+              </div>
+
+              {/* Secondary Overlapping Image (Bottom-Left Offset) */}
+              <div className="relative -mt-16 sm:-mt-24 ml-6 sm:ml-10 w-2/3 sm:w-3/5 aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white z-20">
+                <Image
+                  src="/images/cat-minerals.jpg"
+                  alt="Industrial ball clay and mineral materials"
+                  fill
+                  sizes="(max-width: 1024px) 60vw, 25vw"
+                  className="object-cover object-center"
+                />
+
+                {/* Floating Info Label Bottom Left */}
+                <div className="absolute bottom-3 left-3 z-10 bg-[#000d15]/90 backdrop-blur-md border border-white/20 rounded-lg px-3 py-1.5 shadow-md flex items-center gap-1.5 text-white">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#54a937]" />
+                  <span className="text-[10px] font-semibold tracking-wide">
+                    Multi-Disciplinary Advisory
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Advisory Team & Multidisciplinary Expertise */}
-      <section className="py-20 bg-[#fbfbfa] border-y border-gray-200/60">
+      {/* ========================================================= */}
+      {/* SECTION 4: WHAT WE BRING TO INDUSTRY (Angled Panels)      */}
+      {/* ========================================================= */}
+      <section className="py-20 sm:py-28 bg-[#121c17] text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <div className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-[#54a937] mb-3">
-              <span className="w-6 h-[2px] bg-[#54a937]" />
-              <span>Multi-Disciplinary Strength</span>
-              <span className="w-6 h-[2px] bg-[#54a937]" />
+          {/* Header Row */}
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
+            <div className="max-w-2xl">
+              {/* Large Subtle "02" Numeral */}
+              <span className="text-8xl sm:text-9xl font-serif font-black text-white/10 select-none block -mb-8 pointer-events-none">
+                02
+              </span>
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#78a85a] mb-3">
+                <span className="w-4 h-[2px] bg-[#78a85a]" />
+                <span>OUR OFFERING</span>
+              </div>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+                What We Bring to Industry.
+              </h2>
+              <p className="text-sm sm:text-base text-gray-300 mt-3 leading-relaxed">
+                Engineered material solutions categorized across high-temperature refractory
+                linings, clean bio-energy fuels, and refined industrial minerals.
+              </p>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-[#000d15] mb-4">
-              Expertise Driven Advisory Council
-            </h2>
-            <p className="text-base text-gray-600 leading-relaxed">
-              Our multidisciplinary advisory council brings together veteran
-              experts across key industrial disciplines to guarantee technical
-              excellence.
-            </p>
+
+            {/* Outlined Explore Products Button */}
+            <div className="flex-shrink-0">
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white hover:bg-white/10 px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
+              >
+                <span>Explore Products</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COMPANY_DETAILS.advisoryFocus.map((domain, index) => (
-              <div
-                key={domain}
-                className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm hover:shadow-md transition-all flex items-start gap-4 group"
+          {/* Three Angled Overlapping Offering Panels */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {OFFERINGS.map((item, index) => (
+              <Link
+                key={item.id}
+                href={item.link}
+                className="group relative rounded-2xl overflow-hidden border border-white/15 bg-[#1b2720] shadow-2xl aspect-[3/4] sm:aspect-[4/5] flex flex-col justify-end p-6 sm:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-[#54a937]/80"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#54a937]/10 text-[#54a937] flex items-center justify-center flex-shrink-0 group-hover:bg-[#54a937] group-hover:text-white transition-colors duration-200">
-                  <CheckCircle className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-xs text-gray-400 font-semibold tracking-wider uppercase">
-                    Core Capability #{index + 1}
-                  </span>
-                  <h3 className="text-base font-bold text-[#000d15] mt-1 group-hover:text-[#54a937] transition-colors">
-                    {domain}
+                {/* Background Material Photograph */}
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
+
+                {/* Dark Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0e1713] via-[#0e1713]/60 to-transparent" />
+
+                {/* Content Overlay */}
+                <div className="relative z-10 flex flex-col justify-end">
+                  <div className="text-[11px] font-mono tracking-widest text-[#9bd71d] uppercase font-bold mb-1">
+                    Category 0{index + 1}
+                  </div>
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-[#9bd71d] transition-colors">
+                    {item.title}
                   </h3>
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3 mb-4">
+                    {item.description}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-3 border-t border-white/15">
+                    <span className="text-xs font-semibold text-gray-300 group-hover:text-white">
+                      View Specifications
+                    </span>
+                    <div className="w-9 h-9 rounded-full bg-white/15 text-white flex items-center justify-center backdrop-blur-sm group-hover:bg-[#54a937] group-hover:text-white transition-all">
+                      <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Corporate Pillars */}
-      <section className="py-20 md:py-28 bg-white">
+      {/* ========================================================= */}
+      {/* SECTION 5: OUR APPROACH (Curved Process Line)             */}
+      {/* ========================================================= */}
+      <section className="py-20 sm:py-28 bg-[#FAF9F6] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mb-16">
-            <div className="inline-flex items-center gap-2 text-xs md:text-sm font-semibold tracking-[0.2em] uppercase text-[#54a937] mb-3">
-              <span className="w-6 h-[2px] bg-[#54a937]" />
-              <span>Our Operating Philosophy</span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
+            {/* Left Content Area */}
+            <div className="lg:col-span-5">
+              {/* Large Pale "03" Numeral */}
+              <span className="text-8xl sm:text-9xl font-serif font-black text-gray-200/80 select-none block -mb-8 pointer-events-none">
+                03
+              </span>
+              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#54a937] mb-3">
+                <span className="w-4 h-[2px] bg-[#54a937]" />
+                <span>OUR APPROACH</span>
+              </div>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#000d15] leading-[1.18] mb-4">
+                Understanding Your Material Needs.
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
+                We believe technical accuracy must precede material dispatch. Our approach
+                focuses on evaluating specific thermal loads, verifying chemical composition,
+                and aligning logistics to your plant&apos;s operational schedule.
+              </p>
+              <div>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-[#54a937] hover:bg-[#438b29] text-white px-7 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                >
+                  <span>Our Approach</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-[#000d15]">
-              How We Create Client Advantage
-            </h2>
+
+            {/* Right Process Stages Connected by Curved Line */}
+            <div className="lg:col-span-7 relative">
+              {/* Decorative Subtle Line */}
+              <div className="hidden sm:block absolute top-12 left-12 right-12 h-[2px] bg-gradient-to-r from-[#54a937]/30 via-[#54a937] to-[#54a937]/30 z-0" />
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 relative z-10">
+                {APPROACH_STAGES.map((stage) => {
+                  const Icon = stage.icon;
+                  return (
+                    <div
+                      key={stage.step}
+                      className="flex flex-col items-start sm:items-center text-left sm:text-center group"
+                    >
+                      {/* Circular Icon Marker */}
+                      <div className="w-16 h-16 rounded-full bg-white border-2 border-[#54a937] text-[#54a937] shadow-md flex items-center justify-center mb-5 group-hover:bg-[#54a937] group-hover:text-white transition-all duration-300">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <span className="text-[11px] font-mono font-bold text-[#54a937] tracking-widest uppercase mb-1">
+                        Stage {stage.step}
+                      </span>
+                      <h3 className="font-serif text-base sm:text-lg font-bold text-[#000d15] mb-2 leading-snug">
+                        {stage.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
+                        {stage.description}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* SECTION 6: INDUSTRIAL APPLICATIONS (Cinematic Split)       */}
+      {/* ========================================================= */}
+      <section className="bg-[#121c17] text-white overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[600px]">
+          {/* Left Half: Manufacturing Photograph */}
+          <div className="lg:col-span-5 relative min-h-[350px] lg:min-h-full">
+            <Image
+              src="/images/app-furnace.jpg"
+              alt="Industrial furnace and high-temperature manufacturing facility"
+              fill
+              sizes="(max-width: 1024px) 100vw, 42vw"
+              className="object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent to-[#121c17]" />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PILLARS.map((pillar) => {
-              const Icon = pillar.icon;
-              return (
-                <div
-                  key={pillar.title}
-                  className="p-8 rounded-2xl bg-[#fbfbfa] border border-gray-200/80 flex flex-col justify-between hover:border-[#54a937]/50 hover:shadow-lg transition-all"
+          {/* Right Half: Content Area & Verified Application List */}
+          <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
+            {/* Large Faint "04" Numeral */}
+            <span className="text-8xl sm:text-9xl font-serif font-black text-white/10 select-none block -mb-8 pointer-events-none">
+              04
+            </span>
+            <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#78a85a] mb-3">
+              <span className="w-4 h-[2px] bg-[#78a85a]" />
+              <span>INDUSTRIAL APPLICATIONS</span>
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
+              Materials That Keep Industries Moving.
+            </h2>
+            <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl mb-6">
+              Our refractory bricks, clean biomass fuels, and graded minerals power critical
+              thermal operations across core industrial sectors, protecting assets and
+              optimizing energy throughput.
+            </p>
+
+            <div className="mb-8">
+              <Link
+                href="/products"
+                className="inline-flex items-center gap-2 border border-white/30 hover:border-white text-white hover:bg-white/10 px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
+              >
+                <span>View Applications</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            {/* Vertical List of Verified Industrial Applications */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/15">
+              {APPLICATIONS.map((app) => (
+                <Link
+                  key={app.title}
+                  href={app.link}
+                  className="flex items-center gap-3.5 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#54a937] hover:bg-white/10 transition-all group"
                 >
-                  <div>
-                    <div className="w-12 h-12 rounded-2xl bg-[#000d15] text-[#9bd71d] flex items-center justify-center mb-6">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#000d15] mb-3">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {pillar.description}
+                  <div className="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-black/50">
+                    <Image
+                      src={app.image}
+                      alt={app.title}
+                      fill
+                      sizes="48px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-bold text-white group-hover:text-[#9bd71d] transition-colors truncate">
+                      {app.title}
+                    </h4>
+                    <p className="text-xs text-gray-400 truncate">
+                      {app.subtitle}
                     </p>
                   </div>
+                  <div className="w-7 h-7 rounded-full border border-white/20 flex items-center justify-center text-white/60 group-hover:text-white group-hover:border-[#54a937] group-hover:bg-[#54a937] transition-all flex-shrink-0">
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================= */}
+      {/* SECTION 7: CLOSING CTA (Organic Shapes & Material Image)  */}
+      {/* ========================================================= */}
+      <section className="py-20 sm:py-24 bg-[#FAF9F6] relative overflow-hidden">
+        {/* Soft Green Organic Shapes Flowing In */}
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#54a937]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#78a85a]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Left Content Area */}
+            <div className="lg:col-span-7">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#000d15] leading-[1.15] mb-4">
+                Looking for the Right Industrial Materials?
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl mb-8">
+                Connect with Nelskraft Refractory Pvt. Ltd. to discuss custom particle
+                sizing, bulk shipment schedules, and tailored high-temperature refractory solutions.
+              </p>
+              <div>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 bg-[#54a937] hover:bg-[#438b29] text-white px-8 py-4 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <span>Discuss Your Requirements</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Industrial Raw Material Photograph */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-200/80 bg-white">
+                <Image
+                  src="/images/about-wall.jpg"
+                  alt="Nelskraft corporate facility and industrial materials"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="object-cover object-center"
+                />
+              </div>
+
+              {/* Floating Verified Badge */}
+              <div className="absolute -bottom-4 right-6 bg-white/95 backdrop-blur-md border border-gray-200/90 rounded-xl px-4 py-2.5 shadow-lg flex items-center gap-2">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#54a937]" />
+                <div>
+                  <p className="text-xs font-bold text-[#000d15]">
+                    {COMPANY_DETAILS.shortName} Refractory
+                  </p>
+                  <p className="text-[10px] text-gray-500">
+                    Pune, Maharashtra
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Corporate Identity & Compliance Bar */}
-      <section className="py-14 bg-[#000d15] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left divide-y md:divide-y-0 md:divide-x divide-white/10">
-            <div className="px-4">
-              <p className="text-xs uppercase tracking-widest text-[#9bd71d] font-semibold mb-1">
-                Corporate Entity
-              </p>
-              <p className="text-lg font-bold">{COMPANY_DETAILS.name}</p>
-              <p className="text-xs text-gray-400 mt-1">
-                Registered in Pune, Maharashtra
-              </p>
+              </div>
             </div>
-
-            <div className="px-4 pt-6 md:pt-0">
-              <p className="text-xs uppercase tracking-widest text-[#9bd71d] font-semibold mb-1">
-                Government Compliance
-              </p>
-              <p className="text-sm font-semibold font-mono text-gray-200">
-                CIN: {COMPANY_DETAILS.cin}
-              </p>
-              <p className="text-sm font-semibold font-mono text-gray-200 mt-1">
-                GSTIN: {COMPANY_DETAILS.gstin}
-              </p>
-            </div>
-
-            <div className="px-4 pt-6 md:pt-0">
-              <p className="text-xs uppercase tracking-widest text-[#9bd71d] font-semibold mb-1">
-                Official Catalogue
-              </p>
-              <p className="text-sm text-gray-300">
-                Verified specifications and product properties
-              </p>
-              <a
-                href="/Nelskraft-Catalogue.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-semibold text-[#9bd71d] hover:underline mt-2"
-              >
-                <span>View Full PDF Catalogue</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#000d15] mb-4">
-            Ready to Discuss Your High-Temperature Requirements?
-          </h2>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Contact our technical team to discuss material specifications, custom
-            particle sizing, and bulk industrial shipments.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/products"
-              className="inline-flex items-center gap-2 bg-[#54a937] hover:bg-[#46912c] text-white px-8 py-3.5 rounded-full text-sm font-semibold shadow-md hover:shadow-lg transition-all"
-            >
-              <span>Explore Products</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center border border-gray-300 hover:border-[#000d15] text-[#000d15] px-8 py-3.5 rounded-full text-sm font-semibold transition-all"
-            >
-              Contact Our Office
-            </Link>
           </div>
         </div>
       </section>

@@ -11,10 +11,10 @@ export default function HomePage() {
       {/* 1. Hero Section (Preserved 3-image auto slideshow) */}
       <HeroSection />
 
-      {/* 2. About Nelskraft Section (Clean and still, no leaves) */}
+      {/* 2. About Nelskraft Section */}
       <AboutSection />
 
-      {/* 3 & 4. Falling Leaves Transition & Product Categories Section */}
+      {/* 3. Product Categories Section */}
       <ProductCategoriesSection />
 
       {/* 5. Industries Served / Industrial Applications */}

@@ -9,9 +9,7 @@
   --brand-surface: #fbfbfa;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+
 
 body {
   background-color: #ffffff;

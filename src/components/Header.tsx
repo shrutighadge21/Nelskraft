@@ -54,26 +54,30 @@ export default function Header() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative text-sm font-medium transition-colors duration-200 py-1 ${
+                    className={`relative text-sm font-medium transition-colors duration-200 py-1 group/nav focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#54a937] rounded ${
                       isActive
-                        ? "text-[#000d15] font-semibold"
-                        : "text-[#4b5563] hover:text-[#000d15]"
+                        ? "text-[#1a1f1c] font-semibold"
+                        : "text-[#4b5563] hover:text-[#2d6b1f]"
                     }`}
                   >
-                    {link.name}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#54a937] rounded-full" />
-                    )}
+                    <span>{link.name}</span>
+                    <span
+                      className={`absolute bottom-0 left-0 h-[2px] bg-[#54a937] rounded-full transition-all duration-200 ${
+                        isActive
+                          ? "w-full"
+                          : "w-0 group-hover/nav:w-full bg-[#54a937]/70"
+                      }`}
+                    />
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Desktop Enquire Now Button */}
+            {/* Desktop Enquire Now Button with Subtle Lift & Soft Shadow */}
             <div className="hidden md:flex items-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-[#54a937] hover:bg-[#46912c] text-white px-5 py-2.5 rounded-full text-xs lg:text-sm font-semibold tracking-wide shadow-sm hover:shadow-md transition-all duration-200 group"
+                className="inline-flex items-center gap-2 bg-[#2d6b1f] hover:bg-[#235518] text-white px-5 py-2.5 rounded-full text-xs lg:text-sm font-semibold tracking-wide shadow-xs hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
               >
                 <span>Enquire Now</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
