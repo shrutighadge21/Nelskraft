@@ -1,240 +1,41 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Truck, Layers } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const CATEGORIES = [
-  {
-    number: "01",
-    id: "refractory-products",
-    title: "Refractory Products",
-    description:
-      "Refractory bricks, powders, mortars and castables for industrial applications.",
-    image: "/images/cat-refractory.jpg",
-    alt: "Industrial refractory firebricks, powders, and high-temperature furnace lining components",
-    href: "/products?category=refractory-products",
-    iconBg: "bg-[#f8ede6] border-[#ecdcd0] text-[#984629]",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-5 h-5"
-        aria-hidden="true"
-      >
-        <rect x="2" y="6" width="20" height="5" rx="1" />
-        <rect x="2" y="13" width="9.5" height="5" rx="1" />
-        <rect x="12.5" y="13" width="9.5" height="5" rx="1" />
-      </svg>
-    ),
-  },
-  {
-    number: "02",
-    id: "biomass-fuels",
-    title: "Biomass Fuels",
-    description:
-      "Biomass pellets and de-oiled cashew nut shell cake for industrial fuel applications.",
-    image: "/images/cat-biomass.jpg",
-    alt: "High-density biomass fuel pellets and cashew shell cake for industrial combustion",
-    href: "/products?category=biomass-fuels",
-    iconBg: "bg-[#edf6e8] border-[#ddead5] text-[#54a937]",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-5 h-5"
-        aria-hidden="true"
-      >
-        <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-        <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-      </svg>
-    ),
-  },
-  {
-    number: "03",
-    id: "mineral-materials",
-    title: "Industrial Minerals",
-    description:
-      "Ball clay, silica sand and other mineral raw materials for industrial applications.",
-    image: "/images/cat-minerals.jpg",
-    alt: "Industrial refined ball clay and graded silica sand raw materials",
-    href: "/products?category=mineral-materials",
-    iconBg: "bg-[#f7f0e6] border-[#ece1d2] text-[#b07d4b]",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="w-5 h-5"
-        aria-hidden="true"
-      >
-        <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-      </svg>
-    ),
-  },
-];
-
-const TRUST_INDICATORS = [
-  {
-    title: "Quality-Focused Supply",
-    subtitle: "Materials selected for industrial use.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Reliable Availability",
-    subtitle: "Consistent supply for your needs.",
-    icon: Truck,
-  },
-  {
-    title: "Diverse Material Range",
-    subtitle: "Refractory, biofuels and minerals.",
-    icon: Layers,
-  },
-];
+import { ArrowRight } from "lucide-react";
 
 export default function ProductCategoriesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const bannerRef = useRef<HTMLDivElement>(null);
+  const [activeItem, setActiveItem] = useState<number | null>(null);
 
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReducedMotion) return;
-
-    // Helper to check if element is already within or near viewport
-    const isAlreadyInView = (el: HTMLElement | null) => {
-      if (!el || typeof window === "undefined") return false;
-      const rect = el.getBoundingClientRect();
-      return rect.top < window.innerHeight && rect.bottom > 0;
-    };
-
-    const ctx = gsap.context(() => {
-      // Header entrance animation
-      if (headerRef.current) {
-        if (isAlreadyInView(headerRef.current)) {
-          gsap.set(headerRef.current, { opacity: 1, y: 0, clearProps: "all" });
-        } else {
-          gsap.from(headerRef.current, {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: "power2.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top 85%",
-              once: true,
-            },
-          });
-        }
-      }
-
-      // Sequential cards entrance animation
-      // CRITICAL FIX: If already in view on mount or refresh, ensure full opacity immediately
-      if (cardsRef.current) {
-        if (isAlreadyInView(cardsRef.current)) {
-          gsap.set(cardsRef.current.children, { opacity: 1, y: 0, clearProps: "all" });
-        } else {
-          gsap.from(cardsRef.current.children, {
-            opacity: 0,
-            y: 25,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: cardsRef.current,
-              start: "top 85%",
-              once: true,
-            },
-          });
-        }
-      }
-
-      // Banner reveal
-      if (bannerRef.current) {
-        if (isAlreadyInView(bannerRef.current)) {
-          gsap.set(bannerRef.current, { opacity: 1, y: 0, clearProps: "all" });
-        } else {
-          gsap.from(bannerRef.current, {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: "power2.out",
-            clearProps: "all",
-            scrollTrigger: {
-              trigger: bannerRef.current,
-              start: "top 88%",
-              once: true,
-            },
-          });
-        }
-      }
-    }, sectionRef);
-
-    // Refresh ScrollTrigger positions after page assets settle
-    const refreshTimer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
-
-    return () => {
-      clearTimeout(refreshTimer);
-      ctx.revert();
-    };
-  }, []);
+  const isExpanded = (idx: number) => activeItem === idx;
 
   return (
     <section
       id="products"
-      ref={sectionRef}
-      suppressHydrationWarning
-      className="relative pb-14 md:pb-18 pt-8 md:pt-12 bg-[#FAF9F6] text-[#202522] overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-24 bg-[#FAF8F5] text-[#1B281A] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10">
         {/* Section Header */}
-        <div
-          ref={headerRef}
-          className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12 md:mb-16"
-        >
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           {/* Left: Eyebrow, Heading, Description */}
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-[#984629] mb-3">
-              <span className="w-6 h-[2px] bg-[#984629]" />
+            <div className="inline-flex items-center gap-2.5 text-[11px] font-semibold tracking-[0.22em] uppercase text-[#6B7566] mb-3">
+              <span className="w-5 h-[1.5px] bg-[#6B7566]" />
               <span>OUR PRODUCTS</span>
             </div>
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[#202522] leading-[1.16] mb-3">
-              Product <span className="text-[#984629]">Categories</span>
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight text-[#1B281A] leading-[1.15] mb-3.5">
+              Product <span className="text-[#657357]">Categories</span>
             </h2>
-            <p className="text-sm sm:text-base text-[#454545] font-normal leading-relaxed">
+            <p className="text-[13.5px] sm:text-[14.5px] text-[#555E50] font-normal leading-relaxed max-w-xl">
               A focused range of refractory materials, biomass fuels, and
               industrial minerals for demanding industrial applications.
             </p>
           </div>
 
           {/* Right: Supporting Note with Vertical Accent Line (Desktop) */}
-          <div className="hidden lg:flex items-center gap-6 max-w-md pl-6 border-l border-[#54a937]/50">
-            <p className="text-sm text-[#454545] font-normal leading-relaxed">
+          <div className="hidden lg:flex items-center max-w-md pl-6 border-l border-[#D8D2C4] py-1">
+            <p className="text-[13px] sm:text-[13.5px] text-[#555E50] font-normal leading-relaxed">
               We supply industrial materials that support high-temperature
               processes, energy needs, and mineral requirements across diverse
               industries.
@@ -242,137 +43,258 @@ export default function ProductCategoriesSection() {
           </div>
         </div>
 
-        {/* Three Category Cards in Single Row on Desktop */}
-        <div
-          ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-8 mb-14 md:mb-16"
-        >
-          {CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              href={cat.href}
-              className="group flex flex-col bg-white rounded-3xl overflow-hidden border border-[#e8e6df] shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#54a937]"
-            >
-              {/* Card Image Container with Numbered Marker & Overlapping Icon Badge */}
-              <div className="relative aspect-[16/11] w-full overflow-hidden bg-[#f0eee9]">
-                <Image
-                  src={cat.image}
-                  alt={cat.alt}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-                />
-
-                {/* Numbered Marker Badge (Upper-Right) */}
-                <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-xs text-[#202522] font-mono text-xs font-bold px-3 py-1 rounded-full shadow-xs border border-gray-100 transition-colors group-hover:border-[#54a937]/40">
-                  {cat.number}
-                </div>
-
-                {/* Compact Category Icon Badge (Lower-Left Overlay) */}
-                <div
-                  className={`absolute -bottom-1 left-5 z-10 w-12 h-12 rounded-2xl ${cat.iconBg} border flex items-center justify-center shadow-md transition-transform duration-300 group-hover:scale-110`}
-                >
-                  {cat.icon}
-                </div>
-              </div>
-
-              {/* Card Body */}
-              <div className="pt-6 p-7 flex flex-col flex-1 justify-between">
-                <div>
-                  <h3 className="font-sans text-xl sm:text-[1.35rem] font-bold text-[#202522] group-hover:text-[#2d6b1f] transition-colors duration-200 mb-2.5">
-                    {cat.title}
-                  </h3>
-                  <p className="text-sm text-[#454545] font-normal leading-relaxed mb-6">
-                    {cat.description}
-                  </p>
-                </div>
-
-                {/* Explore Products Action Link */}
-                <div className="pt-2 flex items-center">
-                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2d6b1f] group-hover:text-[#235518] transition-colors">
-                    <span>Explore Products</span>
-                    <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1.5" />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Industrial Enquiry Banner */}
-        <div
-          ref={bannerRef}
-          className="relative rounded-3xl overflow-hidden bg-[#18231c] text-white shadow-md border border-[#27382d] p-8 sm:p-10 lg:p-12 mb-10"
-        >
-          {/* Subtle refractory material background photo on the right */}
-          <div className="absolute inset-y-0 right-0 w-full md:w-1/2 z-0 opacity-25">
-            <Image
-              src="/images/cat-refractory.jpg"
-              alt="Refractory materials texture"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover object-right"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#18231c] via-[#18231c]/80 to-transparent" />
-          </div>
-
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            {/* Left: Eyebrow & Heading */}
-            <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-[#88c96f] mb-3">
-                <span className="w-6 h-[2px] bg-[#88c96f]" />
-                <span>MATERIALS FOR REAL-WORLD INDUSTRIES</span>
-              </div>
-              <h3 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-                Reliable Materials for <br className="hidden sm:inline" />
-                Industrial Applications.
-              </h3>
-            </div>
-
-            {/* Middle: Supporting Text (Desktop) */}
-            <div className="max-w-sm">
-              <p className="text-sm sm:text-base text-gray-300 font-normal leading-relaxed">
-                Refractory products, biomass fuels, and industrial minerals
-                sourced to support diverse industrial requirements.
-              </p>
-            </div>
-
-            {/* Right: View All Products Action Button */}
-            <div className="flex-shrink-0">
-              <Link
-                href="/products"
-                className="inline-flex items-center gap-2.5 bg-[#42792e] hover:bg-[#346622] text-white px-7 py-3.5 rounded-xl text-sm font-semibold tracking-wide shadow-md transition-all duration-200 group transform hover:-translate-y-0.5"
-              >
-                <span>View All Products</span>
-                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Trust Indicators Bar directly below banner */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-          {TRUST_INDICATORS.map((indicator, idx) => {
-            const Icon = indicator.icon;
-            return (
+        {/* Main Product Showcase: Asymmetric Editorial 2-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-stretch">
+          {/* LEFT COLUMN: Featured Refractory Products (01) */}
+          <div
+            onMouseEnter={() => setActiveItem(1)}
+            onMouseLeave={() => setActiveItem(null)}
+            onClick={() => setActiveItem(activeItem === 1 ? null : 1)}
+            className={`lg:col-span-7 lg:pr-10 xl:pr-14 lg:border-r lg:border-[#DDD6C7] flex flex-col justify-between group cursor-pointer transition-all duration-500 ease-out ${
+              isExpanded(1) ? "sm:-translate-y-1" : "hover:sm:-translate-y-1"
+            }`}
+          >
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-8 h-full">
+              {/* Coordinated Text & Content Unit */}
               <div
-                key={idx}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-white/70 border border-[#e8e6df] shadow-2xs"
+                className={`flex flex-col justify-between h-full py-2 max-w-[260px] sm:max-w-[240px] xl:max-w-[270px] flex-shrink-0 transition-transform duration-500 ease-out ${
+                  isExpanded(1) ? "sm:translate-x-1.5" : "group-hover:sm:translate-x-1.5"
+                }`}
               >
-                <div className="w-11 h-11 rounded-xl bg-[#edf6e8] border border-[#ddead5] flex items-center justify-center text-[#54a937] flex-shrink-0">
-                  <Icon className="w-5 h-5" strokeWidth={1.8} />
-                </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#202522]">
-                    {indicator.title}
-                  </h4>
-                  <p className="text-xs text-[#555555] mt-0.5">
-                    {indicator.subtitle}
+                  <span
+                    className={`font-sans text-4xl sm:text-5xl font-bold leading-none select-none tracking-tight transition-all duration-500 ease-out inline-block ${
+                      isExpanded(1)
+                        ? "text-[#A89E84] scale-105 origin-left"
+                        : "text-[#DDD5C1] group-hover:text-[#A89E84] group-hover:scale-105 group-hover:origin-left"
+                    }`}
+                  >
+                    01—
+                  </span>
+                  <h3
+                    className={`font-sans text-2xl sm:text-3xl lg:text-[2rem] font-bold leading-[1.18] mt-4 mb-3 transition-colors duration-400 ${
+                      isExpanded(1)
+                        ? "text-[#0F1C0E]"
+                        : "text-[#1B281A] group-hover:text-[#0F1C0E]"
+                    }`}
+                  >
+                    Refractory
+                    <br />
+                    Products
+                  </h3>
+                  <p
+                    className={`text-xs sm:text-[13.5px] leading-relaxed mb-6 sm:mb-8 transition-colors duration-400 ${
+                      isExpanded(1)
+                        ? "text-[#4A5446]"
+                        : "text-[#636C5F] group-hover:text-[#4A5446]"
+                    }`}
+                  >
+                    Bricks, powders,
+                    <br />
+                    mortars & castables
                   </p>
                 </div>
+
+                <div>
+                  <Link
+                    href="/products?category=refractory-products"
+                    className={`inline-flex items-center gap-2 bg-[#1B291A] text-white text-[12px] font-medium tracking-wide px-5 py-2.5 rounded-full transition-all duration-300 shadow-xs ${
+                      isExpanded(1)
+                        ? "bg-[#283E27] shadow-md translate-x-1"
+                        : "hover:bg-[#283E27] hover:shadow-md group-hover:translate-x-1"
+                    }`}
+                  >
+                    <span>Explore Products</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-            );
-          })}
+
+              {/* Large Featured Photograph with Coordinated Expansion */}
+              <div
+                className={`relative w-full max-w-[340px] sm:max-w-none aspect-[346/401] rounded-tl-[80px] sm:rounded-tl-[100px] overflow-hidden bg-[#ECE7DC] flex-1 self-end sm:self-center transition-all duration-500 ease-out ${
+                  isExpanded(1)
+                    ? "scale-[1.03] shadow-md"
+                    : "group-hover:scale-[1.03] group-hover:shadow-md"
+                }`}
+              >
+                <Image
+                  src="/images/cat-refractory-arch.png"
+                  alt="Industrial refractory firebricks, powders, and high-temperature furnace lining components"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 35vw"
+                  className={`object-cover object-center transition-transform duration-700 ease-out ${
+                    isExpanded(1) ? "scale-[1.05]" : "group-hover:scale-[1.05]"
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: Two Stacked Product Entries (02 & 03) */}
+          <div className="lg:col-span-5 lg:pl-10 xl:pl-14 flex flex-col justify-between gap-8 lg:gap-0">
+            {/* Top Entry: Biomass Fuels (02) - Coordinated Unit */}
+            <div
+              onMouseEnter={() => setActiveItem(2)}
+              onMouseLeave={() => setActiveItem(null)}
+              onClick={() => setActiveItem(activeItem === 2 ? null : 2)}
+              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 lg:pb-8 lg:border-b lg:border-[#DDD6C7] group flex-1 cursor-pointer transition-all duration-500 ease-out ${
+                isExpanded(2) ? "sm:-translate-y-1" : "hover:sm:-translate-y-1"
+              }`}
+            >
+              {/* Coordinated Text Unit */}
+              <div
+                className={`max-w-[200px] flex-shrink-0 transition-transform duration-500 ease-out ${
+                  isExpanded(2) ? "sm:translate-x-1.5" : "group-hover:sm:translate-x-1.5"
+                }`}
+              >
+                <span
+                  className={`font-sans text-3xl sm:text-4xl font-bold leading-none select-none tracking-tight transition-all duration-500 ease-out inline-block ${
+                    isExpanded(2)
+                      ? "text-[#A89E84] scale-105 origin-left"
+                      : "text-[#DDD5C1] group-hover:text-[#A89E84] group-hover:scale-105 group-hover:origin-left"
+                  }`}
+                >
+                  02—
+                </span>
+                <h3
+                  className={`font-sans text-xl sm:text-2xl font-bold leading-tight mt-3 mb-2 transition-colors duration-400 ${
+                    isExpanded(2)
+                      ? "text-[#0F1C0E]"
+                      : "text-[#1B281A] group-hover:text-[#0F1C0E]"
+                  }`}
+                >
+                  Biomass Fuels
+                </h3>
+                <p
+                  className={`text-xs sm:text-[13px] leading-relaxed mb-4 sm:mb-5 transition-colors duration-400 ${
+                    isExpanded(2)
+                      ? "text-[#4A5446]"
+                      : "text-[#636C5F] group-hover:text-[#4A5446]"
+                  }`}
+                >
+                  Pellets, briquettes
+                  <br />
+                  & shell cake
+                </p>
+                <Link
+                  href="/products?category=biomass-fuels"
+                  className={`inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold border-b pb-0.5 transition-all duration-300 ${
+                    isExpanded(2)
+                      ? "text-[#2D452B] border-[#2D452B]"
+                      : "text-[#1B291A] border-[#1B291A] group-hover:text-[#2D452B] group-hover:border-[#2D452B]"
+                  }`}
+                >
+                  <span>Explore Products</span>
+                  <ArrowRight
+                    className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                      isExpanded(2) ? "translate-x-1.5" : "group-hover:translate-x-1.5"
+                    }`}
+                  />
+                </Link>
+              </div>
+
+              {/* Biomass Photograph with Coordinated Expansion */}
+              <div
+                className={`relative w-full max-w-[240px] sm:w-[210px] xl:w-[230px] aspect-[220/175] rounded-tl-[50px] sm:rounded-tl-[65px] overflow-hidden bg-[#ECE7DC] flex-shrink-0 self-end sm:self-center transition-all duration-500 ease-out ${
+                  isExpanded(2)
+                    ? "scale-[1.03] shadow-md"
+                    : "group-hover:scale-[1.03] group-hover:shadow-md"
+                }`}
+              >
+                <Image
+                  src="/images/cat-biomass-arch.png"
+                  alt="High-density biomass fuel pellets and cashew shell cake for industrial combustion"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 25vw"
+                  className={`object-cover object-center transition-transform duration-700 ease-out ${
+                    isExpanded(2) ? "scale-[1.06]" : "group-hover:scale-[1.06]"
+                  }`}
+                />
+              </div>
+            </div>
+
+            {/* Bottom Entry: Industrial Minerals (03) - Coordinated Unit */}
+            <div
+              onMouseEnter={() => setActiveItem(3)}
+              onMouseLeave={() => setActiveItem(null)}
+              onClick={() => setActiveItem(activeItem === 3 ? null : 3)}
+              className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-0 lg:pt-8 group flex-1 cursor-pointer transition-all duration-500 ease-out ${
+                isExpanded(3) ? "sm:-translate-y-1" : "hover:sm:-translate-y-1"
+              }`}
+            >
+              {/* Coordinated Text Unit */}
+              <div
+                className={`max-w-[200px] flex-shrink-0 transition-transform duration-500 ease-out ${
+                  isExpanded(3) ? "sm:translate-x-1.5" : "group-hover:sm:translate-x-1.5"
+                }`}
+              >
+                <span
+                  className={`font-sans text-3xl sm:text-4xl font-bold leading-none select-none tracking-tight transition-all duration-500 ease-out inline-block ${
+                    isExpanded(3)
+                      ? "text-[#A89E84] scale-105 origin-left"
+                      : "text-[#DDD5C1] group-hover:text-[#A89E84] group-hover:scale-105 group-hover:origin-left"
+                  }`}
+                >
+                  03—
+                </span>
+                <h3
+                  className={`font-sans text-xl sm:text-2xl font-bold leading-tight mt-3 mb-2 transition-colors duration-400 ${
+                    isExpanded(3)
+                      ? "text-[#0F1C0E]"
+                      : "text-[#1B281A] group-hover:text-[#0F1C0E]"
+                  }`}
+                >
+                  Industrial Minerals
+                </h3>
+                <p
+                  className={`text-xs sm:text-[13px] leading-relaxed mb-4 sm:mb-5 transition-colors duration-400 ${
+                    isExpanded(3)
+                      ? "text-[#4A5446]"
+                      : "text-[#636C5F] group-hover:text-[#4A5446]"
+                  }`}
+                >
+                  Bauxite, silica sand
+                  <br />
+                  & other raw materials
+                </p>
+                <Link
+                  href="/products?category=mineral-materials"
+                  className={`inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold border-b pb-0.5 transition-all duration-300 ${
+                    isExpanded(3)
+                      ? "text-[#2D452B] border-[#2D452B]"
+                      : "text-[#1B291A] border-[#1B291A] group-hover:text-[#2D452B] group-hover:border-[#2D452B]"
+                  }`}
+                >
+                  <span>Explore Products</span>
+                  <ArrowRight
+                    className={`w-3.5 h-3.5 transition-transform duration-300 ${
+                      isExpanded(3) ? "translate-x-1.5" : "group-hover:translate-x-1.5"
+                    }`}
+                  />
+                </Link>
+              </div>
+
+              {/* Minerals Photograph with Coordinated Expansion */}
+              <div
+                className={`relative w-full max-w-[240px] sm:w-[210px] xl:w-[230px] aspect-[220/175] rounded-tl-[50px] sm:rounded-tl-[65px] overflow-hidden bg-[#ECE7DC] flex-shrink-0 self-end sm:self-center transition-all duration-500 ease-out ${
+                  isExpanded(3)
+                    ? "scale-[1.03] shadow-md"
+                    : "group-hover:scale-[1.03] group-hover:shadow-md"
+                }`}
+              >
+                <Image
+                  src="/images/cat-minerals-arch.png"
+                  alt="Industrial refined ball clay and graded silica sand raw materials"
+                  fill
+                  sizes="(max-width: 640px) 100vw, 25vw"
+                  className={`object-cover object-center transition-transform duration-700 ease-out ${
+                    isExpanded(3) ? "scale-[1.06]" : "group-hover:scale-[1.06]"
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

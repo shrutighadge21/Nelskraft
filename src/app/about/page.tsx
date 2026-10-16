@@ -126,7 +126,7 @@ export default function AboutPage() {
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-bold tracking-tight text-white leading-[1.12] mb-6">
+            <h1 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-white leading-[1.16] mb-6">
               Built on Materials. <br className="hidden sm:inline" />
               Driven by <span className="text-[#54a937]">Reliability.</span>
             </h1>
@@ -167,7 +167,7 @@ export default function AboutPage() {
             {/* Left Column: Numeral, Heading & Narrative */}
             <div className="lg:col-span-6 relative z-10">
               {/* Large Faint "01" Numeral */}
-              <span className="text-8xl sm:text-9xl font-serif font-black text-gray-200/80 select-none -mb-8 sm:-mb-10 block pointer-events-none">
+              <span className="text-7xl sm:text-8xl font-sans font-black text-gray-200/80 select-none -mb-8 sm:-mb-10 block pointer-events-none">
                 01
               </span>
 
@@ -178,7 +178,7 @@ export default function AboutPage() {
               </div>
 
               {/* Heading */}
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight text-[#000d15] leading-[1.18] mb-6">
+              <h2 className="font-sans text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-[#000d15] leading-[1.18] mb-6">
                 Supplying Materials for a{" "}
                 <span className="text-[#54a937]">Stronger Tomorrow.</span>
               </h2>
@@ -264,14 +264,14 @@ export default function AboutPage() {
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
               {/* Large Subtle "02" Numeral */}
-              <span className="text-8xl sm:text-9xl font-serif font-black text-white/10 select-none block -mb-8 pointer-events-none">
+              <span className="text-7xl sm:text-8xl font-sans font-black text-white/10 select-none block -mb-8 pointer-events-none">
                 02
               </span>
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#78a85a] mb-3">
                 <span className="w-4 h-[2px] bg-[#78a85a]" />
                 <span>OUR OFFERING</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+              <h2 className="font-sans text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-white leading-[1.18]">
                 What We Bring to Industry.
               </h2>
               <p className="text-sm sm:text-base text-gray-300 mt-3 leading-relaxed">
@@ -317,7 +317,7 @@ export default function AboutPage() {
                   <div className="text-[11px] font-mono tracking-widest text-[#9bd71d] uppercase font-bold mb-1">
                     Category 0{index + 1}
                   </div>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-[#9bd71d] transition-colors">
+                  <h3 className="font-sans text-lg sm:text-xl font-bold text-white mb-2 group-hover:text-[#9bd71d] transition-colors">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-300 leading-relaxed line-clamp-3 mb-4">
@@ -348,14 +348,14 @@ export default function AboutPage() {
             {/* Left Content Area */}
             <div className="lg:col-span-5">
               {/* Large Pale "03" Numeral */}
-              <span className="text-8xl sm:text-9xl font-serif font-black text-gray-200/80 select-none block -mb-8 pointer-events-none">
+              <span className="text-7xl sm:text-8xl font-sans font-black text-gray-200/80 select-none block -mb-8 pointer-events-none">
                 03
               </span>
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#54a937] mb-3">
                 <span className="w-4 h-[2px] bg-[#54a937]" />
                 <span>OUR APPROACH</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#000d15] leading-[1.18] mb-4">
+              <h2 className="font-sans text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-[#000d15] leading-[1.18] mb-4">
                 Understanding Your Material Needs.
               </h2>
               <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-8">
@@ -394,7 +394,7 @@ export default function AboutPage() {
                       <span className="text-[11px] font-mono font-bold text-[#54a937] tracking-widest uppercase mb-1">
                         Stage {stage.step}
                       </span>
-                      <h3 className="font-serif text-base sm:text-lg font-bold text-[#000d15] mb-2 leading-snug">
+                      <h3 className="font-sans text-base sm:text-lg font-bold text-[#000d15] mb-2 leading-snug">
                         {stage.title}
                       </h3>
                       <p className="text-xs sm:text-sm text-gray-600 leading-relaxed">
@@ -429,14 +429,14 @@ export default function AboutPage() {
           {/* Right Half: Content Area & Verified Application List */}
           <div className="lg:col-span-7 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
             {/* Large Faint "04" Numeral */}
-            <span className="text-8xl sm:text-9xl font-serif font-black text-white/10 select-none block -mb-8 pointer-events-none">
+            <span className="text-7xl sm:text-8xl font-sans font-black text-white/10 select-none block -mb-8 pointer-events-none">
               04
             </span>
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] uppercase text-[#78a85a] mb-3">
               <span className="w-4 h-[2px] bg-[#78a85a]" />
               <span>INDUSTRIAL APPLICATIONS</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white mb-4">
+            <h2 className="font-sans text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-white mb-4 leading-[1.18]">
               Materials That Keep Industries Moving.
             </h2>
             <p className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-xl mb-6">
@@ -502,7 +502,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Content Area */}
             <div className="lg:col-span-7">
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#000d15] leading-[1.15] mb-4">
+              <h2 className="font-sans text-2xl sm:text-3xl lg:text-[2.65rem] font-bold tracking-tight text-[#000d15] leading-[1.18] mb-4">
                 Looking for the Right Industrial Materials?
               </h2>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl mb-8">

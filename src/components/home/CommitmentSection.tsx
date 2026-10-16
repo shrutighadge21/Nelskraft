@@ -83,7 +83,7 @@ export default function CommitmentSection() {
               <span>Our Commitment</span>
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6 leading-[1.18]">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-white mb-6 leading-[1.18]">
               Enabling a More <br />
               <span className="text-[#9bd71d]">Sustainable Future</span>
             </h2>

@@ -56,10 +56,7 @@ export default function ApplicationsSection() {
               </span>
             </div>
             {/* Heading */}
-            <h2
-              className="font-bold leading-[1.06] mb-6 text-[#1a1a1a]"
-              style={{ fontFamily: "'Cinzel','Playfair Display',Georgia,serif", fontSize: "clamp(2.3rem,3.8vw,3.1rem)" }}
-            >
+            <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.14] mb-6 text-[#1a1a1a]">
               Industries<br />
               <span className="text-[#2d6b1f]">We Serve</span>
             </h2>
