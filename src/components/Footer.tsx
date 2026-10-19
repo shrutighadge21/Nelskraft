@@ -198,21 +198,17 @@ export default function Footer() {
             © {currentYear} Nelskraft Refractory Pvt. Ltd. All rights reserved.
           </div>
 
-          {/* Legal and compliance links */}
-          <div className="flex items-center gap-4 text-xs">
-            <Link
-              href="/privacy"
-              className="hover:text-white transition-colors"
+          {/* Developer credit */}
+          <div className="text-xs text-center sm:text-right">
+            Designed and Developed by{" "}
+            <a
+              href="https://qirotec.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#B4C2BA] hover:text-white transition-colors"
             >
-              Privacy Policy
-            </Link>
-            <span className="text-white/20">•</span>
-            <Link
-              href="/terms"
-              className="hover:text-white transition-colors"
-            >
-              Terms &amp; Conditions
-            </Link>
+              Qiro Tech Innovation Pvt. Ltd.
+            </a>
           </div>
         </div>
       </div>

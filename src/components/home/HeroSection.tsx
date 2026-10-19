@@ -4,11 +4,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import {
-  RefractoryBricksIcon,
-  BiomassLeafIcon,
-  IndustrialMineralsIcon,
-} from "./CategoryIcons";
 
 /**
  * Statistics Data:
@@ -139,38 +134,11 @@ function CountUpStrip() {
   );
 }
 
-const CATEGORIES = [
-  {
-    id: "refractory",
-    name: "Refractory Products",
-    line1: "BRICKS, POWDERS,",
-    line2: "MORTARS & CASTABLES",
-    icon: RefractoryBricksIcon,
-    href: "/products?category=refractory-products",
-  },
-  {
-    id: "biomass",
-    name: "Biomass Fuels",
-    line1: "PELLETS, BRIQUETTES",
-    line2: "& SHELL CAKE",
-    icon: BiomassLeafIcon,
-    href: "/products?category=biomass-fuels",
-  },
-  {
-    id: "minerals",
-    name: "Industrial Minerals",
-    line1: "BAUXITE, SILICA SAND",
-    line2: "& OTHER RAW MATERIALS",
-    icon: IndustrialMineralsIcon,
-    href: "/products?category=mineral-materials",
-  },
-];
-
 export default function HeroSection() {
   return (
     <section
       id="about"
-      className="relative w-full bg-[#F7F5EE] text-[#1C261B] overflow-hidden lg:min-h-[calc(100vh-68px)] lg:max-h-[920px] flex flex-col justify-between"
+      className="relative w-full bg-[#F7F5EE] text-[#1C261B] overflow-hidden flex flex-col justify-between"
       aria-label="Nelskraft - Materials That Power Industry"
     >
       {/* Ambient warm radial lighting layer */}
@@ -235,11 +203,11 @@ export default function HeroSection() {
       </div>
 
       {/* Main Editorial Hero Grid Container */}
-      <div className="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-12 pt-2.5 sm:pt-3 lg:pt-1.5 pb-1 lg:pb-0 flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-4 items-center">
+      <div className="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-12 pt-8 sm:pt-12 lg:pt-10 pb-0 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
           
-          {/* LEFT COLUMN: Editorial Typography, Description, CTA, & Category Row */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center z-20 py-1">
+          {/* LEFT COLUMN: Editorial Typography, Description, & CTA */}
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center z-20 py-4 lg:py-6">
             {/* Eyebrow Label with Solid Horizontal Line */}
             <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-[#6E776B] mb-2 sm:mb-2.5">
               <span className="w-6 sm:w-7 h-[2px] bg-[#54a937]" aria-hidden="true" />
@@ -247,14 +215,14 @@ export default function HeroSection() {
             </div>
 
             {/* Compact Refined Sans Headline matching Hero Scale */}
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3 sm:mb-3.5">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3.5 sm:mb-4">
               Materials<br />
               That Power<br />
               Industry.
             </h2>
 
             {/* Supporting Company Description */}
-            <p className="text-[14px] sm:text-base text-[#4E584C] font-normal leading-[1.65] max-w-[480px] mb-3.5 sm:mb-4">
+            <p className="text-[14px] sm:text-base text-[#4E584C] font-normal leading-[1.65] max-w-[480px] mb-6 sm:mb-7">
               Nelskraft Refractory Pvt. Ltd. supplies refractory products, biomass
               fuels, and mineral materials for demanding industrial applications.
               We bring these material categories together to support the diverse
@@ -262,62 +230,21 @@ export default function HeroSection() {
             </p>
 
             {/* Rounded CTA Button */}
-            <div className="mb-4 sm:mb-5">
+            <div>
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2.5 bg-[#445E3D] hover:bg-[#354B2F] text-white px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide shadow-xs hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#445E3D]"
+                className="inline-flex items-center gap-2.5 bg-[#445E3D] hover:bg-[#354B2F] text-white px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-[13px] font-semibold tracking-wide shadow-xs hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#445E3D]"
               >
                 <span>Learn More About Us</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </div>
-
-            {/* Three Compact Category Features with Crisp Vector SVG Icons & Subtle Dividers */}
-            <div className="pt-0.5">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-0 sm:divide-x sm:divide-[#DDD6C8]">
-                {CATEGORIES.map((cat, idx) => {
-                  const IconComponent = cat.icon;
-                  return (
-                    <Link
-                      key={cat.id}
-                      href={cat.href}
-                      className={`group flex flex-col items-start transition-colors duration-200 ${
-                        idx === 0
-                          ? "sm:pr-3 lg:pr-4"
-                          : idx === 1
-                          ? "sm:px-3 lg:px-4"
-                          : "sm:pl-3 lg:pl-4"
-                      }`}
-                    >
-                      {/* Crisp Clean SVG Vector Icon */}
-                      <div className="text-[#384D34] group-hover:text-[#253A22] transition-colors mb-1.5">
-                        <IconComponent size={22} className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
-                      </div>
-
-                      {/* Category Heading (Sans-Serif) */}
-                      <h3 className="font-sans text-[15px] sm:text-[16px] font-bold text-[#1C261B] group-hover:text-[#384D34] transition-colors leading-tight mb-1">
-                        {cat.name}
-                      </h3>
-
-                      {/* Uppercase Concise Description */}
-                      <p className="text-[8.5px] sm:text-[9px] font-semibold tracking-wider text-[#737C70] uppercase leading-snug">
-                        {cat.line1}
-                        <br />
-                        {cat.line2}
-                      </p>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
           </div>
 
           {/* RIGHT COLUMN: Layered Industrial Photography Composition */}
           <div className="lg:col-span-6 xl:col-span-6 relative w-full flex items-center justify-center lg:justify-end self-end">
-
-
             {/* Layered authentic industrial photography */}
-            <div className="relative w-full max-w-[530px] lg:max-w-none aspect-[584/520] select-none flex items-end">
+            <div className="relative w-full max-w-[500px] lg:max-w-[540px] aspect-[584/520] select-none flex items-end">
               <Image
                 src="/images/hero-right-visual.png"
                 alt="Industrial factory plant with distillation towers and sunset sky, layered with authentic stacked refractory bricks, crushed aggregates, and carbon mineral materials"
