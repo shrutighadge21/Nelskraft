@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
+import GalleryClient from "@/components/gallery/GalleryClient";
 
 export const metadata: Metadata = {
   title: "Gallery | Nelskraft Refractory Pvt. Ltd.",
-  description: "Gallery of Nelskraft Refractory Pvt. Ltd.",
+  description:
+    "Explore our industrial photo gallery showcasing high-performance refractory products, biomass fuels, industrial minerals, and advanced thermal applications.",
+  keywords: [
+    "Nelskraft Gallery",
+    "Refractory Products Photos",
+    "Biomass Pellets",
+    "Industrial Minerals",
+    "Furnace Construction",
+    "Boiler Bed Material",
+    "Pune Refractory"
+  ],
+  openGraph: {
+    title: "Gallery | Nelskraft Refractory Pvt. Ltd.",
+    description:
+      "Explore genuine industrial photographs of Nelskraft's refractory products, biomass fuels, minerals, and high-temperature applications.",
+    url: "https://www.nelskraft.com/gallery",
+  },
 };
 
 export default function GalleryPage() {
-  return (
-    <main className="min-h-[60vh] flex items-center justify-center bg-[#FAF8F5] text-[#1B281A] px-4 py-20">
-      <div className="max-w-xl text-center">
-        <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-          Gallery
-        </h1>
-        <p className="text-sm sm:text-base text-[#555E50]">
-          Industrial photo and facility gallery coming soon.
-        </p>
-      </div>
-    </main>
-  );
+  return <GalleryClient />;
 }

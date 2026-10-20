@@ -127,8 +127,8 @@ export default function AboutPage() {
 
             {/* Main Editorial Headline */}
             <h1 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-white leading-[1.16] mb-6">
-              Built on Materials. <br className="hidden sm:inline" />
-              Driven by <span className="text-[#54a937]">Reliability.</span>
+              Building Durability, <br className="hidden sm:inline" />
+              Enabling <span className="text-[#54a937]">Sustainability.</span>
             </h1>
 
             {/* Short Company Introduction */}

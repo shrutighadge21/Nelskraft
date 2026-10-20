@@ -1,15 +1,14 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import {
-  MessageCircle,
-  Check,
+  Search,
   ArrowRight,
-  Sparkles,
-  Info,
+  ChevronRight,
+  MessageCircle,
+  ChevronDown,
 } from "lucide-react";
 import {
   PRODUCTS,
@@ -18,332 +17,541 @@ import {
   getWhatsAppUrl,
 } from "@/data/catalogue";
 
-// Direct, reliable Product Image component with zero temporary state delays
-function ProductCardImage({
-  src,
-  alt,
-  categoryName,
-}: {
-  src: string;
-  alt: string;
-  categoryName: string;
-}) {
-  const [hasError, setHasError] = useState(false);
-
-  return (
-    <div className="relative h-56 w-full overflow-hidden bg-[#f0eee9]">
-      <Image
-        src={hasError ? "/images/cat-refractory.jpg" : src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        onError={() => setHasError(true)}
-      />
-      {/* Category Pill Badge */}
-      <div className="absolute top-3 left-3 bg-[#000d15]/85 backdrop-blur-md text-white text-[10px] font-semibold tracking-wider uppercase px-3 py-1 rounded-full shadow-xs border border-white/10 transition-colors group-hover:bg-[#2d6b1f]">
-        {categoryName}
-      </div>
-    </div>
-  );
-}
-
 export default function ProductsClient() {
-  const searchParams = useSearchParams();
-  const rawCategory = searchParams.get("category") || "all";
-  // Normalize category id (handles both 'mineral-materials' and 'industrial-minerals')
-  const initialCategory =
-    rawCategory === "industrial-minerals" ? "mineral-materials" : rawCategory;
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [visibleCount, setVisibleCount] = useState<number>(6);
+  const [selectedProduct, setSelectedProduct] = useState<ProductItem>(PRODUCTS[0]);
+  const [activeThumbIndex, setActiveThumbIndex] = useState<number>(0);
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
-  const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
+  const catalogueSectionRef = useRef<HTMLElement>(null);
+  const detailSectionRef = useRef<HTMLDivElement>(null);
 
-  // Sync state if URL query param changes via navigation or browser history
-  useEffect(() => {
-    const cat = searchParams.get("category");
-    if (cat) {
-      setSelectedCategory(cat === "industrial-minerals" ? "mineral-materials" : cat);
-    }
-  }, [searchParams]);
+  // Filter products by category and search query
+  const filteredProducts = useMemo(() => {
+    return PRODUCTS.filter((product) => {
+      const matchesCategory =
+        selectedCategory === "all" ||
+        product.category === selectedCategory ||
+        (selectedCategory === "industrial-minerals" &&
+          (product.category === "industrial-minerals" ||
+            product.category === "mineral-materials"));
 
-  // Update selected category and reflect in browser URL so refresh always remembers the category
-  const handleSelectCategory = (catId: string) => {
-    setSelectedCategory(catId);
-    if (typeof window !== "undefined") {
-      const url = new URL(window.location.href);
-      if (catId === "all") {
-        url.searchParams.delete("category");
-      } else {
-        url.searchParams.set("category", catId);
-      }
-      window.history.replaceState(null, "", url.pathname + url.search);
+      const matchesSearch =
+        searchQuery.trim() === "" ||
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
+
+  // Handle category selection
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    setVisibleCount(6);
+    if (catalogueSectionRef.current) {
+      catalogueSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const filteredProducts = useMemo(() => {
-    if (selectedCategory === "all") {
-      return PRODUCTS;
+  // Handle viewing product details
+  const handleViewDetails = (product: ProductItem) => {
+    setSelectedProduct(product);
+    setActiveThumbIndex(0);
+    if (detailSectionRef.current) {
+      detailSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    return PRODUCTS.filter(
-      (p) =>
-        p.category === selectedCategory ||
-        (selectedCategory === "mineral-materials" && p.category === "mineral-materials")
-    );
-  }, [selectedCategory]);
+  };
+
+  // Get current active image for featured detail area
+  const currentThumbnails = selectedProduct.thumbnails && selectedProduct.thumbnails.length > 0
+    ? selectedProduct.thumbnails
+    : [selectedProduct.image];
+
+  const currentDisplayImage = currentThumbnails[activeThumbIndex] || selectedProduct.image;
+
+  // Category counts
+  const refractoryCount = PRODUCTS.filter((p) => p.category === "refractory-products").length;
+  const biomassCount = PRODUCTS.filter((p) => p.category === "biomass-fuels").length;
+  const mineralsCount = PRODUCTS.filter(
+    (p) => p.category === "industrial-minerals" || p.category === "mineral-materials"
+  ).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      {/* Category Tabs with Interactive Micro-Interactions */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5 mb-12">
-        <button
-          type="button"
-          onClick={() => handleSelectCategory("all")}
-          className={`px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f] ${
-            selectedCategory === "all"
-              ? "bg-[#000d15] text-white shadow-md ring-2 ring-[#000d15]/20"
-              : "bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-black shadow-xs"
-          }`}
-        >
-          All Materials ({PRODUCTS.length})
-        </button>
-
-        {PRODUCT_CATEGORIES.map((cat) => {
-          const isSelected = selectedCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => handleSelectCategory(cat.id)}
-              className={`px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wide transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f] ${
-                isSelected
-                  ? "bg-[#2d6b1f] text-white shadow-md ring-2 ring-[#2d6b1f]/30"
-                  : "bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-black shadow-xs"
-              }`}
-            >
-              {cat.title}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Category Overview Card (if specific category selected) */}
-      {selectedCategory !== "all" && (
-        <div className="mb-12 p-6 sm:p-8 rounded-3xl bg-[#FAF9F6] border border-[#e8e6df] shadow-xs flex flex-col md:flex-row items-center gap-6 animate-fadeIn transition-all duration-300">
-          {(() => {
-            const catInfo = PRODUCT_CATEGORIES.find(
-              (c) => c.id === selectedCategory || (selectedCategory === "industrial-minerals" && c.id === "mineral-materials")
-            );
-            if (!catInfo) return null;
-            return (
-              <>
-                <div className="relative w-full md:w-56 h-36 rounded-2xl overflow-hidden flex-shrink-0 bg-gray-100 border border-gray-200/80 shadow-xs">
-                  <Image
-                    src={catInfo.image}
-                    alt={catInfo.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 224px"
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-[#2d6b1f] uppercase mb-1">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Category Overview</span>
-                  </div>
-                  <h2 className="text-2xl sm:text-3xl font-bold font-sans text-[#1a1f1c] mb-2">
-                    {catInfo.title}
-                  </h2>
-                  <p className="text-sm sm:text-base text-[#4a4a4a] leading-relaxed">
-                    {catInfo.description}
-                  </p>
-                </div>
-              </>
-            );
-          })()}
+    <div className="bg-[#FAF8F5] text-[#181E1A] font-sans antialiased">
+      {/* ═══════════════════════════════════════════════
+          HERO SECTION
+      ═══════════════════════════════════════════════ */}
+      <section className="relative w-full bg-[#121915] overflow-hidden py-16 sm:py-24 md:py-28">
+        {/* Authentic Industrial Refractory Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/about-bricks.jpg"
+            alt="Nelskraft Refractory High-Performance Materials"
+            fill
+            priority
+            className="object-cover object-right md:object-center opacity-40 mix-blend-luminosity"
+          />
+          {/* Deep dark overlay to ensure readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0C120E] via-[#0E1611]/90 to-transparent" />
+          <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-[#0C120E]/70" />
         </div>
-      )}
 
-      {/* Product Grid with Smooth Category Switch Fade */}
-      <div
-        key={selectedCategory}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fadeIn transition-opacity duration-200"
-      >
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            className="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between"
-          >
-            <div>
-              {/* Reliable Product Image with fallback */}
-              <ProductCardImage
-                src={product.image}
-                alt={product.name}
-                categoryName={product.categoryName}
-              />
-
-              {/* Product Info */}
-              <div className="p-6">
-                <h3 className="font-sans text-xl font-bold text-[#1a1f1c] mb-2 leading-snug group-hover:text-[#2d6b1f] transition-colors duration-200">
-                  {product.name}
-                </h3>
-                <p className="text-xs sm:text-[13px] text-[#4a4a4a] leading-relaxed line-clamp-3 mb-4">
-                  {product.shortDesc}
-                </p>
-
-                {/* Technical Highlights Pills */}
-                <div className="space-y-1.5 mb-4">
-                  {product.specs.slice(0, 3).map((spec) => (
-                    <div
-                      key={spec.label}
-                      className="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-[#FAF9F6] border border-[#e8e6df]"
-                    >
-                      <span className="text-gray-500 font-medium">{spec.label}</span>
-                      <span className="text-[#1a1f1c] font-semibold">{spec.value}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Applications list tags */}
-                <div className="flex flex-wrap gap-1.5 mb-2">
-                  {product.applications.slice(0, 2).map((app) => (
-                    <span
-                      key={app}
-                      className="text-[10px] bg-emerald-50 text-emerald-800 font-medium px-2.5 py-0.5 rounded-full border border-emerald-100"
-                    >
-                      {app}
-                    </span>
-                  ))}
-                  {product.applications.length > 2 && (
-                    <span className="text-[10px] bg-gray-100 text-gray-600 font-medium px-2 py-0.5 rounded-full">
-                      +{product.applications.length - 2} more
-                    </span>
-                  )}
-                </div>
-              </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            {/* Small label */}
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-5 h-[1.5px] bg-[#678B60]" />
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#98A89A]">
+                OUR PRODUCTS
+              </span>
             </div>
 
-            {/* Action Bar */}
-            <div className="p-6 pt-0 border-t border-gray-100 mt-4 flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={() => setSelectedProduct(product)}
-                className="inline-flex items-center gap-1 text-xs font-semibold text-[#1a1f1c] hover:text-[#2d6b1f] transition-colors cursor-pointer py-1 group/btn focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f] rounded"
-              >
-                <Info className="w-3.5 h-3.5 text-gray-400 group-hover/btn:text-[#2d6b1f] transition-colors" />
-                <span className="underline underline-offset-2">View Full Specs</span>
-              </button>
+            {/* Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-4">
+              High-Performance Materials for Industrial Applications.
+            </h1>
 
-              <div className="flex items-center gap-2">
-                <a
-                  href={getWhatsAppUrl(product.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Enquire about ${product.name} on WhatsApp`}
-                  className="p-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-full transition-all duration-200 transform hover:scale-110 active:scale-95 shadow-xs hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-                  title="Enquire on WhatsApp"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                </a>
+            {/* Description */}
+            <p className="text-sm sm:text-base text-[#B3C2B7] leading-relaxed max-w-xl">
+              A comprehensive range of refractory products, biomass fuels, and industrial
+              minerals to meet diverse industry needs.
+            </p>
+          </div>
+        </div>
+      </section>
 
-                <Link
-                  href={`/contact?product=${encodeURIComponent(product.name)}`}
-                  className="inline-flex items-center gap-1.5 bg-[#1a1f1c] hover:bg-[#2d6b1f] text-white text-xs font-semibold px-4 py-2.5 rounded-full transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 shadow-xs hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
-                >
-                  <span>Enquire</span>
-                  <ArrowRight className="w-3 h-3 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </Link>
+      {/* ═══════════════════════════════════════════════
+          THREE PRODUCT CATEGORY PANELS
+      ═══════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+        {/* Header row */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-4">
+          <div className="flex items-center gap-2">
+            <span className="w-5 h-[1.5px] bg-[#445E3D]" />
+            <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-[#5A665D]">
+              OUR PRODUCT CATEGORIES
+            </h2>
+          </div>
+          <p className="text-xs sm:text-sm text-[#7D8880]">
+            Explore our product range across three key categories.
+          </p>
+        </div>
+
+        {/* 3 Category Panels */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-2">
+          {/* Panel 1: Refractory Products */}
+          <div
+            onClick={() => handleCategorySelect("refractory-products")}
+            className={`group bg-white hover:bg-[#F4F1EA] border rounded-2xl p-3 sm:p-4 flex items-center justify-between cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-sm ${
+              selectedCategory === "refractory-products"
+                ? "border-[#274E37] ring-2 ring-[#274E37]/15"
+                : "border-[#E5E0D5]"
+            }`}
+          >
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+                <Image
+                  src="/images/about-bricks.jpg"
+                  alt="Refractory Products"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-[#181E1A] text-sm sm:text-base leading-snug group-hover:text-[#274E37] transition-colors">
+                  Refractory<br />Products
+                </h3>
+                <p className="text-xs text-[#717873] mt-1">
+                  {refractoryCount} Products
+                </p>
+              </div>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+              <ArrowRight className="w-4 h-4" />
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Product Details Modal */}
-      {selectedProduct && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn"
-          role="dialog"
-          aria-modal="true"
-          aria-label={selectedProduct.name}
-        >
-          <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative border border-gray-200">
-            <button
-              type="button"
-              onClick={() => setSelectedProduct(null)}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center cursor-pointer text-sm font-bold transition-all hover:scale-105 active:scale-95"
-              aria-label="Close modal"
-            >
-              ✕
-            </button>
-
-            <div className="text-xs font-bold tracking-widest text-[#2d6b1f] uppercase mb-1">
-              {selectedProduct.categoryName}
+          {/* Panel 2: Biomass Fuels */}
+          <div
+            onClick={() => handleCategorySelect("biomass-fuels")}
+            className={`group bg-white hover:bg-[#F4F1EA] border rounded-2xl p-3 sm:p-4 flex items-center justify-between cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-sm ${
+              selectedCategory === "biomass-fuels"
+                ? "border-[#274E37] ring-2 ring-[#274E37]/15"
+                : "border-[#E5E0D5]"
+            }`}
+          >
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+                <Image
+                  src="/images/catalogue/page_8_img_0_71.jpeg"
+                  alt="Biomass Fuels"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-[#181E1A] text-sm sm:text-base leading-snug group-hover:text-[#274E37] transition-colors">
+                  Biomass<br />Fuels
+                </h3>
+                <p className="text-xs text-[#717873] mt-1">
+                  {biomassCount} Products
+                </p>
+              </div>
             </div>
-            <h3 className="font-sans text-2xl sm:text-3xl font-bold text-[#1a1f1c] mb-4">
-              {selectedProduct.name}
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
+
+          {/* Panel 3: Industrial Minerals */}
+          <div
+            onClick={() => handleCategorySelect("industrial-minerals")}
+            className={`group bg-white hover:bg-[#F4F1EA] border rounded-2xl p-3 sm:p-4 flex items-center justify-between cursor-pointer transition-all duration-200 shadow-2xs hover:shadow-sm ${
+              selectedCategory === "industrial-minerals"
+                ? "border-[#274E37] ring-2 ring-[#274E37]/15"
+                : "border-[#E5E0D5]"
+            }`}
+          >
+            <div className="flex items-center gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+                <Image
+                  src="/images/catalogue/page_10_img_1_87.jpeg"
+                  alt="Industrial Minerals"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-[#181E1A] text-sm sm:text-base leading-snug group-hover:text-[#274E37] transition-colors">
+                  Industrial<br />Minerals
+                </h3>
+                <p className="text-xs text-[#717873] mt-1">
+                  {mineralsCount} Products
+                </p>
+              </div>
+            </div>
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+              <ArrowRight className="w-4 h-4" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════
+          PRODUCT CATALOGUE & FILTERS SECTION
+      ═══════════════════════════════════════════════ */}
+      <section
+        ref={catalogueSectionRef}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 sm:pb-24"
+      >
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          {/* ────── LEFT SIDEBAR ────── */}
+          <aside className="w-full lg:w-64 flex-shrink-0">
+            <h3 className="text-xs font-bold tracking-[0.16em] uppercase text-[#717873] mb-3">
+              FILTER BY CATEGORY
             </h3>
 
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              {selectedProduct.description}
-            </p>
+            {/* Filter Buttons */}
+            <div className="flex flex-col gap-2">
+              {/* All Products */}
+              <button
+                type="button"
+                onClick={() => handleCategorySelect("all")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                  selectedCategory === "all"
+                    ? "bg-[#274E37] text-white shadow-xs"
+                    : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
+                }`}
+              >
+                <span>All Products</span>
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full ${
+                    selectedCategory === "all"
+                      ? "bg-white/20 text-white"
+                      : "bg-[#EAE6DD] text-[#555E52]"
+                  }`}
+                >
+                  13
+                </span>
+              </button>
 
-            <div className="mb-6">
-              <h4 className="text-xs font-bold tracking-wider text-gray-400 uppercase mb-3">
-                Key Industrial Applications
-              </h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-700">
-                {selectedProduct.applications.map((app) => (
-                  <li key={app} className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#2d6b1f] flex-shrink-0" />
-                    <span>{app}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* Refractory Products */}
+              <button
+                type="button"
+                onClick={() => handleCategorySelect("refractory-products")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                  selectedCategory === "refractory-products"
+                    ? "bg-[#274E37] text-white shadow-xs"
+                    : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
+                }`}
+              >
+                <span>Refractory Products</span>
+                <ChevronRight className="w-4 h-4 opacity-70" />
+              </button>
+
+              {/* Biomass Fuels */}
+              <button
+                type="button"
+                onClick={() => handleCategorySelect("biomass-fuels")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                  selectedCategory === "biomass-fuels"
+                    ? "bg-[#274E37] text-white shadow-xs"
+                    : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
+                }`}
+              >
+                <span>Biomass Fuels</span>
+                <ChevronRight className="w-4 h-4 opacity-70" />
+              </button>
+
+              {/* Industrial Minerals */}
+              <button
+                type="button"
+                onClick={() => handleCategorySelect("industrial-minerals")}
+                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                  selectedCategory === "industrial-minerals"
+                    ? "bg-[#274E37] text-white shadow-xs"
+                    : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
+                }`}
+              >
+                <span>Industrial Minerals</span>
+                <ChevronRight className="w-4 h-4 opacity-70" />
+              </button>
             </div>
 
-            <div className="mb-8">
-              <h4 className="text-xs font-bold tracking-wider text-gray-400 uppercase mb-3">
-                Verified Technical Specifications
-              </h4>
-              <div className="bg-[#FAF9F6] rounded-2xl border border-[#e8e6df] divide-y divide-[#e8e6df] overflow-hidden">
-                {selectedProduct.specs.map((spec) => (
+          </aside>
+
+          {/* ────── MAIN PRODUCTS CONTENT ────── */}
+          <div className="flex-1 w-full">
+            {/* Top Bar: Title & Search Field */}
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#181E1A]">
+                {selectedCategory === "all"
+                  ? `All Products (${filteredProducts.length})`
+                  : selectedCategory === "refractory-products"
+                  ? `Refractory Products (${filteredProducts.length})`
+                  : selectedCategory === "biomass-fuels"
+                  ? `Biomass Fuels (${filteredProducts.length})`
+                  : `Industrial Minerals (${filteredProducts.length})`}
+              </h2>
+
+              {/* Search Field matching sketch top-right position */}
+              <div className="relative w-full sm:w-72">
+                <Search className="w-4 h-4 text-[#8C968E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setVisibleCount(6);
+                  }}
+                  placeholder="Search products..."
+                  className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-white border border-[#D5CFBF] rounded-full focus:outline-none focus:ring-2 focus:ring-[#274E37] focus:border-transparent placeholder-[#8A948C] transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Product Cards Grid (3 Columns on Desktop) */}
+            {filteredProducts.length === 0 ? (
+              <div className="bg-white rounded-2xl border border-[#E5E0D5] p-12 text-center mt-4">
+                <p className="text-sm font-semibold text-[#181E1A]">
+                  No products found matching your search.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery("");
+                    setSelectedCategory("all");
+                  }}
+                  className="mt-3 text-xs font-semibold text-[#274E37] hover:underline"
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-2">
+                {filteredProducts.slice(0, visibleCount).map((product) => (
                   <div
-                    key={spec.label}
-                    className="px-4 py-2.5 flex items-center justify-between text-xs sm:text-sm"
+                    key={product.id}
+                    onClick={() => handleViewDetails(product)}
+                    className="group bg-white border border-[#E5E0D5] rounded-2xl overflow-hidden hover:shadow-md transition-all duration-300 flex flex-col justify-between cursor-pointer"
                   >
-                    <span className="text-gray-600 font-medium">{spec.label}</span>
-                    <span className="text-[#1a1f1c] font-semibold text-right">
-                      {spec.value}
-                    </span>
+                    <div>
+                      {/* Product Image Area */}
+                      <div className="relative h-44 sm:h-48 w-full bg-[#FAF9F6] p-4 flex items-center justify-center overflow-hidden border-b border-[#F0EEEA]">
+                        <Image
+                          src={product.image}
+                          alt={product.name}
+                          fill
+                          className="object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="p-4 sm:p-5">
+                        <h3 className="font-bold text-sm sm:text-base text-[#181E1A] group-hover:text-[#274E37] transition-colors leading-snug line-clamp-1">
+                          {product.name}
+                        </h3>
+
+                        {/* Category Tag directly beneath title */}
+                        <span className="inline-block text-[11px] font-medium text-[#2E5339] bg-[#EAF2EC] px-2.5 py-0.5 rounded-full mt-2 mb-2">
+                          {product.categoryName}
+                        </span>
+
+                        {/* Short Description */}
+                        <p className="text-xs text-[#6B756E] line-clamp-2 leading-relaxed">
+                          {product.shortDesc}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Bottom Action Row */}
+                    <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-[#F0EEEA] flex items-center justify-between">
+                      <span className="text-xs font-semibold text-[#181E1A] group-hover:text-[#274E37] flex items-center gap-1">
+                        View Details &rarr;
+                      </span>
+                      <div className="w-7 h-7 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all">
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
                   </div>
+                ))}
+              </div>
+            )}
+
+            {/* Load More Products Button matching sketch */}
+            {visibleCount < filteredProducts.length && (
+              <div className="text-center mt-10">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((prev) => prev + 6)}
+                  className="inline-flex items-center gap-1.5 bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#D5CFBF] text-xs sm:text-sm font-semibold px-6 py-2.5 rounded-full shadow-2xs transition-all hover:border-[#274E37]"
+                >
+                  <span>Load More Products</span>
+                  <ChevronDown className="w-4 h-4 text-[#555E52]" />
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* ═══════════════════════════════════════════════
+            FEATURED PRODUCT DETAIL AREA
+        ═══════════════════════════════════════════════ */}
+        <div
+          ref={detailSectionRef}
+          className="bg-[#EDEAE1] border border-[#DCD6C7] rounded-3xl p-6 sm:p-10 mt-16 shadow-2xs"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            {/* Left Column: Big Product Image & Thumbnails */}
+            <div className="lg:col-span-5 flex flex-col items-center">
+              {/* Large Main Image Display */}
+              <div className="relative w-full aspect-[4/3] bg-white rounded-2xl p-6 border border-[#DDD7C9] shadow-xs flex items-center justify-center overflow-hidden">
+                <Image
+                  src={currentDisplayImage}
+                  alt={selectedProduct.name}
+                  fill
+                  className="object-contain p-4 transition-all duration-300"
+                />
+              </div>
+
+              {/* Thumbnails below main image matching sketch */}
+              <div className="flex items-center gap-3 mt-4 w-full justify-start">
+                {currentThumbnails.map((thumbUrl, idx) => (
+                  <button
+                    key={thumbUrl + idx}
+                    type="button"
+                    onClick={() => setActiveThumbIndex(idx)}
+                    className={`relative w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
+                      activeThumbIndex === idx
+                        ? "border-[#274E37] ring-1 ring-[#274E37]"
+                        : "border-transparent hover:border-[#C5BDAA]"
+                    }`}
+                  >
+                    <Image
+                      src={thumbUrl}
+                      alt={`${selectedProduct.name} thumbnail ${idx + 1}`}
+                      fill
+                      className="object-cover p-1"
+                    />
+                  </button>
                 ))}
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-4 border-t border-gray-100">
-              <a
-                href={getWhatsAppUrl(selectedProduct.name)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba59] text-white py-3.5 px-6 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Enquire via WhatsApp</span>
-              </a>
+            {/* Right Column: Title, Description, Technical Specs Table, and Action Buttons */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <div>
+                {/* Category tag with dash */}
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-4 h-[1.5px] bg-[#445E3D]" />
+                  <span className="text-xs font-bold tracking-[0.18em] uppercase text-[#445E3D]">
+                    {selectedProduct.categoryName}
+                  </span>
+                </div>
 
-              <Link
-                href={`/contact?product=${encodeURIComponent(selectedProduct.name)}`}
-                onClick={() => setSelectedProduct(null)}
-                className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 bg-[#1a1f1c] hover:bg-[#2d6b1f] text-white py-3.5 px-6 rounded-full text-sm font-semibold shadow-sm hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95"
-              >
-                <span>Request Quotation</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                {/* Product Title */}
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[#181E1A] tracking-tight mb-3">
+                  {selectedProduct.name}
+                </h3>
+
+                {/* Concise Description based on catalogue */}
+                <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed mb-5">
+                  {selectedProduct.description}
+                </p>
+
+                {/* Technical Specification Table */}
+                <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-hidden shadow-2xs mb-6">
+                  <table className="w-full text-left border-collapse">
+                    <tbody>
+                      {selectedProduct.specs.map((spec, sIdx) => (
+                        <tr
+                          key={spec.label + sIdx}
+                          className={
+                            sIdx !== selectedProduct.specs.length - 1
+                              ? "border-b border-[#EBE6DB]"
+                              : ""
+                          }
+                        >
+                          <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5]">
+                            {spec.label}
+                          </td>
+                          <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A]">
+                            {spec.value}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link
+                  href={`/contact?product=${encodeURIComponent(selectedProduct.name)}`}
+                  className="bg-[#274E37] hover:bg-[#1E3E2B] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full shadow-xs transition-all flex items-center gap-2"
+                >
+                  <span>Enquire About This Product</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <a
+                  href={getWhatsAppUrl(selectedProduct.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-transparent hover:bg-white/80 text-[#181E1A] border border-[#BDB5A4] text-xs sm:text-sm font-semibold px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-2xs"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                  <span>Discuss on WhatsApp</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      )}
+      </section>
     </div>
   );
 }

@@ -1,21 +1,38 @@
 import type { Metadata } from "next";
+import ProductsClient from "@/components/products/ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Product | Nelskraft Refractory Pvt. Ltd.",
-  description: "Products of Nelskraft Refractory Pvt. Ltd.",
+  title: "Products & Materials | Nelskraft Refractory Pvt. Ltd.",
+  description:
+    "Explore Nelskraft's high-performance refractory products, biomass fuels, and industrial minerals engineered for high-temperature and heavy industrial applications.",
+  keywords: [
+    "Refractory Products",
+    "High Alumina Brick Powder",
+    "Boiler Bed Material",
+    "Refractories Mortar",
+    "Refractories Castable",
+    "Fireclay",
+    "CAT-9 Cement",
+    "IS-6 Bricks",
+    "IS-8 Bricks",
+    "Biomass Pellets",
+    "Cashew Nut Shell Cake",
+    "Ball Clay",
+    "Silica Sand",
+    "Nelskraft Pune"
+  ],
+  openGraph: {
+    title: "Products & Materials | Nelskraft Refractory Pvt. Ltd.",
+    description:
+      "High-Performance Materials for Industrial Applications: Refractory Products, Biomass Fuels, and Industrial Minerals.",
+    url: "https://www.nelskraft.com/products",
+  },
 };
 
 export default function ProductPage() {
   return (
-    <main className="min-h-[60vh] flex items-center justify-center bg-[#FAF8F5] text-[#1B281A] px-4 py-20">
-      <div className="max-w-xl text-center">
-        <h1 className="font-sans text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-          Product
-        </h1>
-        <p className="text-sm sm:text-base text-[#555E50]">
-          This page is currently being prepared and will be designed soon.
-        </p>
-      </div>
+    <main className="w-full">
+      <ProductsClient />
     </main>
   );
 }

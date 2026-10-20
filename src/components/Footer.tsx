@@ -6,6 +6,14 @@ import { COMPANY_DETAILS, PRODUCT_CATEGORIES } from "@/data/catalogue";
 export default function Footer() {
   const currentYear = 2026;
 
+  const QUICK_LINKS = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Product", href: "/products" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Contact Us", href: "/contact" },
+  ];
+
   return (
     <footer className="bg-[#0B130E] text-[#D8E2DC] border-t border-[#1C2C24]">
       {/* Main Footer Body with 4 Aligned Columns and Thin Understated Vertical Separators */}
@@ -20,13 +28,13 @@ export default function Footer() {
 
               {/* Tagline in Subtle Brand Green */}
               <div className="pt-1">
-                <p className="text-[11px] font-bold tracking-[0.18em] uppercase text-[#78c454]">
+                <p className="text-xs font-bold tracking-[0.16em] uppercase text-[#78c454]">
                   Building Durability. Enabling Sustainability.
                 </p>
               </div>
 
               {/* Concise Company Description */}
-              <p className="text-xs text-[#B4C2BA] leading-relaxed max-w-sm pt-1">
+              <p className="text-sm text-[#B4C2BA] leading-relaxed max-w-sm pt-1">
                 Supplying high-performance refractory products, sustainable biomass
                 fuels, and verified mineral materials engineered for severe
                 high-temperature industrial operations across India.
@@ -34,9 +42,9 @@ export default function Footer() {
             </div>
 
             {/* Verified Company Credentials */}
-            <div className="pt-6 mt-6 border-t border-white/10 text-[11px] text-[#8EA096] font-mono space-y-1">
+            <div className="pt-6 mt-6 border-t border-white/10 text-xs text-[#8EA096] font-mono space-y-1">
               <div className="flex items-center gap-1.5 text-[#B4C2BA]">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#54a937] flex-shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[#54a937] flex-shrink-0" />
                 <span className="font-sans font-semibold">Registered Entity</span>
               </div>
               <div className="tracking-wide">CIN: {COMPANY_DETAILS.cin}</div>
@@ -46,59 +54,34 @@ export default function Footer() {
 
           {/* ═══════ COLUMN 2 — QUICK LINKS ═══════ */}
           <div className="lg:col-span-2 lg:px-8 lg:border-r lg:border-white/10">
-            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-bold tracking-[0.18em] uppercase text-white mb-6 flex items-center gap-2">
               <span className="w-2.5 h-[2px] bg-[#54a937]" />
               <span>QUICK LINKS</span>
             </h3>
 
-            <ul className="space-y-3.5 text-xs text-[#B4C2BA]">
-              <li>
-                <Link
-                  href="/"
-                  className="group flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
-                  <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="group flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
-                  <span>About Us</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/products"
-                  className="group flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
-                  <span>Products</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="group flex items-center gap-2 hover:text-white transition-colors"
-                >
-                  <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
-                  <span>Contact Us</span>
-                </Link>
-              </li>
+            <ul className="space-y-3.5 text-sm text-[#B4C2BA]">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="group flex items-center gap-2 hover:text-white transition-colors"
+                  >
+                    <ChevronRight className="w-3.5 h-3.5 text-[#54a937] transition-transform duration-200 group-hover:translate-x-1" />
+                    <span>{link.name}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* ═══════ COLUMN 3 — PRODUCTS ═══════ */}
           <div className="lg:col-span-3 lg:px-8 lg:border-r lg:border-white/10">
-            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-bold tracking-[0.18em] uppercase text-white mb-6 flex items-center gap-2">
               <span className="w-2.5 h-[2px] bg-[#54a937]" />
               <span>PRODUCTS</span>
             </h3>
 
-            <ul className="space-y-3.5 text-xs text-[#B4C2BA]">
+            <ul className="space-y-3.5 text-sm text-[#B4C2BA]">
               {PRODUCT_CATEGORIES.map((cat) => (
                 <li key={cat.id}>
                   <Link
@@ -124,12 +107,12 @@ export default function Footer() {
 
           {/* ═══════ COLUMN 4 — GET IN TOUCH ═══════ */}
           <div className="lg:col-span-3 lg:pl-8">
-            <h3 className="text-xs font-bold tracking-[0.2em] uppercase text-white mb-6 flex items-center gap-2">
+            <h3 className="text-sm font-bold tracking-[0.18em] uppercase text-white mb-6 flex items-center gap-2">
               <span className="w-2.5 h-[2px] bg-[#54a937]" />
               <span>GET IN TOUCH</span>
             </h3>
 
-            <ul className="space-y-4 text-xs text-[#B4C2BA]">
+            <ul className="space-y-4 text-sm text-[#B4C2BA]">
               {/* Phone */}
               <li>
                 <a
@@ -140,10 +123,10 @@ export default function Footer() {
                     <Phone className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
+                    <span className="text-xs uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
                       Phone Number
                     </span>
-                    <span className="text-white font-medium text-xs sm:text-[13px] group-hover:text-[#78c454] transition-colors">
+                    <span className="text-white font-medium text-sm sm:text-base group-hover:text-[#78c454] transition-colors">
                       {COMPANY_DETAILS.phoneDisplay}
                     </span>
                   </div>
@@ -160,10 +143,10 @@ export default function Footer() {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div className="min-w-0">
-                    <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
+                    <span className="text-xs uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
                       Email Address
                     </span>
-                    <span className="text-white font-medium text-xs sm:text-[13px] group-hover:text-[#78c454] transition-colors">
+                    <span className="text-white font-medium text-sm sm:text-base group-hover:text-[#78c454] transition-colors">
                       {COMPANY_DETAILS.email}
                     </span>
                   </div>
@@ -176,10 +159,10 @@ export default function Footer() {
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5">
+                  <span className="text-xs uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5">
                     Head Office
                   </span>
-                  <p className="leading-relaxed text-[#B4C2BA] text-xs">
+                  <p className="leading-relaxed text-[#B4C2BA] text-sm">
                     {COMPANY_DETAILS.address.full}
                   </p>
                 </div>
@@ -192,20 +175,20 @@ export default function Footer() {
 
       {/* ═══════ SEPARATE SLIM BOTTOM STRIP ═══════ */}
       <div className="bg-[#060B08] border-t border-white/10 py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8EA096]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-[#8EA096]">
           {/* Copyright notice */}
           <div>
             © {currentYear} Nelskraft Refractory Pvt. Ltd. All rights reserved.
           </div>
 
           {/* Developer credit */}
-          <div className="text-xs text-center sm:text-right">
+          <div className="text-xs sm:text-sm text-center sm:text-right">
             Designed and Developed by{" "}
             <a
               href="https://qirotec.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#B4C2BA] hover:text-white transition-colors"
+              className="text-[#B4C2BA] hover:text-white transition-colors font-medium"
             >
               Qiro Tech Innovation Pvt. Ltd.
             </a>

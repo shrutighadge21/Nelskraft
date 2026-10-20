@@ -22,7 +22,7 @@ export default function Logo({
     >
       <div className="relative w-10 h-10 md:w-11 md:h-11 flex-shrink-0">
         <Image
-          src="/images/logo-icon.png"
+          src={isDarkVariant ? "/images/logo-white.png" : "/images/logo-icon.png"}
           alt="Nelskraft Logo Emblem"
           fill
           sizes="44px"

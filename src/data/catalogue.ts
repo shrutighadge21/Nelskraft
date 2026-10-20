@@ -6,13 +6,14 @@ export interface ProductSpecItem {
 export interface ProductItem {
   id: string;
   name: string;
-  category: "refractory-products" | "biomass-fuels" | "mineral-materials";
+  category: "refractory-products" | "biomass-fuels" | "industrial-minerals" | "mineral-materials";
   categoryName: string;
   shortDesc: string;
   description: string;
   applications: string[];
   specs: ProductSpecItem[];
   image: string;
+  thumbnails?: string[];
   featured?: boolean;
 }
 
@@ -65,8 +66,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Refractory Products",
     tagline: "High-performance materials for high-temperature applications.",
     description: "Formulated for severe thermal environments up to 1700°C, furnace linings, boiler beds and continuous industrial heat resistance.",
-    image: "/images/cat-refractory.jpg",
-    itemCount: 8
+    image: "/images/about-bricks.jpg",
+    itemCount: 9
   },
   {
     id: "biomass-fuels",
@@ -74,42 +75,47 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Biomass Fuels",
     tagline: "Sustainable fuel solutions for efficient combustion.",
     description: "Clean-burning, high-calorific eco-friendly alternatives to coal engineered for industrial boilers, kilns and low-emission power units.",
-    image: "/images/cat-biomass.jpg",
+    image: "/images/catalogue/page_8_img_0_71.jpeg",
     itemCount: 2
   },
   {
-    id: "mineral-materials",
-    slug: "mineral-materials",
-    title: "Mineral Materials",
+    id: "industrial-minerals",
+    slug: "industrial-minerals",
+    title: "Industrial Minerals",
     tagline: "Quality minerals for industrial use.",
     description: "High-purity ball clays and graded silica sand with rigorous chemical consistency for advanced ceramics and industrial casting.",
-    image: "/images/cat-minerals.jpg",
+    image: "/images/catalogue/page_10_img_1_87.jpeg",
     itemCount: 2
   }
 ];
 
 export const PRODUCTS: ProductItem[] = [
-  // --- REFRACTORY PRODUCTS ---
+  // --- 01. REFRACTORY PRODUCTS (9 Entries) ---
   {
     id: "high-alumina-brick-powder",
     name: "High Alumina Brick Powder",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "70% Al₂O₃ refractory powder for bricks, mortar, welding flux and iron filter nozzle mouths.",
-    description: "High Alumina Brick Powder is engineered for superior refractory performance at operating temperatures reaching 1700°C. Formulated with 70% Al₂O₃ content, it provides critical thermal stability and chemical corrosion resistance for demanding metallurgical lining applications.",
+    shortDesc: "Used in refractory bricks, mortar, welding flux, and nozzle mouth.",
+    description: "High alumina brick powder is used in refractory bricks, mortar, welding flux and nozzle mouth (for iron filter manufacturing).",
     applications: [
       "Refractory Bricks Manufacturing",
       "High-Temperature Mortar Formulations",
       "Welding Flux Processing",
-      "Nozzle Mouth for Iron Filter Manufacturing"
+      "Nozzle Mouth (for Iron Filter manufacturing)"
     ],
     specs: [
+      { label: "Size", value: "0 - 5 mm" },
       { label: "Al₂O₃ Content", value: "70%" },
-      { label: "Maximum Operating Temperature", value: "1700°C" },
-      { label: "Grain Size Range", value: "0 - 5 mm" },
-      { label: "Mesh Size", value: "60 Mesh (Fines)" }
+      { label: "Mesh Size", value: "60 (fines)" },
+      { label: "Temperature", value: "1700°C" }
     ],
-    image: "/images/cat-refractory.jpg",
+    image: "/images/catalogue/page_3_img_0_37.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_3_img_0_37.jpeg",
+      "/images/catalogue/page_4_img_0_44.jpeg",
+      "/images/catalogue/page_3_img_1_38.jpeg"
+    ],
     featured: true
   },
   {
@@ -117,22 +123,26 @@ export const PRODUCTS: ProductItem[] = [
     name: "Refractories Boiler Bed Material (IS-8 Grade)",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Specialized bed material for Circulating Fluidized Bed (CFB) boilers operating up to 1400°C.",
-    description: "Engineered specifically for CFB boiler environments, this IS-8 Grade bed material exhibits low attrition rates, controlled bulk density (1000-1100 kg/m³), and optimal fluidization characteristics under prolonged high temperatures.",
+    shortDesc: "Utilized in CFB boiler applications.",
+    description: "Refractories boiler bed material IS-8 grade engineered specifically for Circulating Fluidized Bed (CFB) boiler usage with optimal thermal stability.",
     applications: [
-      "Circulating Fluidized Bed (CFB) Boilers",
+      "CFB Boiler Usage",
       "Atmospheric Fluidized Bed Combustion (AFBC) Boilers",
       "Thermal Power & Cogeneration Units"
     ],
     specs: [
-      { label: "Grade", value: "IS-8 Grade" },
-      { label: "Al₂O₃ Content", value: "35% – 40%" },
-      { label: "SiO₂ Content", value: "45% – 55%" },
-      { label: "Size Distribution", value: "0.85 mm – 2.36 mm" },
-      { label: "Bulk Density", value: "1000 – 1100 kg/m³" },
+      { label: "Size", value: "0.85mm - 2.36mm" },
+      { label: "Al₂O₃ Content", value: "35% - 40%" },
+      { label: "SiO₂ Content", value: "45% - 55%" },
+      { label: "Bulk Density", value: "1000 - 1100 m³" },
       { label: "Operating Temperature", value: "1400°C" }
     ],
-    image: "/images/app-boiler.jpg",
+    image: "/images/catalogue/page_3_img_1_38.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_3_img_1_38.jpeg",
+      "/images/catalogue/page_6_img_1_59.jpeg",
+      "/images/catalogue/page_4_img_1_45.jpeg"
+    ],
     featured: true
   },
   {
@@ -140,22 +150,25 @@ export const PRODUCTS: ProductItem[] = [
     name: "Refractories Mortar",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Fire and air setting bonding mortar for furnace construction and refractory brick linings.",
-    description: "Nelskraft Refractories Mortar provides exceptional bonding strength between refractory firebricks. Formulated in 60 & 100 mesh fines with 50% to 70% Al₂O₃, it prevents slag penetration and gas leakage in extreme furnace thermal cycles.",
+    shortDesc: "Fire and air setting mortar for furnace construction.",
+    description: "Fire and air setting mortar used for furnace construction and brick lining works, ensuring tight, durable bonding.",
     applications: [
-      "Furnace Lining & Construction",
-      "Refractory Brick Joint Laying",
-      "Kiln Crown & Wall Sealing",
-      "Chimney & Duct Joint Works"
+      "Fire and Air Setting Mortar",
+      "Furnace Construction",
+      "Brick Lining Works"
     ],
     specs: [
-      { label: "Al₂O₃ Content", value: "50% – 70%" },
-      { label: "Operating Temperature", value: "1600°C" },
-      { label: "Grain Size Range", value: "0 – 1 mm" },
-      { label: "Mesh Size", value: "60 & 100 Mesh (Fines)" },
-      { label: "Setting Type", value: "Fire and Air Setting" }
+      { label: "Size", value: "0 - 1 mm" },
+      { label: "Mesh", value: "60 & 100 (Fines)" },
+      { label: "Al₂O₃ Content", value: "50% - 70%" },
+      { label: "Temperature", value: "1600°C" }
     ],
-    image: "/images/cat-refractory.jpg",
+    image: "/images/catalogue/page_4_img_0_44.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_4_img_0_44.jpeg",
+      "/images/catalogue/page_3_img_0_37.jpeg",
+      "/images/catalogue/page_5_img_0_51.jpeg"
+    ],
     featured: false
   },
   {
@@ -163,23 +176,27 @@ export const PRODUCTS: ProductItem[] = [
     name: "Refractories Castable",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Customizable dense monolithic castable refractory for furnace repairs and casting installations.",
-    description: "Nelskraft Refractories Castable is a premium monolithic refractory tailored for furnace walls, roofs, burner blocks, and launders. Size distribution and alumina content are customizable according to specific customer requirements and operating thermal profiles.",
+    shortDesc: "Used in furnace construction.",
+    description: "Dense monolithic refractories castable for furnace construction. Size and chemical percentage can be customized according to customer preferences.",
     applications: [
-      "Monolithic Furnace Construction",
-      "Burner Block Linings",
-      "Ladle Preheaters & Flue Gas Ducts",
-      "Quick In-situ Furnace Patching"
+      "Furnace Construction",
+      "Monolithic Repairs",
+      "Industrial Burner Linings"
     ],
     specs: [
-      { label: "Al₂O₃ Content Grades", value: "50%, 60%, 70%" },
-      { label: "Temperature Rating (50% Al₂O₃)", value: "1400°C" },
-      { label: "Temperature Rating (60% Al₂O₃)", value: "1500°C" },
-      { label: "Temperature Rating (70% Al₂O₃)", value: "1600°C" },
-      { label: "Available Sizes", value: "0-1mm, 1-3mm & 3-5mm" },
-      { label: "Customization", value: "Custom grain sizes and chemical ratios available" }
+      { label: "Size", value: "0 - 1mm, 1-3mm & 3-5 mm" },
+      { label: "Al₂O₃ Content", value: "50% - 70%" },
+      { label: "Temperature (50% Al₂O₃)", value: "1400°C" },
+      { label: "Temperature (60% Al₂O₃)", value: "1500°C" },
+      { label: "Temperature (70% Al₂O₃)", value: "1600°C" },
+      { label: "Customization", value: "Customized per customer preferences" }
     ],
-    image: "/images/app-furnace.jpg",
+    image: "/images/catalogue/page_4_img_1_45.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_4_img_1_45.jpeg",
+      "/images/catalogue/page_6_img_1_59.jpeg",
+      "/images/catalogue/page_4_img_0_44.jpeg"
+    ],
     featured: true
   },
   {
@@ -187,21 +204,24 @@ export const PRODUCTS: ProductItem[] = [
     name: "Fireclay",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Finely ground fireclay for furnace construction, brick bonding and thermal sealing up to 1600°C.",
-    description: "Specially processed natural refractory fireclay with balanced alumina-silica composition. Delivers superior workability, plasticity and bonding when laying refractory brick linings in furnaces, kilns, and flue stacks.",
+    shortDesc: "Used for furnace construction and brick lining.",
+    description: "Finely ground natural fireclay for tasks related to furnace construction and brick lining with excellent thermal bonding properties.",
     applications: [
       "Furnace Construction",
-      "Refractory Brick Lining Bonding",
-      "Tundish & Ladle Grouting",
-      "Thermal Insulation Sealing"
+      "Brick Lining Works",
+      "Thermal Sealing"
     ],
     specs: [
-      { label: "Al₂O₃ Content", value: "30% – 50%" },
-      { label: "Operating Temperature", value: "1400°C – 1600°C" },
-      { label: "Mesh Size", value: "60 & 100 Mesh (Fines)" },
-      { label: "Functionality", value: "High thermal plasticity and cohesion" }
+      { label: "Mesh", value: "60 & 100 (Fines)" },
+      { label: "Al₂O₃ Content", value: "30% - 50%" },
+      { label: "Temperature", value: "1400°C - 1600°C" }
     ],
-    image: "/images/cat-refractory.jpg",
+    image: "/images/catalogue/page_5_img_0_51.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_5_img_0_51.jpeg",
+      "/images/catalogue/page_5_img_1_52.jpeg",
+      "/images/catalogue/page_4_img_0_44.jpeg"
+    ],
     featured: false
   },
   {
@@ -209,20 +229,24 @@ export const PRODUCTS: ProductItem[] = [
     name: "CAT - 9 Cement",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Heavy-duty refractory cement formulated specifically for turbine power units and severe heat zones.",
-    description: "CAT - 9 is an ultra-reliable refractory cement designed for turbine power units, boiler ducting, and power plant infrastructure. It stands up to extreme thermal shocks and constant operational vibrations up to 1600°C.",
+    shortDesc: "Used in cement applications in turbine power units.",
+    description: "Specialized refractory cement formulated for high-vibration, intense thermal conditions in turbine power units.",
     applications: [
-      "Turbine Power Generation Units",
-      "Power Plant Enclosure Linings",
-      "High-Vibration Thermal Seals",
-      "Industrial Gas Duct Linings"
+      "Cement Applications in Turbine Power Units",
+      "High-Vibration Thermal Enclosures",
+      "Power Plant Duct Linings"
     ],
     specs: [
-      { label: "Mesh Size", value: "60 Mesh" },
-      { label: "Operating Temperature", value: "1600°C" },
-      { label: "Application Profile", value: "Turbine Power Units & Energy Plants" }
+      { label: "Mesh Size", value: "60 mesh" },
+      { label: "Temperature", value: "1600°C" },
+      { label: "Application", value: "Turbine Power Units" }
     ],
-    image: "/images/app-industrial.jpg",
+    image: "/images/catalogue/page_5_img_1_52.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_5_img_1_52.jpeg",
+      "/images/catalogue/page_5_img_0_51.jpeg",
+      "/images/catalogue/page_6_img_0_58.jpeg"
+    ],
     featured: false
   },
   {
@@ -230,55 +254,84 @@ export const PRODUCTS: ProductItem[] = [
     name: "Refractories Brick Powder (IS-8 Grade)",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Grade IS-8 refractory powder for nozzle mouths, welding fluxes, mortars, and foundry filters.",
-    description: "Processed from select IS-8 grade refractory materials, this brick powder is available in multiple particle graduations. It delivers consistent chemical characteristics and excellent thermal shock resistance.",
+    shortDesc: "Refractory bricks, mortar, welding flux, and nozzle mouth.",
+    description: "IS-8 grade brick powder for refractory bricks, mortar, welding flux, and nozzle mouth (for iron filter manufacturing). Size and chemical percentage can be customized.",
     applications: [
-      "Iron Filter Manufacturing",
-      "Nozzle Mouth Casting",
-      "Refractory Mortar & Grouting",
-      "Welding Flux Formulations"
+      "Refractory Bricks & Mortar",
+      "Welding Flux Formulations",
+      "Nozzle Mouth (for Iron Filter manufacturing)"
     ],
     specs: [
-      { label: "Grade", value: "IS-8 Grade" },
-      { label: "Al₂O₃ Content", value: "40% – 70%" },
-      { label: "Operating Temperature", value: "1400°C – 1700°C" },
-      { label: "Available Sizes", value: "0-1mm, 1-3mm & 3-5mm" },
-      { label: "Customization", value: "Custom grain and chemical composition upon request" }
+      { label: "Size", value: "0 - 1 mm, 1-3mm & 3-5mm" },
+      { label: "Al₂O₃ Content", value: "40% - 70%" },
+      { label: "Temperature", value: "1400°C - 1700°C" },
+      { label: "Customization", value: "Customized according to customer preferences" }
     ],
-    image: "/images/cat-refractory.jpg",
+    image: "/images/catalogue/page_6_img_0_58.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_6_img_0_58.jpeg",
+      "/images/catalogue/page_6_img_1_59.jpeg",
+      "/images/catalogue/page_3_img_0_37.jpeg"
+    ],
     featured: false
   },
   {
-    id: "is-6-and-is-8-bricks",
-    name: "IS-6 & IS-8 Refractory Bricks",
+    id: "is-6-bricks",
+    name: "IS - 6 Bricks",
     category: "refractory-products",
     categoryName: "Refractory Products",
-    shortDesc: "Standardized IS-6 (1400°C) and IS-8 (1500°C) dense refractory bricks for structural masonry.",
-    description: "Certified Indian Standard refractory bricks engineered for structural furnace lining, boiler walls, and incinerators. Characterized by high compressive strength, controlled porosity, and dimensional accuracy.",
+    shortDesc: "Standardized IS-6 dense refractory bricks for 1400°C masonry.",
+    description: "Certified IS-6 grade refractory bricks engineered for furnace construction, boiler walls, and high-temperature thermal masonry.",
     applications: [
-      "Industrial Furnace Walls & Hearths",
-      "Boiler Chambers & Fireboxes",
-      "Incinerator Linings",
-      "Chimney & Flue Duct Masonry"
+      "Furnace Walls & Masonry",
+      "Boiler Fireboxes",
+      "Incinerator Linings"
     ],
     specs: [
-      { label: "IS-6 Grade Al₂O₃ Content", value: "30%" },
-      { label: "IS-6 Grade Temperature", value: "1400°C" },
-      { label: "IS-8 Grade Al₂O₃ Content", value: "40%" },
-      { label: "IS-8 Grade Temperature", value: "1500°C" }
+      { label: "Al₂O₃ Content", value: "30%" },
+      { label: "Temperature", value: "1400°C" }
     ],
-    image: "/images/cat-refractory.jpg",
+    image: "/images/catalogue/page_7_img_0_65.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_7_img_0_65.jpeg",
+      "/images/catalogue/page_7_img_1_66.jpeg",
+      "/images/about-bricks.jpg"
+    ],
+    featured: false
+  },
+  {
+    id: "is-8-bricks",
+    name: "IS-8 Bricks",
+    category: "refractory-products",
+    categoryName: "Refractory Products",
+    shortDesc: "High-duty IS-8 dense refractory bricks for 1500°C masonry.",
+    description: "Certified IS-8 grade refractory bricks formulated with 40% alumina content for superior structural endurance up to 1500°C.",
+    applications: [
+      "High-Temperature Furnace Chambers",
+      "Industrial Kiln Walls",
+      "Heavy-Duty Chimney Masonry"
+    ],
+    specs: [
+      { label: "Al₂O₃ Content", value: "40%" },
+      { label: "Temperature", value: "1500°C" }
+    ],
+    image: "/images/catalogue/page_7_img_1_66.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_7_img_1_66.jpeg",
+      "/images/catalogue/page_7_img_0_65.jpeg",
+      "/images/about-bricks.jpg"
+    ],
     featured: false
   },
 
-  // --- BIOMASS FUELS ---
+  // --- 02. BIOMASS FUELS (2 Entries) ---
   {
     id: "biomass-pellets",
     name: "Biomass Pellets",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "High-density cylindrical biomass fuel pellets with GCV 3200-3700 kcal/kg, low moisture & minimal ash.",
-    description: "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. They reduce carbon emissions and operational fuel costs while ensuring reliable year-round availability.",
+    shortDesc: "High-quality biomass pellets for efficient industrial combustion.",
+    description: "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. Reduces carbon footprint and fuel costs.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Thermal Power Plants & Co-firing",
@@ -286,22 +339,27 @@ export const PRODUCTS: ProductItem[] = [
       "Textile, Food & Chemical Processing Plants"
     ],
     specs: [
-      { label: "Gross Calorific Value (GCV)", value: "3200 – 3700 kcal/kg" },
-      { label: "Sizes Available", value: "8 mm, 16 mm (or custom per client)" },
-      { label: "Moisture Content", value: "4% – 6%" },
-      { label: "Environmental Advantage", value: "Low carbon footprint, clean combustion" },
-      { label: "Supply Chain", value: "Consistent year-round availability" }
+      { label: "Gross Calorific Value (GCV)", value: "3200 - 3700" },
+      { label: "Sizes Available", value: "8mm, 16mm and as per customer requirement" },
+      { label: "Moisture", value: "4% - 6%" },
+      { label: "Advantage", value: "Sustainable & Cost-Effective" },
+      { label: "Supply", value: "Consistent year-round availability" }
     ],
-    image: "/images/cat-biomass.jpg",
+    image: "/images/catalogue/page_8_img_0_71.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_8_img_0_71.jpeg",
+      "/images/catalogue/page_8_img_1_72.jpeg",
+      "/images/catalogue/page_8_img_2_73.jpeg"
+    ],
     featured: true
   },
   {
     id: "de-oiled-cashew-nut-shell-cake",
-    name: "De-oiled Cashew Nut Shell Cake (Bio Shell Cake)",
+    name: "De-oiled Cashew Nut Shell Cake",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "High-energy biomass fuel with GCV 4200-4600 kcal/kg derived after Cashew Nut Shell Liquid extraction.",
-    description: "Cashew De-Oiled Cake, also known as Bio Shell Cake, is an eco-friendly biomass fuel derived from cashew nut shells after the extraction of Cashew Nut Shell Liquid (CNSL). This fuel offers exceptionally high calorific value (4200-4600 GCV) and burns cleanly with minimal ash production, making it a viable replacement for coal in industrial boilers, kilns, and furnaces.",
+    shortDesc: "Eco-friendly biomass fuel replacement for coal in industrial boilers.",
+    description: "Cashew De-Oiled Cake, also known as Bio Shell Cake, is an eco-friendly biomass fuel derived from cashew nut shells after the extraction of Cashew Nut Shell Liquid (CNSL). This fuel offers a high calorific value and burns cleanly with minimal ash production, making it a viable replacement for coal in industrial boilers, kilns, and furnaces.",
     applications: [
       "Industrial Boilers & Thermic Fluid Heaters",
       "Cement & Lime Kilns",
@@ -309,56 +367,57 @@ export const PRODUCTS: ProductItem[] = [
       "Direct Coal Replacement in Heavy Industry"
     ],
     specs: [
-      { label: "Gross Calorific Value (GCV)", value: "4200 – 4600 kcal/kg" },
-      { label: "Moisture Content", value: "10%" },
-      { label: "Ash Characteristics", value: "Minimal ash residue, clean burning" },
-      { label: "Source Material", value: "Cashew Nut Shell after CNSL extraction" }
+      { label: "Gross Calorific Value (GCV)", value: "4200 - 4600" },
+      { label: "Moisture", value: "10%" },
+      { label: "Ash Production", value: "Minimal ash, clean burning" }
     ],
-    image: "/images/cat-biomass.jpg",
+    image: "/images/catalogue/page_9_img_0_78.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_9_img_0_78.jpeg",
+      "/images/catalogue/page_9_img_1_79.jpeg",
+      "/images/catalogue/page_8_img_0_71.jpeg"
+    ],
     featured: true
   },
 
-  // --- MINERAL MATERIALS ---
+  // --- 03. INDUSTRIAL MINERALS (2 Entries) ---
   {
     id: "ball-clay",
     name: "Ball Clay",
-    category: "mineral-materials",
-    categoryName: "Mineral Materials",
-    shortDesc: "High-plasticity ceramic ball clay with 35.1% Al₂O₃, high green strength and superior fired brightness.",
+    category: "industrial-minerals",
+    categoryName: "Industrial Minerals",
+    shortDesc: "Exceptional plasticity and bonding for high-quality ceramics.",
     description: "Ball clay’s exceptional plasticity makes it essential in ceramic manufacturing, allowing easy shaping for intricate designs. Its high green strength prevents cracks during handling, while superior bonding enhances durability, making it ideal for high-quality ceramics.",
     applications: [
-      "Ceramic Tile & Sanitaryware Manufacturing",
+      "Ceramic Manufacturing & Sanitaryware",
       "Electrical Porcelain & Tableware",
       "Refractory Bonding Clay",
-      "Precision Casting & Vitrified Enamels"
+      "Precision Casting"
     ],
     specs: [
-      { label: "SiO₂ (XRF)", value: "47.2%" },
-      { label: "Al₂O₃ (XRF)", value: "35.1%" },
-      { label: "Fe₂O₃ (XRF)", value: "0.85%" },
-      { label: "TiO₂ (XRF)", value: "1.50%" },
-      { label: "K₂O (XRF)", value: "0.10%" },
-      { label: "CaO (XRF)", value: "0.05%" },
-      { label: "MgO (XRF)", value: "0.01%" },
-      { label: "L.O.I", value: "14.4%" },
+      { label: "SiO₂", value: "47.2%" },
+      { label: "Al₂O₃", value: "35.1%" },
+      { label: "Fe₂O₃", value: "0.85%" },
+      { label: "TiO₂", value: "1.50%" },
       { label: "Water of Plasticity", value: "42%" },
-      { label: "Residue 350#", value: "< 1%" },
       { label: "Dry MOR", value: "30 kg/cm² (Extruded Bar)" },
-      { label: "Soluble Salts", value: "< 600 ppm" },
-      { label: "Fired Colour L value (1205°C)", value: "> 90" },
       { label: "Fired Shrinkage (1205°C)", value: "12%" },
-      { label: "Fired MOR (1205°C)", value: "> 300 kg/cm²" },
-      { label: "Water Absorption (1205°C)", value: "< 14%" }
+      { label: "Fired MOR (1205°C)", value: "> 300 kg/cm²" }
     ],
-    image: "/images/app-ceramic.jpg",
+    image: "/images/catalogue/page_10_img_1_87.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_10_img_1_87.jpeg",
+      "/images/catalogue/page_10_img_0_85.jpeg",
+      "/images/catalogue/page_11_img_2_95.jpeg"
+    ],
     featured: true
   },
   {
     id: "silica-sand",
     name: "Silica Sand",
-    category: "mineral-materials",
-    categoryName: "Mineral Materials",
-    shortDesc: "High-purity industrial mineral with 84-93% SiO₂ for chemical stability and thermal resistance.",
+    category: "industrial-minerals",
+    categoryName: "Industrial Minerals",
+    shortDesc: "High-purity industrial mineral for chemical stability and durability.",
     description: "Silica sand is a high-purity industrial mineral primarily composed of silicon dioxide (SiO₂). It is widely used in various industries for its chemical stability, durability, and high-temperature resistance. The material is available in different grades to meet the requirements of diverse applications.",
     applications: [
       "Foundry Casting & Core Making",
@@ -367,16 +426,17 @@ export const PRODUCTS: ProductItem[] = [
       "Industrial Filtration Systems"
     ],
     specs: [
-      { label: "Silica (SiO₂)", value: "84.00% – 93.00%" },
-      { label: "Alumina (Al₂O₃)", value: "2.00% – 8.00%" },
-      { label: "Iron (Fe₂O₃)", value: "0.30% – 1.80%" },
-      { label: "Calcium (CaO)", value: "0.30% – 3.00%" },
-      { label: "Magnesium (MgO)", value: "0.30% – 4.00%" },
-      { label: "Sulphur (SO₃)", value: "0.44% – 2.00%" },
-      { label: "Sodium (Na₂O)", value: "0.03% – 0.07%" },
-      { label: "Loss on Ignition (L.O.I)", value: "1.00% – 5.00%" }
+      { label: "Silica (SiO₂)", value: "84.00 - 93.00%" },
+      { label: "Alumina (Al₂O₃)", value: "2.00 - 8.00%" },
+      { label: "Iron (Fe₂O₃)", value: "0.30 - 1.80%" },
+      { label: "Loss on Ignition", value: "1.00 - 5.00%" }
     ],
-    image: "/images/cat-minerals.jpg",
+    image: "/images/catalogue/page_11_img_2_95.jpeg",
+    thumbnails: [
+      "/images/catalogue/page_11_img_2_95.jpeg",
+      "/images/catalogue/page_11_img_1_94.jpeg",
+      "/images/catalogue/page_11_img_0_93.jpeg"
+    ],
     featured: true
   }
 ];

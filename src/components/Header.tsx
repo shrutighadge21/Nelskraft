@@ -34,8 +34,8 @@ export default function Header() {
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled
-            ? "bg-[#F7F5EE]/95 backdrop-blur-md shadow-xs border-b border-[#E5E0D5] py-2.5"
-            : "bg-[#F7F5EE] border-b border-[#E5E0D5] py-2.5 sm:py-3"
+            ? "bg-[#F7F5EE]/95 backdrop-blur-md shadow-xs border-b border-[#E5E0D5] py-3.5 sm:py-4"
+            : "bg-[#F7F5EE] border-b border-[#E5E0D5] py-4 sm:py-5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ export default function Header() {
 
             {/* Desktop Navigation Links - Centered Horizontally */}
             <nav
-              className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2 space-x-6 lg:space-x-8"
+              className="hidden md:flex items-center justify-center absolute left-1/2 -translate-x-1/2 space-x-7 lg:space-x-9"
               aria-label="Main Navigation"
             >
               {NAV_LINKS.map((link) => {
@@ -60,7 +60,7 @@ export default function Header() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className={`relative text-[16px] transition-colors duration-200 py-1 group/nav focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#486341] rounded ${
+                    className={`relative text-[16px] transition-colors duration-200 py-1.5 group/nav focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#486341] rounded ${
                       isActive
                         ? "text-[#1C261B] font-bold"
                         : "text-[#3A4538] font-medium hover:text-[#1C261B]"
@@ -68,7 +68,7 @@ export default function Header() {
                   >
                     <span>{link.name}</span>
                     <span
-                      className={`absolute bottom-0 left-0 h-[2px] bg-[#3B5436] rounded-full transition-all duration-200 ${
+                      className={`absolute -bottom-1 left-0 h-[2.5px] bg-[#3B5436] rounded-full transition-all duration-200 ${
                         isActive
                           ? "w-full"
                           : "w-0 group-hover/nav:w-full bg-[#3B5436]/70"
@@ -80,7 +80,7 @@ export default function Header() {
             </nav>
 
             {/* Desktop Enquire Now Button on Right */}
-            <div className="hidden md:flex items-center z-10">
+            <div className="hidden md:flex items-center z-10 -mr-1 sm:-mr-2">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 bg-[#445E3D] hover:bg-[#354B2F] text-white px-5 py-2.5 rounded-full text-xs lg:text-[13px] font-semibold tracking-wide shadow-xs hover:shadow-sm transition-all duration-200 transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#445E3D]"
