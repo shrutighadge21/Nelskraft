@@ -203,11 +203,11 @@ export default function HeroSection() {
       </div>
 
       {/* Main Editorial Hero Grid Container */}
-      <div className="relative z-10 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-12 pt-8 sm:pt-12 lg:pt-10 pb-0 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-10 pb-0 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
           {/* LEFT COLUMN: Editorial Typography, Description, & CTA */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center z-20 py-4 lg:py-6">
+          <div className="lg:col-span-7 xl:col-span-7 flex flex-col justify-center z-20 py-4 lg:py-6">
             {/* Eyebrow Label with Solid Horizontal Line */}
             <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-[#6E776B] mb-2 sm:mb-2.5">
               <span className="w-6 sm:w-7 h-[2px] bg-[#54a937]" aria-hidden="true" />
@@ -215,14 +215,14 @@ export default function HeroSection() {
             </div>
 
             {/* Compact Refined Sans Headline matching Hero Scale */}
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3.5 sm:mb-4">
-              Materials<br />
-              That Power<br />
-              Industry.
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] xl:text-[3.25rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3.5 sm:mb-4">
+              <span className="block sm:inline">Materials That</span>{" "}
+              <br className="hidden sm:inline" />
+              <span className="block sm:inline">Power Industry.</span>
             </h2>
 
             {/* Supporting Company Description */}
-            <p className="text-[14px] sm:text-base text-[#4E584C] font-normal leading-[1.65] max-w-[480px] mb-6 sm:mb-7">
+            <p className="text-[14px] sm:text-base text-[#4E584C] font-normal leading-[1.65] max-w-[520px] mb-6 sm:mb-7">
               Nelskraft Refractory Pvt. Ltd. supplies refractory products, biomass
               fuels, and mineral materials for demanding industrial applications.
               We bring these material categories together to support the diverse
@@ -242,15 +242,15 @@ export default function HeroSection() {
           </div>
 
           {/* RIGHT COLUMN: Layered Industrial Photography Composition */}
-          <div className="lg:col-span-6 xl:col-span-6 relative w-full flex items-center justify-center lg:justify-end self-end">
+          <div className="lg:col-span-5 xl:col-span-5 relative w-full flex items-center justify-center lg:justify-end self-end">
             {/* Layered authentic industrial photography */}
-            <div className="relative w-full max-w-[500px] lg:max-w-[540px] aspect-[584/520] select-none flex items-end">
+            <div className="relative w-full max-w-[480px] lg:max-w-[500px] aspect-[584/520] select-none flex items-end">
               <Image
                 src="/images/hero-right-visual.png"
                 alt="Industrial factory plant with distillation towers and sunset sky, layered with authentic stacked refractory bricks, crushed aggregates, and carbon mineral materials"
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-contain object-right-bottom drop-shadow-xs"
               />
             </div>
@@ -276,7 +276,7 @@ export default function HeroSection() {
             aria-hidden="true"
           />
 
-          <div className="relative max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 py-2.5 sm:py-3 lg:py-2.5">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-2.5">
             <CountUpStrip />
           </div>
         </div>

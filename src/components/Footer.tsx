@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, ChevronRight, ShieldCheck } from "lucide-react";
+import { Phone, Mail, MapPin, ChevronRight } from "lucide-react";
 import Logo from "./Logo";
 import { COMPANY_DETAILS, PRODUCT_CATEGORIES } from "@/data/catalogue";
 
@@ -21,7 +21,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-0">
           
           {/* ═══════ COLUMN 1 — COMPANY ═══════ */}
-          <div className="lg:col-span-4 lg:pr-10 lg:border-r lg:border-white/10 flex flex-col justify-between">
+          <div className="lg:col-span-4 lg:pr-10 lg:border-r lg:border-white/10">
             <div className="space-y-4">
               {/* Existing Official Logo */}
               <Logo variant="light" />
@@ -39,16 +39,6 @@ export default function Footer() {
                 fuels, and verified mineral materials engineered for severe
                 high-temperature industrial operations across India.
               </p>
-            </div>
-
-            {/* Verified Company Credentials */}
-            <div className="pt-6 mt-6 border-t border-white/10 text-xs text-[#8EA096] font-mono space-y-1">
-              <div className="flex items-center gap-1.5 text-[#B4C2BA]">
-                <ShieldCheck className="w-4 h-4 text-[#54a937] flex-shrink-0" />
-                <span className="font-sans font-semibold">Registered Entity</span>
-              </div>
-              <div className="tracking-wide">CIN: {COMPANY_DETAILS.cin}</div>
-              <div className="tracking-wide">GSTIN: {COMPANY_DETAILS.gstin}</div>
             </div>
           </div>
 

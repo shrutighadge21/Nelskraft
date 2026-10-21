@@ -147,7 +147,9 @@ export default function AboutSection() {
 
             {/* Main Heading */}
             <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.65rem] font-bold tracking-tight text-[#202522] leading-[1.18] mb-4">
-              Materials That Power Industry.
+              <span className="block sm:inline">Materials That</span>{" "}
+              <br className="hidden sm:inline" />
+              <span className="block sm:inline">Power Industry.</span>
             </h2>
 
             {/* Description */}

@@ -15,7 +15,7 @@ export default function ProductCategoriesSection() {
       id="products"
       className="relative py-16 sm:py-20 lg:py-24 bg-[#FAF8F5] text-[#1B281A] overflow-hidden"
     >
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           {/* Left: Eyebrow, Heading, Description */}
