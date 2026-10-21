@@ -631,21 +631,13 @@ export default function ProductsClient() {
                                 ✓
                               </span>
                             </div>
-                            {variety.specs.length > 0 ? (
+                            {variety.specs && variety.specs.length > 0 && (
                               <span
                                 className={`text-[11px] mt-2 font-medium ${
                                   isSelected ? "text-[#CDE3D2]" : "text-[#6C756B]"
                                 }`}
                               >
                                 GCV: {variety.specs.find((s) => s.label === "GCV")?.value}
-                              </span>
-                            ) : (
-                              <span
-                                className={`text-[11px] mt-2 italic font-normal ${
-                                  isSelected ? "text-[#E0D7C5]" : "text-[#8C8372]"
-                                }`}
-                              >
-                                Specs on request
                               </span>
                             )}
                           </button>
@@ -672,8 +664,8 @@ export default function ProductsClient() {
                   </div>
                 )}
 
-                {/* Technical Specification Table */}
-                {activeSpecs && activeSpecs.length > 0 ? (
+                {/* Technical Specification Table (only displayed when specifications are supplied) */}
+                {activeSpecs && activeSpecs.length > 0 && (
                   <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-x-auto shadow-2xs mb-6">
                     <table className="w-full text-left border-collapse min-w-[280px]">
                       <tbody>
@@ -696,18 +688,6 @@ export default function ProductsClient() {
                         ))}
                       </tbody>
                     </table>
-                  </div>
-                ) : (
-                  <div className="bg-white rounded-xl border border-[#D8D2C2] p-5 sm:p-6 shadow-2xs mb-6">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="w-2 h-2 rounded-full bg-[#445E3D]" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#445E3D]">
-                        Technical Specifications
-                      </span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed">
-                      Technical specifications and laboratory test parameters will be published upon verified batch analysis. Please contact our technical desk for trial samples and custom requirement details.
-                    </p>
                   </div>
                 )}
               </div>
