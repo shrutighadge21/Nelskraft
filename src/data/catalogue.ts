@@ -340,8 +340,8 @@ export const PRODUCTS: ProductItem[] = [
     name: "Biomass Pellets",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "High-density biomass fuel pellets available in multiple certified feedstock varieties.",
-    description: "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. Available in multiple certified feedstock varieties to meet precise thermal requirements.",
+    shortDesc: "Biomass pellets are compact, cylindrical fuel products made from biomass materials for industrial heating and combustion applications.",
+    description: "Biomass pellets are compact, cylindrical fuel products made from biomass materials for industrial heating and combustion applications.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Thermal Power Plants & Co-firing",
@@ -357,7 +357,8 @@ export const PRODUCTS: ProductItem[] = [
     image: "/images/catalogue/pellets-soya-rice-husk.jpg",
     thumbnails: [
       "/images/catalogue/pellets-soya-rice-husk.jpg",
-      "/images/catalogue/pellets-pine-wood.jpg"
+      "/images/catalogue/pellets-pine-wood.jpg",
+      "/images/catalogue/pellets-rice-husk.jpg"
     ],
     featured: true,
     varieties: [
@@ -368,7 +369,7 @@ export const PRODUCTS: ProductItem[] = [
         thumbnails: [
           "/images/catalogue/pellets-soya-rice-husk.jpg"
         ],
-        description: "Darker, greenish-brown cylindrical pellets manufactured from soya and rice husk feedstock for steady industrial boiler combustion.",
+        description: "Cylindrical biomass fuel pellets made from soya and rice husk feedstock for industrial heating applications.",
         specs: [
           { label: "GCV", value: "3800" },
           { label: "Moisture", value: "5.65" },
@@ -383,7 +384,7 @@ export const PRODUCTS: ProductItem[] = [
         thumbnails: [
           "/images/catalogue/pellets-pine-wood.jpg"
         ],
-        description: "Light-brown wood pellets made from pine wood featuring high calorific value and ultra-low ash accumulation.",
+        description: "Biomass fuel pellets made from pine wood, supplied for industrial heating applications.",
         specs: [
           { label: "GCV", value: "4400" },
           { label: "Moisture", value: "6.68" },
@@ -392,10 +393,13 @@ export const PRODUCTS: ProductItem[] = [
         ]
       },
       {
-        id: "soya-rice-husk-mix-pellets",
-        name: "Soya & Rice Husk Mix Pellets",
-        image: "/images/catalogue/pellets-soya-rice-mix.svg",
-        description: "Selectable blended variety of soya and rice husk mix pellets formulated for industrial thermal and combustion efficiency.",
+        id: "rice-husk-pellets",
+        name: "Rice Husk Pellets",
+        image: "/images/catalogue/pellets-rice-husk.jpg",
+        thumbnails: [
+          "/images/catalogue/pellets-rice-husk.jpg"
+        ],
+        description: "Cylindrical biomass fuel pellets made from rice husk for industrial heating applications.",
         specs: []
       }
     ]
@@ -405,8 +409,8 @@ export const PRODUCTS: ProductItem[] = [
     name: "Biomass Briquettes",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "High-calorific compressed biomass briquettes offering consistent industrial thermal output.",
-    description: "Solid compressed biomass fuel briquettes providing sustained heat release and minimal clinker formation. Formulated from premium agricultural and wood residues as a reliable coal substitute.",
+    shortDesc: "Compressed biomass fuels made from agricultural and plant-based materials for industrial heating applications.",
+    description: "Compressed biomass fuels made from agricultural and plant-based materials for industrial heating applications.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Process Furnaces & Kilns",
@@ -418,17 +422,21 @@ export const PRODUCTS: ProductItem[] = [
       { label: "Moisture", value: "6.20%" },
       { label: "Ash", value: "8.0%" }
     ],
-    image: "/images/catalogue/briquettes-main.svg",
+    image: "/images/catalogue/briquettes-bagasse-sawdust.jpg",
     thumbnails: [
-      "/images/catalogue/briquettes-main.svg"
+      "/images/catalogue/briquettes-bagasse-sawdust.jpg",
+      "/images/catalogue/briquettes-soya-rice.jpg"
     ],
     featured: true,
     varieties: [
       {
         id: "sugarcane-bagasse-sawdust-briquettes",
         name: "Sugarcane Bagasse & Sawdust Mix Briquettes",
-        image: "/images/catalogue/briquettes-bagasse-sawdust.svg",
-        description: "Compressed cylindrical briquettes manufactured from a balanced mix of sugarcane bagasse and sawdust for reliable thermal output.",
+        image: "/images/catalogue/briquettes-bagasse-sawdust.jpg",
+        thumbnails: [
+          "/images/catalogue/briquettes-bagasse-sawdust.jpg"
+        ],
+        description: "Compressed briquettes made from a mixture of sugarcane bagasse and sawdust for industrial heating applications.",
         specs: [
           { label: "GCV", value: "4000" },
           { label: "Moisture", value: "6.20%" },
@@ -438,8 +446,11 @@ export const PRODUCTS: ProductItem[] = [
       {
         id: "soya-rice-husk-briquettes",
         name: "Soya & Rice Husk Mix Briquettes",
-        image: "/images/catalogue/briquettes-soya-rice.svg",
-        description: "Dark, compressed briquettes prepared from a blend of soya and rice husk feedstock for prolonged high-efficiency combustion.",
+        image: "/images/catalogue/briquettes-soya-rice.jpg",
+        thumbnails: [
+          "/images/catalogue/briquettes-soya-rice.jpg"
+        ],
+        description: "Compressed biomass briquettes made from a mixture of soya and rice husk for industrial heating applications.",
         specs: [
           { label: "GCV", value: "4000" },
           { label: "Moisture", value: "2%" },
@@ -454,7 +465,7 @@ export const PRODUCTS: ProductItem[] = [
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
     shortDesc: "Eco-friendly biomass fuel derived from cashew nut shells after CNSL extraction.",
-    description: "Cashew De-Oiled Cake, also known as Bio Shell Cake, is an eco-friendly biomass fuel derived from cashew nut shells after the extraction of Cashew Nut Shell Liquid (CNSL). Kept ready for verified description and specifications to be added.",
+    description: "Eco-friendly biomass fuel derived from cashew nut shells after CNSL extraction.",
     applications: [
       "Industrial Boilers & Thermic Fluid Heaters",
       "Cement & Lime Kilns",

@@ -577,25 +577,30 @@ export default function ProductsClient() {
                   )}
                 </div>
 
-                {/* Product / Variety Title */}
+                {/* Main Product Title */}
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-[#181E1A] tracking-tight mb-3">
-                  {activeTitle}
+                  {selectedProduct.name}
                 </h3>
+
+                {/* Main Description (displayed before selectable varieties) */}
+                <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed mb-5">
+                  {selectedProduct.description}
+                </p>
 
                 {/* Selectable Varieties (for Biomass Pellets & Biomass Briquettes) */}
                 {hasVarieties && selectedProduct.varieties && (
-                  <div className="mb-5 bg-white/80 border border-[#D5CFBF] rounded-2xl p-3.5 sm:p-4 shadow-2xs">
-                    <div className="flex items-center justify-between mb-2.5">
+                  <div className="mb-6 bg-white/80 border border-[#D5CFBF] rounded-2xl p-4 sm:p-5 shadow-2xs">
+                    <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-bold uppercase tracking-wider text-[#3D5B3A] flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-[#274E37]" />
                         Select Variety ({selectedProduct.varieties.length} Available)
                       </span>
                       <span className="text-[11px] text-[#717A6F] hidden sm:inline">
-                        Click to view specifications & photo
+                        Click to view details & specifications
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 mb-4">
                       {selectedProduct.varieties.map((variety, vIdx) => {
                         const isSelected = selectedVarietyIndex === vIdx;
                         return (
@@ -640,20 +645,32 @@ export default function ProductsClient() {
                                   isSelected ? "text-[#E0D7C5]" : "text-[#8C8372]"
                                 }`}
                               >
-                                Specs pending
+                                Specs on request
                               </span>
                             )}
                           </button>
                         );
                       })}
                     </div>
+
+                    {/* Active Variety Information */}
+                    {activeVariety && (
+                      <div className="border-t border-[#E8E3D7] pt-3.5 mt-1">
+                        <div className="flex items-center gap-2 mb-1.5">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#274E37] bg-[#E2EDE4] px-2 py-0.5 rounded-md">
+                            Selected Variety
+                          </span>
+                          <h4 className="text-sm sm:text-base font-bold text-[#181E1A]">
+                            {activeVariety.name}
+                          </h4>
+                        </div>
+                        <p className="text-xs sm:text-[13px] text-[#556054] leading-relaxed">
+                          {activeVariety.description}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 )}
-
-                {/* Concise Description */}
-                <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed mb-5">
-                  {activeDescription}
-                </p>
 
                 {/* Technical Specification Table */}
                 {activeSpecs && activeSpecs.length > 0 ? (
