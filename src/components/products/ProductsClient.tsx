@@ -654,6 +654,11 @@ export default function ProductsClient() {
                         <p className="text-xs sm:text-[13px] text-[#556054] leading-relaxed">
                           {activeVariety.description}
                         </p>
+                        {activeVariety.additionalInfo && (
+                          <p className="text-xs sm:text-[13px] text-[#556054] leading-relaxed mt-2">
+                            {activeVariety.additionalInfo}
+                          </p>
+                        )}
                       </div>
                     )}
                   </div>

@@ -10,6 +10,7 @@ export interface ProductVariety {
   thumbnails?: string[];
   specs: ProductSpecItem[];
   description?: string;
+  additionalInfo?: string;
 }
 
 export interface ProductItem {
@@ -364,7 +365,8 @@ export const PRODUCTS: ProductItem[] = [
         thumbnails: [
           "/images/catalogue/pellets-rice-husk.jpg"
         ],
-        description: "Cylindrical biomass fuel pellets made from rice husk for industrial heating applications.",
+        description: "Rice Husk Pellets are compact, cylindrical biomass fuel pellets made from rice husk for industrial heating and combustion applications.",
+        additionalInfo: "These pellets are produced from rice husk biomass and are intended for use as an alternative solid fuel in suitable industrial heating systems.",
         specs: []
       },
       {
@@ -377,8 +379,8 @@ export const PRODUCTS: ProductItem[] = [
         description: "Biomass fuel pellets made from pine wood, supplied for industrial heating applications.",
         specs: [
           { label: "GCV", value: "4400" },
-          { label: "Moisture", value: "6.68" },
-          { label: "Ash", value: "1.19" },
+          { label: "Moisture", value: "6.68%" },
+          { label: "Ash", value: "1.19%" },
           { label: "Size", value: "6 mm" }
         ]
       },
@@ -392,8 +394,8 @@ export const PRODUCTS: ProductItem[] = [
         description: "Cylindrical biomass fuel pellets made from soya and rice husk feedstock for industrial heating applications.",
         specs: [
           { label: "GCV", value: "3800" },
-          { label: "Moisture", value: "5.65" },
-          { label: "Ash", value: "13.18" },
+          { label: "Moisture", value: "5.65%" },
+          { label: "Ash", value: "13.18%" },
           { label: "Size", value: "6 mm" }
         ]
       }
