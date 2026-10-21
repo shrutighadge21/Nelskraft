@@ -86,7 +86,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Biomass Fuels",
     tagline: "Sustainable fuel solutions for efficient combustion.",
     description: "Clean-burning, high-calorific eco-friendly alternatives to coal engineered for industrial boilers, kilns and low-emission power units.",
-    image: "/images/catalogue/pellets-pine-wood.jpg",
+    image: "/images/catalogue/pine-wood-pellets.jpg",
     itemCount: 3
   },
   {
@@ -353,7 +353,7 @@ export const PRODUCTS: ProductItem[] = [
     image: "/images/catalogue/pellets-rice-husk.jpg",
     thumbnails: [
       "/images/catalogue/pellets-rice-husk.jpg",
-      "/images/catalogue/pellets-pine-wood.jpg",
+      "/images/catalogue/pine-wood-pellets.jpg",
       "/images/catalogue/pellets-soya-rice-husk.jpg"
     ],
     featured: true,
@@ -372,9 +372,9 @@ export const PRODUCTS: ProductItem[] = [
       {
         id: "pine-wood-pellets",
         name: "Pine Wood Pellets",
-        image: "/images/catalogue/pellets-pine-wood.jpg",
+        image: "/images/catalogue/pine-wood-pellets.jpg",
         thumbnails: [
-          "/images/catalogue/pellets-pine-wood.jpg"
+          "/images/catalogue/pine-wood-pellets.jpg"
         ],
         description: "Biomass fuel pellets made from pine wood, supplied for industrial heating applications.",
         specs: [
