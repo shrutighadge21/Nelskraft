@@ -340,42 +340,32 @@ export const PRODUCTS: ProductItem[] = [
     name: "Biomass Pellets",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "Biomass pellets are compact, cylindrical fuel products made from biomass materials for industrial heating and combustion applications.",
-    description: "Biomass pellets are compact, cylindrical fuel products made from biomass materials for industrial heating and combustion applications.",
+    shortDesc: "Biomass pellets are compact, cylindrical fuels made from biomass materials for industrial heating and combustion applications.",
+    description: "Biomass pellets are compact, cylindrical fuels made from biomass materials for industrial heating and combustion applications.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Thermal Power Plants & Co-firing",
       "Process Heaters & Furnaces",
       "Textile, Food & Chemical Processing Plants"
     ],
-    specs: [
-      { label: "GCV", value: "3800" },
-      { label: "Moisture", value: "5.65" },
-      { label: "Ash", value: "13.18" },
-      { label: "Size", value: "6 mm" }
-    ],
-    image: "/images/catalogue/pellets-soya-rice-husk.jpg",
+    specs: [],
+    image: "/images/catalogue/pellets-rice-husk.jpg",
     thumbnails: [
-      "/images/catalogue/pellets-soya-rice-husk.jpg",
+      "/images/catalogue/pellets-rice-husk.jpg",
       "/images/catalogue/pellets-pine-wood.jpg",
-      "/images/catalogue/pellets-rice-husk.jpg"
+      "/images/catalogue/pellets-soya-rice-husk.jpg"
     ],
     featured: true,
     varieties: [
       {
-        id: "soya-rice-husk-pellets",
-        name: "Soya & Rice Husk Pellets",
-        image: "/images/catalogue/pellets-soya-rice-husk.jpg",
+        id: "rice-husk-pellets",
+        name: "Rice Husk Pellets",
+        image: "/images/catalogue/pellets-rice-husk.jpg",
         thumbnails: [
-          "/images/catalogue/pellets-soya-rice-husk.jpg"
+          "/images/catalogue/pellets-rice-husk.jpg"
         ],
-        description: "Cylindrical biomass fuel pellets made from soya and rice husk feedstock for industrial heating applications.",
-        specs: [
-          { label: "GCV", value: "3800" },
-          { label: "Moisture", value: "5.65" },
-          { label: "Ash", value: "13.18" },
-          { label: "Size", value: "6 mm" }
-        ]
+        description: "Cylindrical biomass fuel pellets made from rice husk for industrial heating applications.",
+        specs: []
       },
       {
         id: "pine-wood-pellets",
@@ -393,14 +383,19 @@ export const PRODUCTS: ProductItem[] = [
         ]
       },
       {
-        id: "rice-husk-pellets",
-        name: "Rice Husk Pellets",
-        image: "/images/catalogue/pellets-rice-husk.jpg",
+        id: "soya-rice-husk-pellets",
+        name: "Soya & Rice Husk Pellets",
+        image: "/images/catalogue/pellets-soya-rice-husk.jpg",
         thumbnails: [
-          "/images/catalogue/pellets-rice-husk.jpg"
+          "/images/catalogue/pellets-soya-rice-husk.jpg"
         ],
-        description: "Cylindrical biomass fuel pellets made from rice husk for industrial heating applications.",
-        specs: []
+        description: "Cylindrical biomass fuel pellets made from soya and rice husk feedstock for industrial heating applications.",
+        specs: [
+          { label: "GCV", value: "3800" },
+          { label: "Moisture", value: "5.65" },
+          { label: "Ash", value: "13.18" },
+          { label: "Size", value: "6 mm" }
+        ]
       }
     ]
   },
@@ -409,8 +404,8 @@ export const PRODUCTS: ProductItem[] = [
     name: "Biomass Briquettes",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "Compressed biomass fuels made from agricultural and plant-based materials for industrial heating applications.",
-    description: "Compressed biomass fuels made from agricultural and plant-based materials for industrial heating applications.",
+    shortDesc: "Biomass briquettes are compressed solid fuels made from biomass residues for industrial heating and combustion applications.",
+    description: "Biomass briquettes are compressed solid fuels made from biomass residues for industrial heating and combustion applications.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Process Furnaces & Kilns",

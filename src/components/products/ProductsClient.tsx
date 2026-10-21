@@ -564,17 +564,12 @@ export default function ProductsClient() {
             {/* Right Column: Title, Description, Technical Specs Table, and Action Buttons */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                {/* Category tag with dash and parent indicator */}
+                {/* Category tag with dash indicator */}
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className="w-4 h-[1.5px] bg-[#445E3D]" />
                   <span className="text-xs font-bold tracking-[0.18em] uppercase text-[#445E3D]">
                     {selectedProduct.categoryName}
                   </span>
-                  {hasVarieties && (
-                    <span className="text-xs font-semibold text-[#6C776B]">
-                      • {selectedProduct.name}
-                    </span>
-                  )}
                 </div>
 
                 {/* Main Product Title */}
