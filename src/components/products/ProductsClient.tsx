@@ -92,6 +92,7 @@ export default function ProductsClient() {
             alt="Nelskraft Refractory High-Performance Materials"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-right md:object-center opacity-40 mix-blend-luminosity"
           />
           {/* Deep dark overlay to ensure readability */}

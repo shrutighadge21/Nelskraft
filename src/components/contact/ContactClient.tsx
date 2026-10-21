@@ -11,10 +11,12 @@ import {
   Navigation,
   ExternalLink,
   AlertCircle,
+  CheckCircle2,
+  Loader2,
   MessageCircle,
   RotateCcw,
 } from "lucide-react";
-import { COMPANY_DETAILS } from "@/data/catalogue";
+import { COMPANY_DETAILS, getWhatsAppUrl } from "@/data/catalogue";
 
 export default function ContactClient() {
   const searchParams = useSearchParams();
@@ -30,15 +32,15 @@ export default function ContactClient() {
     message: "",
   });
 
+  const [honeypot, setHoneypot] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [submissionState, setSubmissionState] = useState<{
-    status: "idle" | "prepared";
-    mailtoUrl: string;
-    whatsappUrl: string;
+    status: "idle" | "loading" | "success" | "error";
+    message: string;
+    submittedName?: string;
   }>({
     status: "idle",
-    mailtoUrl: "",
-    whatsappUrl: "",
+    message: "",
   });
 
   // Client-side validation logic
@@ -112,7 +114,7 @@ export default function ContactClient() {
     )}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setTouched({
@@ -126,17 +128,66 @@ export default function ContactClient() {
       return;
     }
 
-    const mailto = buildMailtoUrl();
-    const whatsapp = buildPrefilledWhatsAppUrl();
-
     setSubmissionState({
-      status: "prepared",
-      mailtoUrl: mailto,
-      whatsappUrl: whatsapp,
+      status: "loading",
+      message: "",
     });
 
-    if (typeof window !== "undefined") {
-      window.location.href = mailto;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          company: formData.company,
+          email: formData.email,
+          phone: formData.phone,
+          category: formData.category,
+          product: formData.product,
+          message: formData.message,
+          _hp: honeypot,
+        }),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.success) {
+        const submittedName = formData.name;
+        setSubmissionState({
+          status: "success",
+          message:
+            data.message ||
+            "Your inquiry has been successfully delivered to info@nelskraft.com.",
+          submittedName,
+        });
+
+        // Clear form fields
+        setFormData({
+          name: "",
+          company: "",
+          email: "",
+          phone: "",
+          category: "Refractory Products",
+          product: "",
+          message: "",
+        });
+        setTouched({});
+      } else {
+        setSubmissionState({
+          status: "error",
+          message:
+            data.error ||
+            "Failed to send inquiry. Please try again or reach out to us directly at info@nelskraft.com.",
+        });
+      }
+    } catch {
+      setSubmissionState({
+        status: "error",
+        message:
+          "Network connection error. Please verify your connection or email info@nelskraft.com directly.",
+      });
     }
   };
 
@@ -174,34 +225,80 @@ export default function ContactClient() {
                   </p>
                 </div>
 
-                {/* Transparent Notice if user submitted */}
-                {submissionState.status === "prepared" && (
-                  <div className="mb-6 p-5 rounded-xl bg-amber-50/90 border border-amber-200 text-amber-900 text-xs sm:text-sm space-y-3 animate-fadeIn">
-                    <div className="flex items-start gap-2.5">
-                      <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-                      <div>
-                        <p className="font-bold text-amber-950">
-                          Enquiry Draft Prepared for info@nelskraft.com
+                {/* Success Notification Banner */}
+                {submissionState.status === "success" && (
+                  <div className="mb-6 p-5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm space-y-3 animate-fadeIn">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-base text-emerald-950">
+                          Inquiry Successfully Delivered to info@nelskraft.com
                         </p>
-                        <p className="text-amber-800 mt-1 leading-relaxed">
-                          Notice: An automated backend email dispatch server is not configured in
-                          this web build. Your detailed enquiry draft has been prepared and opened
-                          in your email application. You can also send it directly via WhatsApp:
+                        <p className="text-emerald-800 mt-1 leading-relaxed text-xs sm:text-sm">
+                          Thank you{submissionState.submittedName ? `, ${submissionState.submittedName}` : ""}! We have received your technical requirement. Our engineering and material specialists will review your requirements and respond within 24 business hours.
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3 pt-1">
+                    <div className="flex flex-wrap items-center gap-3 pt-1 pl-11">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setSubmissionState({
+                            status: "idle",
+                            message: "",
+                          })
+                        }
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        <span>Send Another Inquiry</span>
+                      </button>
+
                       <a
-                        href={submissionState.mailtoUrl}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
+                        href={getWhatsAppUrl()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        <span>Chat on WhatsApp</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Error Notification Banner */}
+                {submissionState.status === "error" && (
+                  <div className="mb-6 p-5 rounded-xl bg-red-50 border border-red-200 text-red-950 text-xs sm:text-sm space-y-3 animate-fadeIn">
+                    <div className="flex items-start gap-3">
+                      <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-sm sm:text-base text-red-950">
+                          Unable to Deliver Inquiry Automatically
+                        </p>
+                        <p className="text-red-800 mt-1 leading-relaxed text-xs sm:text-sm">
+                          {submissionState.message}
+                        </p>
+                        <p className="text-red-700 text-xs mt-1">
+                          You can retry sending, or use the direct mail and WhatsApp options below:
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3 pt-1 pl-9">
+                      <a
+                        href={buildMailtoUrl()}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
                       >
                         <Mail className="w-3.5 h-3.5" />
-                        <span>Send via Email Client</span>
+                        <span>Send via Email App</span>
                       </a>
 
                       <a
-                        href={submissionState.whatsappUrl}
+                        href={buildPrefilledWhatsAppUrl()}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
@@ -215,14 +312,12 @@ export default function ContactClient() {
                         onClick={() =>
                           setSubmissionState({
                             status: "idle",
-                            mailtoUrl: "",
-                            whatsappUrl: "",
+                            message: "",
                           })
                         }
-                        className="inline-flex items-center gap-1 px-3 py-2 text-gray-600 hover:text-gray-900 text-xs font-semibold cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3 py-2 text-gray-700 hover:text-gray-900 text-xs font-semibold cursor-pointer underline"
                       >
-                        <RotateCcw className="w-3.5 h-3.5" />
-                        <span>Edit Form</span>
+                        Dismiss
                       </button>
                     </div>
                   </div>
@@ -411,14 +506,42 @@ export default function ContactClient() {
                     )}
                   </div>
 
-                  {/* Submit Button (Matching reference design) */}
+                  {/* Spam prevention honeypot field - invisible to human visitors */}
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="contact-hp">Leave this field blank</label>
+                    <input
+                      id="contact-hp"
+                      type="text"
+                      name="_hp"
+                      value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Submit Button (Matching reference design, with Loading & Duplicate Submission Guard) */}
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#54a937] hover:bg-[#438a2c] text-white py-3.5 px-8 rounded-lg text-sm font-bold tracking-wider uppercase transition-all shadow hover:shadow-md cursor-pointer"
+                      disabled={submissionState.status === "loading"}
+                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#54a937] hover:bg-[#438a2c] text-white py-3.5 px-8 rounded-lg text-sm font-bold tracking-wider uppercase transition-all shadow hover:shadow-md cursor-pointer ${
+                        submissionState.status === "loading"
+                          ? "opacity-75 cursor-not-allowed"
+                          : "active:scale-[0.99]"
+                      }`}
                     >
-                      <span>SEND INQUIRY</span>
-                      <ArrowRight className="w-4 h-4" />
+                      {submissionState.status === "loading" ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>SENDING INQUIRY...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>SEND INQUIRY</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
