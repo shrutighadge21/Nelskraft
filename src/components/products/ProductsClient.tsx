@@ -22,12 +22,13 @@ export default function ProductsClient() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [visibleCount, setVisibleCount] = useState<number>(6);
   const [selectedProduct, setSelectedProduct] = useState<ProductItem>(PRODUCTS[0]);
+  const [selectedVarietyIndex, setSelectedVarietyIndex] = useState<number>(0);
   const [activeThumbIndex, setActiveThumbIndex] = useState<number>(0);
 
   const catalogueSectionRef = useRef<HTMLElement>(null);
   const detailSectionRef = useRef<HTMLDivElement>(null);
 
-  // Filter products by category and search query
+  // Filter products by category, search query, and variety names
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
       const matchesCategory =
@@ -37,11 +38,16 @@ export default function ProductsClient() {
           (product.category === "industrial-minerals" ||
             product.category === "mineral-materials"));
 
+      const q = searchQuery.trim().toLowerCase();
       const matchesSearch =
-        searchQuery.trim() === "" ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.categoryName.toLowerCase().includes(searchQuery.toLowerCase());
+        q === "" ||
+        product.name.toLowerCase().includes(q) ||
+        product.shortDesc.toLowerCase().includes(q) ||
+        product.categoryName.toLowerCase().includes(q) ||
+        (product.varieties &&
+          product.varieties.some((v) =>
+            v.name.toLowerCase().includes(q)
+          ));
 
       return matchesCategory && matchesSearch;
     });
@@ -56,27 +62,64 @@ export default function ProductsClient() {
     }
   };
 
-  // Handle viewing product details
-  const handleViewDetails = (product: ProductItem) => {
+  // Handle viewing product details (with optional initial variety)
+  const handleViewDetails = (product: ProductItem, varietyIndex: number = 0) => {
     setSelectedProduct(product);
+    setSelectedVarietyIndex(varietyIndex);
     setActiveThumbIndex(0);
     if (detailSectionRef.current) {
       detailSectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // Get current active image for featured detail area
-  const currentThumbnails = selectedProduct.thumbnails && selectedProduct.thumbnails.length > 0
+  // Derive active variety (if product supports selectable varieties)
+  const hasVarieties = Boolean(
+    selectedProduct.varieties && selectedProduct.varieties.length > 0
+  );
+  const activeVariety =
+    hasVarieties && selectedProduct.varieties
+      ? selectedProduct.varieties[
+          Math.min(
+            selectedVarietyIndex,
+            selectedProduct.varieties.length - 1
+          )
+        ] || selectedProduct.varieties[0]
+      : null;
+
+  // Active display details synchronized with selected variety
+  const activeTitle = activeVariety ? activeVariety.name : selectedProduct.name;
+  const activeDescription =
+    activeVariety?.description || selectedProduct.description;
+  const activeSpecs = activeVariety
+    ? activeVariety.specs
+    : selectedProduct.specs;
+
+  // Get current active images and thumbnails
+  const currentThumbnails = activeVariety
+    ? activeVariety.thumbnails && activeVariety.thumbnails.length > 0
+      ? activeVariety.thumbnails
+      : [activeVariety.image]
+    : selectedProduct.thumbnails && selectedProduct.thumbnails.length > 0
     ? selectedProduct.thumbnails
     : [selectedProduct.image];
 
-  const currentDisplayImage = currentThumbnails[activeThumbIndex] || selectedProduct.image;
+  const currentDisplayImage =
+    currentThumbnails[activeThumbIndex] ||
+    currentThumbnails[0] ||
+    selectedProduct.image;
 
   // Category counts
-  const refractoryCount = PRODUCTS.filter((p) => p.category === "refractory-products").length;
-  const biomassCount = PRODUCTS.filter((p) => p.category === "biomass-fuels").length;
+  const totalCount = PRODUCTS.length;
+  const refractoryCount = PRODUCTS.filter(
+    (p) => p.category === "refractory-products"
+  ).length;
+  const biomassCount = PRODUCTS.filter(
+    (p) => p.category === "biomass-fuels"
+  ).length;
   const mineralsCount = PRODUCTS.filter(
-    (p) => p.category === "industrial-minerals" || p.category === "mineral-materials"
+    (p) =>
+      p.category === "industrial-minerals" ||
+      p.category === "mineral-materials"
   ).length;
 
   return (
@@ -275,7 +318,7 @@ export default function ProductsClient() {
                       : "bg-[#EAE6DD] text-[#555E52]"
                   }`}
                 >
-                  13
+                  {totalCount}
                 </span>
               </button>
 
@@ -290,7 +333,15 @@ export default function ProductsClient() {
                 }`}
               >
                 <span>Refractories</span>
-                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full ${
+                    selectedCategory === "refractory-products"
+                      ? "bg-white/20 text-white"
+                      : "bg-[#EAE6DD] text-[#555E52]"
+                  }`}
+                >
+                  {refractoryCount}
+                </span>
               </button>
 
               {/* Biomass Fuels */}
@@ -304,7 +355,15 @@ export default function ProductsClient() {
                 }`}
               >
                 <span>Biomass Fuels</span>
-                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full ${
+                    selectedCategory === "biomass-fuels"
+                      ? "bg-white/20 text-white"
+                      : "bg-[#EAE6DD] text-[#555E52]"
+                  }`}
+                >
+                  {biomassCount}
+                </span>
               </button>
 
               {/* Industrial Minerals */}
@@ -318,7 +377,15 @@ export default function ProductsClient() {
                 }`}
               >
                 <span>Minerals</span>
-                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
+                <span
+                  className={`text-xs px-2 py-0.5 rounded-full ${
+                    selectedCategory === "industrial-minerals"
+                      ? "bg-white/20 text-white"
+                      : "bg-[#EAE6DD] text-[#555E52]"
+                  }`}
+                >
+                  {mineralsCount}
+                </span>
               </button>
             </div>
 
@@ -348,7 +415,7 @@ export default function ProductsClient() {
                     setSearchQuery(e.target.value);
                     setVisibleCount(6);
                   }}
-                  placeholder="Search products..."
+                  placeholder="Search products & varieties..."
                   className="w-full pl-10 pr-4 py-2 text-xs sm:text-sm bg-white border border-[#D5CFBF] rounded-full focus:outline-none focus:ring-2 focus:ring-[#274E37] focus:border-transparent placeholder-[#8A948C] transition-all"
                 />
               </div>
@@ -386,6 +453,7 @@ export default function ProductsClient() {
                           src={product.image}
                           alt={product.name}
                           fill
+                          unoptimized={product.image.endsWith(".svg")}
                           className="object-contain p-3 group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
@@ -396,10 +464,17 @@ export default function ProductsClient() {
                           {product.name}
                         </h3>
 
-                        {/* Category Tag directly beneath title */}
-                        <span className="inline-block text-[11px] font-medium text-[#2E5339] bg-[#EAF2EC] px-2.5 py-0.5 rounded-full mt-2 mb-2">
-                          {product.categoryName}
-                        </span>
+                        {/* Category Tag & Varieties Badge */}
+                        <div className="flex flex-wrap items-center gap-1.5 mt-2 mb-2">
+                          <span className="inline-block text-[11px] font-medium text-[#2E5339] bg-[#EAF2EC] px-2.5 py-0.5 rounded-full">
+                            {product.categoryName}
+                          </span>
+                          {product.varieties && product.varieties.length > 0 && (
+                            <span className="inline-block text-[10px] font-semibold text-[#274E37] bg-[#E1EDE3] px-2 py-0.5 rounded-full border border-[#BCDDC3]">
+                              {product.varieties.length} Varieties
+                            </span>
+                          )}
+                        </div>
 
                         {/* Short Description */}
                         <p className="text-xs text-[#6B756E] line-clamp-2 leading-relaxed">
@@ -452,87 +527,178 @@ export default function ProductsClient() {
               <div className="relative w-full aspect-[4/3] bg-white rounded-2xl p-6 border border-[#DDD7C9] shadow-xs flex items-center justify-center overflow-hidden">
                 <Image
                   src={currentDisplayImage}
-                  alt={selectedProduct.name}
+                  alt={activeTitle}
                   fill
+                  unoptimized={currentDisplayImage.endsWith(".svg")}
                   className="object-contain p-4 transition-all duration-300"
                 />
               </div>
 
-              {/* Thumbnails below main image matching sketch */}
-              <div className="flex items-center gap-3 mt-4 w-full justify-start">
-                {currentThumbnails.map((thumbUrl, idx) => (
-                  <button
-                    key={thumbUrl + idx}
-                    type="button"
-                    onClick={() => setActiveThumbIndex(idx)}
-                    className={`relative w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-xl overflow-hidden border-2 cursor-pointer transition-all ${
-                      activeThumbIndex === idx
-                        ? "border-[#274E37] ring-1 ring-[#274E37]"
-                        : "border-transparent hover:border-[#C5BDAA]"
-                    }`}
-                  >
-                    <Image
-                      src={thumbUrl}
-                      alt={`${selectedProduct.name} thumbnail ${idx + 1}`}
-                      fill
-                      className="object-cover p-1"
-                    />
-                  </button>
-                ))}
-              </div>
+              {/* Thumbnails below main image */}
+              {currentThumbnails.length > 1 && (
+                <div className="flex items-center gap-3 mt-4 w-full justify-start overflow-x-auto pb-1">
+                  {currentThumbnails.map((thumbUrl, idx) => (
+                    <button
+                      key={thumbUrl + idx}
+                      type="button"
+                      onClick={() => setActiveThumbIndex(idx)}
+                      className={`relative w-20 h-16 sm:w-24 sm:h-20 bg-white rounded-xl overflow-hidden border-2 cursor-pointer transition-all flex-shrink-0 ${
+                        activeThumbIndex === idx
+                          ? "border-[#274E37] ring-1 ring-[#274E37]"
+                          : "border-transparent hover:border-[#C5BDAA]"
+                      }`}
+                    >
+                      <Image
+                        src={thumbUrl}
+                        alt={`${activeTitle} thumbnail ${idx + 1}`}
+                        fill
+                        unoptimized={thumbUrl.endsWith(".svg")}
+                        className="object-cover p-1"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Right Column: Title, Description, Technical Specs Table, and Action Buttons */}
             <div className="lg:col-span-7 flex flex-col justify-between">
               <div>
-                {/* Category tag with dash */}
-                <div className="flex items-center gap-2 mb-2">
+                {/* Category tag with dash and parent indicator */}
+                <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className="w-4 h-[1.5px] bg-[#445E3D]" />
                   <span className="text-xs font-bold tracking-[0.18em] uppercase text-[#445E3D]">
                     {selectedProduct.categoryName}
                   </span>
+                  {hasVarieties && (
+                    <span className="text-xs font-semibold text-[#6C776B]">
+                      • {selectedProduct.name}
+                    </span>
+                  )}
                 </div>
 
-                {/* Product Title */}
+                {/* Product / Variety Title */}
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-[#181E1A] tracking-tight mb-3">
-                  {selectedProduct.name}
+                  {activeTitle}
                 </h3>
 
-                {/* Concise Description based on catalogue */}
+                {/* Selectable Varieties (for Biomass Pellets & Biomass Briquettes) */}
+                {hasVarieties && selectedProduct.varieties && (
+                  <div className="mb-5 bg-white/80 border border-[#D5CFBF] rounded-2xl p-3.5 sm:p-4 shadow-2xs">
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#3D5B3A] flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#274E37]" />
+                        Select Variety ({selectedProduct.varieties.length} Available)
+                      </span>
+                      <span className="text-[11px] text-[#717A6F] hidden sm:inline">
+                        Click to view specifications & photo
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+                      {selectedProduct.varieties.map((variety, vIdx) => {
+                        const isSelected = selectedVarietyIndex === vIdx;
+                        return (
+                          <button
+                            key={variety.id || variety.name}
+                            type="button"
+                            onClick={() => {
+                              setSelectedVarietyIndex(vIdx);
+                              setActiveThumbIndex(0);
+                            }}
+                            className={`text-left p-3 rounded-xl border transition-all duration-200 cursor-pointer flex flex-col justify-between ${
+                              isSelected
+                                ? "bg-[#274E37] text-white border-[#274E37] shadow-sm ring-2 ring-[#274E37]/15"
+                                : "bg-white hover:bg-[#FAF8F5] text-[#181E1A] border-[#D5CFBF] hover:border-[#274E37]"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between gap-1.5">
+                              <span className="text-xs sm:text-[13px] font-bold leading-snug">
+                                {variety.name}
+                              </span>
+                              <span
+                                className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] mt-0.5 ${
+                                  isSelected
+                                    ? "bg-white text-[#274E37] font-bold"
+                                    : "border border-[#C8C2B3] text-transparent"
+                                }`}
+                              >
+                                ✓
+                              </span>
+                            </div>
+                            {variety.specs.length > 0 ? (
+                              <span
+                                className={`text-[11px] mt-2 font-medium ${
+                                  isSelected ? "text-[#CDE3D2]" : "text-[#6C756B]"
+                                }`}
+                              >
+                                GCV: {variety.specs.find((s) => s.label === "GCV")?.value}
+                              </span>
+                            ) : (
+                              <span
+                                className={`text-[11px] mt-2 italic font-normal ${
+                                  isSelected ? "text-[#E0D7C5]" : "text-[#8C8372]"
+                                }`}
+                              >
+                                Specs pending
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Concise Description */}
                 <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed mb-5">
-                  {selectedProduct.description}
+                  {activeDescription}
                 </p>
 
                 {/* Technical Specification Table */}
-                <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-x-auto shadow-2xs mb-6">
-                  <table className="w-full text-left border-collapse min-w-[280px]">
-                    <tbody>
-                      {selectedProduct.specs.map((spec, sIdx) => (
-                        <tr
-                          key={spec.label + sIdx}
-                          className={
-                            sIdx !== selectedProduct.specs.length - 1
-                              ? "border-b border-[#EBE6DB]"
-                              : ""
-                          }
-                        >
-                          <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5] whitespace-nowrap">
-                            {spec.label}
-                          </td>
-                          <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A] break-words">
-                            {spec.value}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                {activeSpecs && activeSpecs.length > 0 ? (
+                  <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-x-auto shadow-2xs mb-6">
+                    <table className="w-full text-left border-collapse min-w-[280px]">
+                      <tbody>
+                        {activeSpecs.map((spec, sIdx) => (
+                          <tr
+                            key={spec.label + sIdx}
+                            className={
+                              sIdx !== activeSpecs.length - 1
+                                ? "border-b border-[#EBE6DB]"
+                                : ""
+                            }
+                          >
+                            <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5] whitespace-nowrap">
+                              {spec.label}
+                            </td>
+                            <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A] break-words">
+                              {spec.value}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-xl border border-[#D8D2C2] p-5 sm:p-6 shadow-2xs mb-6">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="w-2 h-2 rounded-full bg-[#445E3D]" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#445E3D]">
+                        Technical Specifications
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#505A52] leading-relaxed">
+                      Technical specifications and laboratory test parameters will be published upon verified batch analysis. Please contact our technical desk for trial samples and custom requirement details.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Action Buttons */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full">
                 <Link
-                  href={`/contact?product=${encodeURIComponent(selectedProduct.name)}`}
+                  href={`/contact?product=${encodeURIComponent(activeTitle)}`}
                   className="bg-[#274E37] hover:bg-[#1E3E2B] text-white text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full shadow-xs transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <span>Enquire About This Product</span>
@@ -540,7 +706,7 @@ export default function ProductsClient() {
                 </Link>
 
                 <a
-                  href={getWhatsAppUrl(selectedProduct.name)}
+                  href={getWhatsAppUrl(activeTitle)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="bg-transparent hover:bg-white/80 text-[#181E1A] border border-[#BDB5A4] text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all flex items-center justify-center gap-2 shadow-2xs text-center"

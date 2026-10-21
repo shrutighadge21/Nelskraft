@@ -3,6 +3,15 @@ export interface ProductSpecItem {
   value: string;
 }
 
+export interface ProductVariety {
+  id: string;
+  name: string;
+  image: string;
+  thumbnails?: string[];
+  specs: ProductSpecItem[];
+  description?: string;
+}
+
 export interface ProductItem {
   id: string;
   name: string;
@@ -15,6 +24,7 @@ export interface ProductItem {
   image: string;
   thumbnails?: string[];
   featured?: boolean;
+  varieties?: ProductVariety[];
 }
 
 export interface ProductCategory {
@@ -75,8 +85,8 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     title: "Biomass Fuels",
     tagline: "Sustainable fuel solutions for efficient combustion.",
     description: "Clean-burning, high-calorific eco-friendly alternatives to coal engineered for industrial boilers, kilns and low-emission power units.",
-    image: "/images/catalogue/page_8_img_0_71.jpeg",
-    itemCount: 2
+    image: "/images/catalogue/pellets-pine-wood.jpg",
+    itemCount: 3
   },
   {
     id: "industrial-minerals",
@@ -324,14 +334,14 @@ export const PRODUCTS: ProductItem[] = [
     featured: false
   },
 
-  // --- 02. BIOMASS FUELS (2 Entries) ---
+  // --- 02. BIOMASS FUELS (3 Entries) ---
   {
     id: "biomass-pellets",
     name: "Biomass Pellets",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "High-quality biomass pellets for efficient industrial combustion.",
-    description: "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. Reduces carbon footprint and fuel costs.",
+    shortDesc: "High-density biomass fuel pellets available in multiple certified feedstock varieties.",
+    description: "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. Available in multiple certified feedstock varieties to meet precise thermal requirements.",
     applications: [
       "Industrial Boilers & Steam Generation",
       "Thermal Power Plants & Co-firing",
@@ -339,43 +349,123 @@ export const PRODUCTS: ProductItem[] = [
       "Textile, Food & Chemical Processing Plants"
     ],
     specs: [
-      { label: "Gross Calorific Value (GCV)", value: "3200 - 3700" },
-      { label: "Sizes Available", value: "8mm, 16mm and as per customer requirement" },
-      { label: "Moisture", value: "4% - 6%" },
-      { label: "Advantage", value: "Sustainable & Cost-Effective" },
-      { label: "Supply", value: "Consistent year-round availability" }
+      { label: "GCV", value: "3800" },
+      { label: "Moisture", value: "5.65" },
+      { label: "Ash", value: "13.18" },
+      { label: "Size", value: "6 mm" }
     ],
-    image: "/images/catalogue/page_8_img_0_71.jpeg",
+    image: "/images/catalogue/pellets-soya-rice-husk.jpg",
     thumbnails: [
-      "/images/catalogue/page_8_img_0_71.jpeg",
-      "/images/catalogue/page_8_img_1_72.jpeg",
-      "/images/catalogue/page_8_img_2_73.jpeg"
+      "/images/catalogue/pellets-soya-rice-husk.jpg",
+      "/images/catalogue/pellets-pine-wood.jpg"
     ],
-    featured: true
+    featured: true,
+    varieties: [
+      {
+        id: "soya-rice-husk-pellets",
+        name: "Soya & Rice Husk Pellets",
+        image: "/images/catalogue/pellets-soya-rice-husk.jpg",
+        thumbnails: [
+          "/images/catalogue/pellets-soya-rice-husk.jpg"
+        ],
+        description: "Darker, greenish-brown cylindrical pellets manufactured from soya and rice husk feedstock for steady industrial boiler combustion.",
+        specs: [
+          { label: "GCV", value: "3800" },
+          { label: "Moisture", value: "5.65" },
+          { label: "Ash", value: "13.18" },
+          { label: "Size", value: "6 mm" }
+        ]
+      },
+      {
+        id: "pine-wood-pellets",
+        name: "Pine Wood Pellets",
+        image: "/images/catalogue/pellets-pine-wood.jpg",
+        thumbnails: [
+          "/images/catalogue/pellets-pine-wood.jpg"
+        ],
+        description: "Light-brown wood pellets made from pine wood featuring high calorific value and ultra-low ash accumulation.",
+        specs: [
+          { label: "GCV", value: "4400" },
+          { label: "Moisture", value: "6.68" },
+          { label: "Ash", value: "1.19" },
+          { label: "Size", value: "6 mm" }
+        ]
+      },
+      {
+        id: "soya-rice-husk-mix-pellets",
+        name: "Soya & Rice Husk Mix Pellets",
+        image: "/images/catalogue/pellets-soya-rice-mix.svg",
+        description: "Selectable blended variety of soya and rice husk mix pellets formulated for industrial thermal and combustion efficiency.",
+        specs: []
+      }
+    ]
+  },
+  {
+    id: "biomass-briquettes",
+    name: "Biomass Briquettes",
+    category: "biomass-fuels",
+    categoryName: "Biomass Fuels",
+    shortDesc: "High-calorific compressed biomass briquettes offering consistent industrial thermal output.",
+    description: "Solid compressed biomass fuel briquettes providing sustained heat release and minimal clinker formation. Formulated from premium agricultural and wood residues as a reliable coal substitute.",
+    applications: [
+      "Industrial Boilers & Steam Generation",
+      "Process Furnaces & Kilns",
+      "Thermic Fluid Heaters",
+      "Direct Commercial Coal Replacement"
+    ],
+    specs: [
+      { label: "GCV", value: "4000" },
+      { label: "Moisture", value: "6.20%" },
+      { label: "Ash", value: "8.0%" }
+    ],
+    image: "/images/catalogue/briquettes-main.svg",
+    thumbnails: [
+      "/images/catalogue/briquettes-main.svg"
+    ],
+    featured: true,
+    varieties: [
+      {
+        id: "sugarcane-bagasse-sawdust-briquettes",
+        name: "Sugarcane Bagasse & Sawdust Mix Briquettes",
+        image: "/images/catalogue/briquettes-bagasse-sawdust.svg",
+        description: "Compressed cylindrical briquettes manufactured from a balanced mix of sugarcane bagasse and sawdust for reliable thermal output.",
+        specs: [
+          { label: "GCV", value: "4000" },
+          { label: "Moisture", value: "6.20%" },
+          { label: "Ash", value: "8.0%" }
+        ]
+      },
+      {
+        id: "soya-rice-husk-briquettes",
+        name: "Soya & Rice Husk Mix Briquettes",
+        image: "/images/catalogue/briquettes-soya-rice.svg",
+        description: "Dark, compressed briquettes prepared from a blend of soya and rice husk feedstock for prolonged high-efficiency combustion.",
+        specs: [
+          { label: "GCV", value: "4000" },
+          { label: "Moisture", value: "2%" },
+          { label: "Ash", value: "13.2%" }
+        ]
+      }
+    ]
   },
   {
     id: "de-oiled-cashew-nut-shell-cake",
     name: "De-oiled Cashew Nut Shell Cake",
     category: "biomass-fuels",
     categoryName: "Biomass Fuels",
-    shortDesc: "Eco-friendly biomass fuel replacement for coal in industrial boilers.",
-    description: "Cashew De-Oiled Cake, also known as Bio Shell Cake, is an eco-friendly biomass fuel derived from cashew nut shells after the extraction of Cashew Nut Shell Liquid (CNSL). This fuel offers a high calorific value and burns cleanly with minimal ash production, making it a viable replacement for coal in industrial boilers, kilns, and furnaces.",
+    shortDesc: "Eco-friendly biomass fuel derived from cashew nut shells after CNSL extraction.",
+    description: "Cashew De-Oiled Cake, also known as Bio Shell Cake, is an eco-friendly biomass fuel derived from cashew nut shells after the extraction of Cashew Nut Shell Liquid (CNSL). Kept ready for verified description and specifications to be added.",
     applications: [
       "Industrial Boilers & Thermic Fluid Heaters",
       "Cement & Lime Kilns",
       "High-Heat Industrial Furnaces",
       "Direct Coal Replacement in Heavy Industry"
     ],
-    specs: [
-      { label: "Gross Calorific Value (GCV)", value: "4200 - 4600" },
-      { label: "Moisture", value: "10%" },
-      { label: "Ash Production", value: "Minimal ash, clean burning" }
-    ],
-    image: "/images/catalogue/page_9_img_0_78.jpeg",
+    specs: [],
+    image: "/images/catalogue/cashew-nut-shell-cake.jpg",
     thumbnails: [
-      "/images/catalogue/page_9_img_0_78.jpeg",
-      "/images/catalogue/page_9_img_1_79.jpeg",
-      "/images/catalogue/page_8_img_0_71.jpeg"
+      "/images/catalogue/cashew-nut-shell-cake.jpg",
+      "/images/catalogue/page_9_img_1_79.jpeg"
     ],
     featured: true
   },
