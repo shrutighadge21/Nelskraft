@@ -65,7 +65,7 @@ export default function WhyChooseSection() {
             </div>
 
             {/* Main Headline */}
-            <h2 className="font-sans text-3xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight leading-[1.16] mb-5">
+            <h2 className="font-sans text-2xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight leading-[1.16] mb-4 sm:mb-5">
               <span className="text-[#1A2819] block">Industrial Materials,</span>
               <span className="text-[#59664D] block">Thoughtfully Supplied.</span>
             </h2>
@@ -114,9 +114,9 @@ export default function WhyChooseSection() {
                 onClick={() => setActiveIdx(idx)}
                 className={`flex flex-col cursor-pointer transition-colors duration-200 group text-left ${
                   idx > 0
-                    ? "md:border-l md:border-[#DDD6C7] md:pl-8 lg:md:pl-12"
-                    : "md:pr-8 lg:md:pr-12"
-                } ${idx === 1 ? "md:pr-8 lg:md:pr-12" : ""}`}
+                    ? "md:border-l md:border-[#DDD6C7] md:pl-8 lg:pl-12"
+                    : "md:pr-8 lg:pr-12"
+                } ${idx === 1 ? "md:pr-8 lg:pr-12" : ""}`}
               >
                 {/* Pale Beige Numeral */}
                 <div className="flex items-center gap-2 mb-3">

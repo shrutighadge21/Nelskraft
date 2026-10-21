@@ -114,7 +114,7 @@ export default function GalleryClient() {
                 />
 
                 {/* Subtle Hover Overlay with Title and Arrow matching reference */}
-                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#274E37] via-[#274E37]/95 to-[#274E37]/80 flex items-center justify-between gap-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-out">
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-[#274E37] via-[#274E37]/95 to-[#274E37]/80 flex items-center justify-between gap-3 opacity-100 sm:opacity-0 sm:translate-y-2 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 transition-all duration-300 ease-out">
                   <h3 className="font-bold text-xs sm:text-sm text-white leading-snug line-clamp-2 flex-1">
                     {item.name}
                   </h3>
@@ -137,9 +137,9 @@ export default function GalleryClient() {
           aria-modal="true"
           aria-label={activeItem.name}
           onClick={() => setActiveItem(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200"
         >
-          {/* Close Button Top-Right */}
+          {/* Close Button Top-Right (Prominent & easy to tap on mobile) */}
           <button
             type="button"
             onClick={(e) => {
@@ -147,7 +147,7 @@ export default function GalleryClient() {
               setActiveItem(null);
             }}
             aria-label="Close image popup"
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 border border-white/20 text-white flex items-center justify-center transition-all cursor-pointer shadow-md"
+            className="absolute top-3 right-3 sm:top-6 sm:right-6 z-10 w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-black/90 border border-white/30 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg active:scale-95"
           >
             <X className="w-5 h-5" />
           </button>
@@ -158,7 +158,7 @@ export default function GalleryClient() {
             className="relative max-w-4xl w-full max-h-[90vh] flex flex-col items-center"
           >
             {/* Enlarged Image */}
-            <div className="relative w-full max-h-[75vh] aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-black/40 shadow-2xl border border-white/10">
+            <div className="relative w-full max-h-[68vh] sm:max-h-[75vh] aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-black/40 shadow-2xl border border-white/10">
               <Image
                 src={activeItem.image}
                 alt={activeItem.name}
@@ -169,7 +169,7 @@ export default function GalleryClient() {
             </div>
 
             {/* Display Name ONLY beneath the image */}
-            <h2 className="text-white font-bold text-base sm:text-lg text-center mt-4 tracking-wide max-w-2xl px-4">
+            <h2 className="text-white font-bold text-sm sm:text-lg text-center mt-3 sm:mt-4 tracking-wide max-w-2xl px-4">
               {activeItem.name}
             </h2>
           </div>

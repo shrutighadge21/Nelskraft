@@ -255,12 +255,12 @@ export default function ProductsClient() {
             </h3>
 
             {/* Filter Buttons */}
-            <div className="flex flex-col gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-1 gap-2">
               {/* All Products */}
               <button
                 type="button"
                 onClick={() => handleCategorySelect("all")}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left cursor-pointer ${
                   selectedCategory === "all"
                     ? "bg-[#274E37] text-white shadow-xs"
                     : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
@@ -282,42 +282,42 @@ export default function ProductsClient() {
               <button
                 type="button"
                 onClick={() => handleCategorySelect("refractory-products")}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left cursor-pointer ${
                   selectedCategory === "refractory-products"
                     ? "bg-[#274E37] text-white shadow-xs"
                     : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
                 }`}
               >
-                <span>Refractory Products</span>
-                <ChevronRight className="w-4 h-4 opacity-70" />
+                <span>Refractories</span>
+                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
               </button>
 
               {/* Biomass Fuels */}
               <button
                 type="button"
                 onClick={() => handleCategorySelect("biomass-fuels")}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left cursor-pointer ${
                   selectedCategory === "biomass-fuels"
                     ? "bg-[#274E37] text-white shadow-xs"
                     : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
                 }`}
               >
                 <span>Biomass Fuels</span>
-                <ChevronRight className="w-4 h-4 opacity-70" />
+                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
               </button>
 
               {/* Industrial Minerals */}
               <button
                 type="button"
                 onClick={() => handleCategorySelect("industrial-minerals")}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left ${
+                className={`w-full flex items-center justify-between px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 text-left cursor-pointer ${
                   selectedCategory === "industrial-minerals"
                     ? "bg-[#274E37] text-white shadow-xs"
                     : "bg-white hover:bg-[#F2EFEA] text-[#181E1A] border border-[#E5E0D5]"
                 }`}
               >
-                <span>Industrial Minerals</span>
-                <ChevronRight className="w-4 h-4 opacity-70" />
+                <span>Minerals</span>
+                <ChevronRight className="w-4 h-4 opacity-70 hidden sm:inline lg:inline" />
               </button>
             </div>
 
@@ -503,8 +503,8 @@ export default function ProductsClient() {
                 </p>
 
                 {/* Technical Specification Table */}
-                <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-hidden shadow-2xs mb-6">
-                  <table className="w-full text-left border-collapse">
+                <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-x-auto shadow-2xs mb-6">
+                  <table className="w-full text-left border-collapse min-w-[280px]">
                     <tbody>
                       {selectedProduct.specs.map((spec, sIdx) => (
                         <tr
@@ -515,10 +515,10 @@ export default function ProductsClient() {
                               : ""
                           }
                         >
-                          <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5]">
+                          <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5] whitespace-nowrap">
                             {spec.label}
                           </td>
-                          <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A]">
+                          <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A] break-words">
                             {spec.value}
                           </td>
                         </tr>
@@ -529,10 +529,10 @@ export default function ProductsClient() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full">
                 <Link
                   href={`/contact?product=${encodeURIComponent(selectedProduct.name)}`}
-                  className="bg-[#274E37] hover:bg-[#1E3E2B] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full shadow-xs transition-all flex items-center gap-2"
+                  className="bg-[#274E37] hover:bg-[#1E3E2B] text-white text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full shadow-xs transition-all flex items-center justify-center gap-2 text-center"
                 >
                   <span>Enquire About This Product</span>
                   <ArrowRight className="w-4 h-4" />
@@ -542,7 +542,7 @@ export default function ProductsClient() {
                   href={getWhatsAppUrl(selectedProduct.name)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-transparent hover:bg-white/80 text-[#181E1A] border border-[#BDB5A4] text-xs sm:text-sm font-semibold px-6 py-3 rounded-full transition-all flex items-center gap-2 shadow-2xs"
+                  className="bg-transparent hover:bg-white/80 text-[#181E1A] border border-[#BDB5A4] text-xs sm:text-sm font-semibold px-6 py-3.5 rounded-full transition-all flex items-center justify-center gap-2 shadow-2xs text-center"
                 >
                   <MessageCircle className="w-4 h-4 text-[#25D366]" />
                   <span>Discuss on WhatsApp</span>

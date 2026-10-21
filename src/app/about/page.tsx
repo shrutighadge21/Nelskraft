@@ -126,7 +126,7 @@ export default function AboutPage() {
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-white leading-[1.16] mb-6">
+            <h1 className="font-sans text-2xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-white leading-[1.16] mb-5 sm:mb-6">
               Building Durability, <br className="hidden sm:inline" />
               Enabling <span className="text-[#54a937]">Sustainability.</span>
             </h1>

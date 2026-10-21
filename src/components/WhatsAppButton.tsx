@@ -26,7 +26,7 @@ export default function WhatsAppButton() {
   return (
     <aside
       aria-label="Floating quick actions"
-      className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3.5"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end gap-3"
     >
       {/* Scroll-to-Top Button directly above WhatsApp button */}
       {showScrollTop && (
@@ -34,15 +34,15 @@ export default function WhatsAppButton() {
           type="button"
           onClick={scrollToTop}
           aria-label="Scroll to top of page"
-          className="w-12 h-12 bg-[#181E1A] hover:bg-[#274E37] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-200/50 cursor-pointer animate-in fade-in zoom-in-75"
+          className="w-10 h-10 sm:w-12 sm:h-12 bg-[#181E1A] hover:bg-[#274E37] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 focus:outline-none focus:ring-4 focus:ring-emerald-200/50 cursor-pointer animate-in fade-in zoom-in-75"
         >
-          <ArrowUp className="w-5 h-5 text-white" />
+          <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
         </button>
       )}
 
       {/* WhatsApp Floating Button */}
       <div className="flex items-center group">
-        <div className="hidden group-hover:flex items-center mr-3 bg-white text-gray-800 text-xs font-medium py-1.5 px-3 rounded-full shadow-lg border border-gray-100 animate-fadeIn whitespace-nowrap">
+        <div className="hidden md:group-hover:flex items-center mr-3 bg-white text-gray-800 text-xs font-medium py-1.5 px-3 rounded-full shadow-lg border border-gray-100 animate-fadeIn whitespace-nowrap">
           Chat with our Material Specialists
         </div>
         <a
@@ -50,11 +50,11 @@ export default function WhatsAppButton() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact Nelskraft on WhatsApp (+91 7020309001)"
-          className="w-13 h-13 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-200 cursor-pointer"
+          className="w-12 h-12 sm:w-14 sm:h-14 bg-[#25D366] hover:bg-[#20ba59] text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform group-hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-200 cursor-pointer"
         >
           {/* Proper, authentic WhatsApp SVG Icon */}
           <svg
-            className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-current"
+            className="w-6 h-6 sm:w-8 sm:h-8 text-white fill-current"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"

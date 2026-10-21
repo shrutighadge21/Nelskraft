@@ -136,7 +136,7 @@ export default function Footer() {
                     <span className="text-xs uppercase font-bold tracking-wider text-[#8EA096] block mb-0.5 group-hover:text-[#78c454] transition-colors">
                       Email Address
                     </span>
-                    <span className="text-white font-medium text-sm sm:text-base group-hover:text-[#78c454] transition-colors">
+                    <span className="text-white font-medium text-sm sm:text-base group-hover:text-[#78c454] transition-colors break-all">
                       {COMPANY_DETAILS.email}
                     </span>
                   </div>

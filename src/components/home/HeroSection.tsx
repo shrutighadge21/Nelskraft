@@ -106,11 +106,11 @@ function CountUpStrip() {
   }, [startAnimation, resetAnimation]);
 
   return (
-    <div ref={stripRef} className="flex flex-wrap sm:flex-nowrap items-center gap-6 sm:gap-8 lg:gap-14">
+    <div ref={stripRef} className="flex flex-wrap sm:flex-nowrap items-center justify-between sm:justify-start gap-4 sm:gap-8 lg:gap-14">
       {STATS.map((stat, index) => (
-        <div key={stat.target} className="flex items-center gap-6 sm:gap-8 lg:gap-14">
+        <div key={stat.target} className="flex items-center gap-4 sm:gap-8 lg:gap-14">
           <div className="flex flex-col">
-            <span className="font-sans text-2xl sm:text-3xl lg:text-[2.15rem] font-bold text-[#EDE6D8] leading-none tracking-tight">
+            <span className="font-sans text-xl sm:text-3xl lg:text-[2.15rem] font-bold text-[#EDE6D8] leading-none tracking-tight">
               {counts[index]}
               {stat.suffix}
             </span>
@@ -215,7 +215,7 @@ export default function HeroSection() {
             </div>
 
             {/* Compact Refined Sans Headline matching Hero Scale */}
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] xl:text-[3.25rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3.5 sm:mb-4">
+            <h2 className="font-sans text-2xl sm:text-4xl md:text-[2.65rem] lg:text-[3rem] xl:text-[3.25rem] font-bold tracking-tight text-[#162217] leading-[1.14] mb-3.5 sm:mb-4">
               <span className="block sm:inline">Materials That</span>{" "}
               <br className="hidden sm:inline" />
               <span className="block sm:inline">Power Industry.</span>

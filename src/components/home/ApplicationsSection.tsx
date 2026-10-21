@@ -56,12 +56,12 @@ export default function ApplicationsSection() {
               </span>
             </div>
             {/* Heading */}
-            <h2 className="font-sans text-3xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.14] mb-6 text-[#1a1a1a]">
-              Industries<br />
+            <h2 className="font-sans text-2xl sm:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.14] mb-4 sm:mb-6 text-[#1a1a1a]">
+              Industries <br className="hidden lg:inline" />
               <span className="text-[#2d6b1f]">We Serve</span>
             </h2>
             {/* Body */}
-            <p className="text-[0.88rem] text-[#4a4a4a] leading-relaxed mb-9 max-w-[265px]">
+            <p className="text-[0.88rem] sm:text-[0.92rem] text-[#4a4a4a] leading-relaxed mb-8 sm:mb-9 max-w-xl lg:max-w-[265px]">
               Our refractory products, biomass fuels, and mineral materials serve diverse
               high-temperature applications where performance, reliable supply, and consistent
               quality are essential.

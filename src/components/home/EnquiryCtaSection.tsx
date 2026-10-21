@@ -70,7 +70,7 @@ export default function EnquiryCtaSection() {
             </div>
 
             {/* Main Headline */}
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-[#1a1f1c] leading-[1.18] mb-4">
+            <h2 className="font-sans text-2xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-[#1a1f1c] leading-[1.18] mb-4">
               Looking for Industrial Materials?
             </h2>
 
@@ -81,7 +81,7 @@ export default function EnquiryCtaSection() {
             </p>
 
             {/* Subtle Inline Phone & Email */}
-            <div className="flex flex-wrap items-center gap-6 text-sm text-[#4a4a4a] pt-1">
+            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-[#4a4a4a] pt-1">
               <a
                 href={`tel:${COMPANY_DETAILS.phone}`}
                 className="inline-flex items-center gap-2 hover:text-[#2d6b1f] transition-colors font-medium"
@@ -92,7 +92,7 @@ export default function EnquiryCtaSection() {
               <span className="text-gray-300 hidden sm:inline">•</span>
               <a
                 href={`mailto:${COMPANY_DETAILS.email}`}
-                className="inline-flex items-center gap-2 hover:text-[#2d6b1f] transition-colors font-medium"
+                className="inline-flex items-center gap-2 hover:text-[#2d6b1f] transition-colors font-medium break-all"
               >
                 <Mail className="w-4 h-4 text-[#2d6b1f]" />
                 <span>{COMPANY_DETAILS.email}</span>
@@ -101,11 +101,11 @@ export default function EnquiryCtaSection() {
           </div>
 
           {/* Right Column: Actions (Side-by-side on desktop, clean responsive stack on mobile) */}
-          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-4 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3 sm:gap-4 flex-shrink-0 w-full sm:w-auto">
             {/* Primary Button: Enquire Now */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2.5 bg-[#2d6b1f] hover:bg-[#235518] text-white px-8 py-4 rounded-xl text-sm sm:text-base font-semibold tracking-wide shadow-sm hover:shadow-md transition-all duration-200 group transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#2d6b1f] hover:bg-[#235518] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base font-semibold tracking-wide shadow-sm hover:shadow-md transition-all duration-200 group transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
             >
               <span>Enquire Now</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -114,7 +114,7 @@ export default function EnquiryCtaSection() {
             {/* Secondary Action: Contact Us */}
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2 bg-white/85 hover:bg-white text-[#1a1f1c] hover:text-[#2d6b1f] border border-[#cfccc4] hover:border-[#2d6b1f] px-8 py-4 rounded-xl text-sm sm:text-base font-semibold tracking-wide backdrop-blur-xs shadow-xs hover:shadow-sm transition-all duration-200 group transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/85 hover:bg-white text-[#1a1f1c] hover:text-[#2d6b1f] border border-[#cfccc4] hover:border-[#2d6b1f] px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm sm:text-base font-semibold tracking-wide backdrop-blur-xs shadow-xs hover:shadow-sm transition-all duration-200 group transform hover:-translate-y-0.5 active:scale-95 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2d6b1f]"
             >
               <span>Contact Us</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 text-gray-500 group-hover:text-[#2d6b1f]" />

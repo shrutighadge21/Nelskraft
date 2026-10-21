@@ -24,7 +24,7 @@ export default function ProductCategoriesSection() {
               <span className="w-5 h-[1.5px] bg-[#6B7566]" />
               <span>OUR PRODUCTS</span>
             </div>
-            <h2 className="font-sans text-3xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight text-[#1B281A] leading-[1.15] mb-3.5">
+            <h2 className="font-sans text-2xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight text-[#1B281A] leading-[1.15] mb-3.5">
               Product <span className="text-[#657357]">Categories</span>
             </h2>
             <p className="text-[13.5px] sm:text-[14.5px] text-[#555E50] font-normal leading-relaxed max-w-xl">

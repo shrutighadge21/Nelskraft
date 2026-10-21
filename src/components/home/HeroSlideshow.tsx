@@ -95,12 +95,12 @@ export default function HeroSlideshow() {
           </div>
 
           {/* Headline with High Contrast Charcoal (#202522) and Muted Terracotta (#984629) */}
-          <h1 className="font-sans text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-[#202522] leading-[1.18] mb-5">
+          <h1 className="font-sans text-2xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-[#202522] leading-[1.18] mb-4 sm:mb-5">
             High-Performance <span className="text-[#984629]">Refractories</span>, Biomass Fuels &amp; Industrial Minerals
           </h1>
 
           {/* Supporting Paragraph with Crisp Dark Neutral Gray (#454545) and Comfortable Spacing */}
-          <p className="text-base sm:text-[1.0625rem] text-[#454545] font-medium leading-[1.7] max-w-lg">
+          <p className="text-sm sm:text-[1.0625rem] text-[#454545] font-medium leading-[1.65] sm:leading-[1.7] max-w-lg">
             Supplying durable refractory bricks, low-emission biomass fuels, and verified mineral raw materials engineered for severe industrial applications across India.
           </p>
 

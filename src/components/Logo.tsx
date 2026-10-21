@@ -20,12 +20,12 @@ export default function Logo({
       className={`group inline-flex items-center gap-3 transition-opacity duration-200 hover:opacity-95 ${className}`}
       aria-label="Nelskraft Refractory Pvt. Ltd. - Home"
     >
-      <div className="relative w-10 h-10 md:w-11 md:h-11 flex-shrink-0">
+      <div className="relative w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 flex-shrink-0">
         <Image
           src={isDarkVariant ? "/images/logo-white.png" : "/images/logo-icon.png"}
           alt="Nelskraft Logo Emblem"
           fill
-          sizes="44px"
+          sizes="(max-width: 640px) 36px, 44px"
           className="object-contain"
           priority
         />
@@ -33,14 +33,14 @@ export default function Logo({
 
       <div className="flex flex-col justify-center">
         <span
-          className={`font-sans font-extrabold tracking-[0.14em] text-base md:text-lg leading-tight ${
+          className={`font-sans font-extrabold tracking-[0.14em] text-sm sm:text-base md:text-lg leading-tight ${
             isDarkVariant ? "text-white" : "text-[#000d15]"
           }`}
         >
           NELSKRAFT
         </span>
         <span
-          className={`font-sans font-semibold tracking-[0.16em] text-[8px] md:text-[9px] uppercase leading-none mt-0.5 ${
+          className={`font-sans font-semibold tracking-[0.16em] text-[7.5px] sm:text-[8.5px] md:text-[9px] uppercase leading-none mt-0.5 ${
             isDarkVariant ? "text-gray-300" : "text-[#4b5563]"
           }`}
         >

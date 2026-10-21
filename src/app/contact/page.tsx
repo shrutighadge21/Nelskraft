@@ -39,7 +39,7 @@ export default function ContactPage() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white mb-5 leading-[1.12]">
+          <h1 className="font-sans text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white mb-5 leading-[1.12]">
             Let’s Talk About Your{" "}
             <span className="text-[#54a937]">Material Requirements.</span>
           </h1>
