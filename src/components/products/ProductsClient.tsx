@@ -632,7 +632,7 @@ export default function ProductsClient() {
                                   isSelected ? "text-[#CDE3D2]" : "text-[#6C756B]"
                                 }`}
                               >
-                                GCV: {variety.specs.find((s) => s.label === "GCV")?.value}
+                                GCV: {variety.specs.find((s) => s.label === "GCV" || s.label.includes("GCV"))?.value}
                               </span>
                             )}
                           </button>
@@ -667,7 +667,23 @@ export default function ProductsClient() {
                 {/* Technical Specification Table (only displayed when specifications are supplied) */}
                 {activeSpecs && activeSpecs.length > 0 && (
                   <div className="bg-white rounded-xl border border-[#D8D2C2] overflow-x-auto shadow-2xs mb-6">
-                    <table className="w-full text-left border-collapse min-w-[280px]">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="border-b border-[#E8E3D7] bg-[#F7F5F0]">
+                          <th
+                            scope="col"
+                            className="w-[42%] sm:w-2/5 py-2.5 px-3.5 sm:px-4 text-xs sm:text-sm font-bold text-[#181E1A]"
+                          >
+                            Specification
+                          </th>
+                          <th
+                            scope="col"
+                            className="py-2.5 px-3.5 sm:px-4 text-xs sm:text-sm font-bold text-[#181E1A]"
+                          >
+                            Details
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {activeSpecs.map((spec, sIdx) => (
                           <tr
@@ -678,10 +694,10 @@ export default function ProductsClient() {
                                 : ""
                             }
                           >
-                            <td className="w-2/5 py-2.5 px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5] whitespace-nowrap">
+                            <td className="w-[42%] sm:w-2/5 py-2.5 px-3.5 sm:px-4 text-xs sm:text-sm font-semibold text-[#505A52] bg-[#FAF8F5] break-words">
                               {spec.label}
                             </td>
-                            <td className="py-2.5 px-4 text-xs sm:text-sm font-medium text-[#181E1A] break-words">
+                            <td className="py-2.5 px-3.5 sm:px-4 text-xs sm:text-sm font-medium text-[#181E1A] break-words">
                               {spec.value}
                             </td>
                           </tr>

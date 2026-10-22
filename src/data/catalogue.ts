@@ -365,9 +365,15 @@ export const PRODUCTS: ProductItem[] = [
         thumbnails: [
           "/images/catalogue/pellets-rice-husk.jpg"
         ],
-        description: "Rice Husk Pellets are compact, cylindrical biomass fuel pellets made from rice husk for industrial heating and combustion applications.",
-        additionalInfo: "These pellets are produced from rice husk biomass and are intended for use as an alternative solid fuel in suitable industrial heating systems.",
-        specs: []
+        description:
+          "Our high-quality biomass pellets are a reliable and eco-friendly alternative to coal, designed for efficient combustion in industrial applications. Reduces carbon footprint and fuel costs.",
+        specs: [
+          { label: "Gross Calorific Value (GCV)", value: "3200–3700" },
+          { label: "Sizes Available", value: "8 mm, 16 mm and as per customer requirement" },
+          { label: "Moisture", value: "4%–6%" },
+          { label: "Advantage", value: "Sustainable & Cost-Effective" },
+          { label: "Supply", value: "Consistent year-round availability" }
+        ]
       },
       {
         id: "pine-wood-pellets",
