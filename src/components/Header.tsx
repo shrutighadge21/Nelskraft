@@ -72,7 +72,7 @@ export default function Header() {
             : "bg-[#F7F5EE] border-b border-[#E5E0D5] py-4 sm:py-5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between">
             {/* Logo (Official Nelskraft Brand) */}
             <div className="flex-shrink-0 z-10">

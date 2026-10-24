@@ -203,7 +203,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main Editorial Hero Grid Container */}
-      <div className="relative z-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-10 pb-0 flex flex-col justify-center">
+      <div className="relative z-10 max-w-7xl w-full mx-auto px-5 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-10 pb-0 flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
           {/* LEFT COLUMN: Editorial Typography, Description, & CTA */}
@@ -276,7 +276,7 @@ export default function HeroSection() {
             aria-hidden="true"
           />
 
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-2.5">
+          <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-2.5 sm:py-3 lg:py-2.5">
             <CountUpStrip />
           </div>
         </div>

@@ -120,7 +120,7 @@ export default function AboutSection() {
       ref={sectionRef}
       className="relative pt-8 sm:pt-12 md:pt-14 pb-14 sm:pb-16 md:pb-20 bg-[#FAF9F6] text-[#202522] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* LEFT COLUMN: About Us Image */}
           <div className="lg:col-span-5 relative w-full aspect-[16/11] sm:aspect-[16/10] lg:aspect-[4/3.8] rounded-2xl overflow-hidden border border-[#e8e6df] shadow-xs bg-[#EDEBE4]">

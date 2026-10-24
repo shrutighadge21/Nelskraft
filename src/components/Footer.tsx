@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0B130E] text-[#D8E2DC] border-t border-[#1C2C24]">
       {/* Main Footer Body with 4 Aligned Columns and Thin Understated Vertical Separators */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-14">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-16 pb-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-0">
           
           {/* ═══════ COLUMN 1 — COMPANY ═══════ */}
@@ -165,7 +165,7 @@ export default function Footer() {
 
       {/* ═══════ SEPARATE SLIM BOTTOM STRIP ═══════ */}
       <div className="bg-[#060B08] border-t border-white/10 py-5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-[#8EA096]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-[#8EA096]">
           {/* Copyright notice */}
           <div>
             © {currentYear} Nelskraft Refractory Pvt. Ltd. All rights reserved.

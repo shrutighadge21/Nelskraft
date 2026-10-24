@@ -53,7 +53,7 @@ export default function WhyChooseSection() {
       id="why-choose"
       className="relative py-16 sm:py-20 lg:py-24 bg-[#FAF8F5] text-[#1B281A] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Top Composition: Left Text + Right Curved Large Image */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16 sm:mb-20 lg:mb-24">
           {/* Left Text Column */}

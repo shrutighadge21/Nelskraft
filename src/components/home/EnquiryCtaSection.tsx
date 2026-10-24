@@ -56,7 +56,7 @@ export default function EnquiryCtaSection() {
       />
 
       {/* Main Container Content */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div className="relative z-20 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10 lg:gap-14">
           
           {/* Left Column: Eyebrow, Headline, Description & Direct Quick Contacts */}
@@ -81,7 +81,7 @@ export default function EnquiryCtaSection() {
             </p>
 
             {/* Subtle Inline Phone & Email */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-[#4a4a4a] pt-1">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-sm text-[#4a4a4a] pt-1">
               <a
                 href={`tel:${COMPANY_DETAILS.phone}`}
                 className="inline-flex items-center gap-2 hover:text-[#2d6b1f] transition-colors font-medium"

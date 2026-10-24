@@ -117,7 +117,7 @@ export default function AboutPage() {
         </div>
 
         {/* Content Container */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-20 lg:py-28 relative z-10 w-full">
           <div className="max-w-2xl lg:max-w-3xl">
             {/* Eyebrow Label */}
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.22em] uppercase text-[#78a85a] mb-5">
@@ -155,7 +155,7 @@ export default function AboutPage() {
       {/* SECTION 3: WHO WE ARE (Asymmetric Layout, Overlapping)     */}
       {/* ========================================================= */}
       <section className="py-20 sm:py-28 bg-[#FAF9F6] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             {/* Left Column: Numeral, Heading & Narrative */}
             <div className="lg:col-span-6 relative z-10">
@@ -252,7 +252,7 @@ export default function AboutPage() {
       {/* SECTION 4: WHAT WE BRING TO INDUSTRY (Angled Panels)      */}
       {/* ========================================================= */}
       <section className="py-20 sm:py-28 bg-[#121c17] text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Header Row */}
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
@@ -336,7 +336,7 @@ export default function AboutPage() {
       {/* SECTION 5: OUR APPROACH (Curved Process Line)             */}
       {/* ========================================================= */}
       <section className="py-20 sm:py-28 bg-[#FAF9F6] relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
             {/* Left Content Area */}
             <div className="lg:col-span-5">

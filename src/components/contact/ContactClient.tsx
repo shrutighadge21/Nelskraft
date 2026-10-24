@@ -203,7 +203,7 @@ export default function ContactClient() {
       {/* 1. MAIN TWO-COLUMN CONTACT SECTION (Exact Reference Layout)*/}
       {/* ========================================================= */}
       <section className="bg-[#f8fafc] text-[#1c242c] py-14 sm:py-18 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             {/* ----------------------------------------------------- */}
             {/* LEFT COLUMN: Contact Enquiry Form                     */}
@@ -641,7 +641,7 @@ export default function ContactClient() {
       {/* 2. MAP SECTION ("OUR LOCATION" / "Find Us") - Exact Match */}
       {/* ========================================================= */}
       <section className="bg-[#000d15] text-white py-16 sm:py-20 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
             <div>

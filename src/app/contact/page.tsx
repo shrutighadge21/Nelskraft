@@ -30,7 +30,7 @@ export default function ContactPage() {
         </div>
 
         {/* Hero Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
           {/* Eyebrow Label */}
           <div className="inline-flex items-center justify-center gap-2.5 text-xs sm:text-sm font-bold tracking-[0.22em] uppercase text-[#54a937] mb-4">
             <span className="w-5 h-[2px] bg-[#54a937]" />

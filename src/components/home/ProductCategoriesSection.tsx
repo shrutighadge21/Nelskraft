@@ -15,7 +15,7 @@ export default function ProductCategoriesSection() {
       id="products"
       className="relative py-16 sm:py-20 lg:py-24 bg-[#FAF8F5] text-[#1B281A] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           {/* Left: Eyebrow, Heading, Description */}
@@ -54,10 +54,10 @@ export default function ProductCategoriesSection() {
               isExpanded(1) ? "sm:-translate-y-1" : "hover:sm:-translate-y-1"
             }`}
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-8 h-full">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 sm:gap-8 h-auto sm:h-full">
               {/* Coordinated Text & Content Unit */}
               <div
-                className={`flex flex-col justify-between h-full py-2 max-w-[260px] sm:max-w-[240px] xl:max-w-[270px] flex-shrink-0 transition-transform duration-500 ease-out ${
+                className={`flex flex-col justify-between h-auto sm:h-full py-2 max-w-[260px] sm:max-w-[240px] xl:max-w-[270px] flex-shrink-0 transition-transform duration-500 ease-out ${
                   isExpanded(1) ? "sm:translate-x-1.5" : "group-hover:sm:translate-x-1.5"
                 }`}
               >
@@ -112,7 +112,7 @@ export default function ProductCategoriesSection() {
 
               {/* Large Featured Photograph with Coordinated Expansion */}
               <div
-                className={`relative w-full max-w-[340px] sm:max-w-none aspect-[346/401] rounded-tl-[80px] sm:rounded-tl-[100px] overflow-hidden bg-[#ECE7DC] flex-1 self-end sm:self-center transition-all duration-500 ease-out ${
+                className={`relative w-full max-w-[280px] sm:max-w-none aspect-[346/401] rounded-tl-[80px] sm:rounded-tl-[100px] overflow-hidden bg-[#ECE7DC] flex-shrink-0 sm:flex-1 self-end sm:self-center transition-all duration-500 ease-out ${
                   isExpanded(1)
                     ? "scale-[1.03] shadow-md"
                     : "group-hover:scale-[1.03] group-hover:shadow-md"

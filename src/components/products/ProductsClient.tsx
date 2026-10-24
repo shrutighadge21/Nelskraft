@@ -143,7 +143,7 @@ export default function ProductsClient() {
           <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-[#0C120E]/70" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
           <div className="max-w-2xl">
             {/* Small label */}
             <div className="flex items-center gap-2 mb-3">
@@ -170,7 +170,7 @@ export default function ProductsClient() {
       {/* ═══════════════════════════════════════════════
           THREE PRODUCT CATEGORY PANELS
       ═══════════════════════════════════════════════ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-6">
+      <section className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-10 pb-6">
         {/* Header row */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-4">
           <div className="flex items-center gap-2">
@@ -295,7 +295,7 @@ export default function ProductsClient() {
       ═══════════════════════════════════════════════ */}
       <section
         ref={catalogueSectionRef}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16 sm:pb-24"
+        className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 pt-8 pb-16 sm:pb-24"
       >
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* ────── LEFT SIDEBAR ────── */}
