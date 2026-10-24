@@ -37,7 +37,7 @@ export default function HeroSlideshow() {
 
   return (
     <section
-      className="relative w-full min-h-[560px] md:min-h-[640px] lg:h-[86vh] max-h-[880px] overflow-hidden flex items-center bg-[#fbfbfb]"
+      className="relative w-full min-h-[380px] sm:min-h-[480px] md:min-h-[640px] lg:h-[86vh] max-h-[880px] overflow-hidden flex items-center bg-[#fbfbfb]"
       aria-label="Nelskraft Homepage Hero"
     >
       {/* Background Slideshow - 100% natural colors, full contrast & vivid details */}
@@ -75,37 +75,37 @@ export default function HeroSlideshow() {
         }}
         aria-hidden="true"
       />
-      {/* Mobile: smooth top-to-bottom localized fade prioritizing readability */}
+      {/* Mobile: subtle, balanced overlay keeping industrial image clearly visible */}
       <div
-        className="absolute inset-x-0 top-0 h-[72%] pointer-events-none z-10 sm:hidden"
+        className="absolute inset-0 pointer-events-none z-10 sm:hidden"
         style={{
           background:
-            "linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 253, 248, 0.88) 55%, rgba(255, 253, 248, 0.35) 82%, rgba(255, 255, 255, 0) 100%)",
+            "linear-gradient(180deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 253, 248, 0.45) 55%, rgba(255, 253, 248, 0.15) 85%, rgba(255, 255, 255, 0) 100%)",
         }}
         aria-hidden="true"
       />
 
       {/* Hero Content - Restricted to ~45% width on desktop for balanced composition */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full flex items-center">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14 md:py-20 lg:py-24 w-full flex items-center">
         <div className="w-full sm:max-w-xl lg:max-w-[45%] text-left">
           {/* Introductory Eyebrow Text */}
-          <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-[#984629] mb-4">
+          <div className="inline-flex items-center gap-2.5 text-xs font-semibold tracking-[0.22em] uppercase text-[#984629] mb-2 sm:mb-4">
             <span className="w-6 h-[2px] bg-[#54a937]" />
             <span>Nelskraft Refractory Pvt. Ltd.</span>
           </div>
 
           {/* Headline with High Contrast Charcoal (#202522) and Muted Terracotta (#984629) */}
-          <h1 className="font-sans text-2xl sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-[#202522] leading-[1.18] mb-4 sm:mb-5">
+          <h1 className="font-sans text-[1.4rem] sm:text-4xl md:text-[2.75rem] lg:text-[3.1rem] font-bold tracking-tight text-[#202522] leading-[1.2] mb-2.5 sm:mb-5">
             High-Performance <span className="text-[#984629]">Refractories</span>, Biomass Fuels &amp; Industrial Minerals
           </h1>
 
           {/* Supporting Paragraph with Crisp Dark Neutral Gray (#454545) and Comfortable Spacing */}
-          <p className="text-sm sm:text-[1.0625rem] text-[#454545] font-medium leading-[1.65] sm:leading-[1.7] max-w-lg">
+          <p className="text-[13px] sm:text-[1.0625rem] text-[#333a35] font-medium leading-[1.55] sm:leading-[1.7] max-w-lg">
             Supplying durable refractory bricks, low-emission biomass fuels, and verified mineral raw materials engineered for severe industrial applications across India.
           </p>
 
           {/* Subtle Visual Slide Progress Indicator */}
-          <div className="flex items-center gap-2 mt-8 pointer-events-none" aria-hidden="true">
+          <div className="flex items-center gap-2 mt-5 sm:mt-8 pointer-events-none" aria-hidden="true">
             {SLIDES.map((_, index) => (
               <span
                 key={index}

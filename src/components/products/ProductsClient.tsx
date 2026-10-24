@@ -195,12 +195,14 @@ export default function ProductsClient() {
                 : "border-[#E5E0D5]"
             }`}
           >
-            <div className="flex items-center gap-3.5 min-w-0">
-              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+            <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 shrink-0 rounded-xl overflow-hidden bg-[#EAE6DD]">
                 <Image
                   src="/images/about-bricks.jpg"
                   alt="Refractory Products"
                   fill
+                  priority
+                  sizes="(max-width: 640px) 80px, 96px"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -213,7 +215,7 @@ export default function ProductsClient() {
                 </p>
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all shrink-0 ml-2">
               <ArrowRight className="w-4 h-4" />
             </div>
           </div>
@@ -227,12 +229,14 @@ export default function ProductsClient() {
                 : "border-[#E5E0D5]"
             }`}
           >
-            <div className="flex items-center gap-3.5 min-w-0">
-              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+            <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 shrink-0 rounded-xl overflow-hidden bg-[#EAE6DD]">
                 <Image
                   src="/images/catalogue/page_8_img_0_71.jpeg"
                   alt="Biomass Fuels"
                   fill
+                  priority
+                  sizes="(max-width: 640px) 80px, 96px"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -245,7 +249,7 @@ export default function ProductsClient() {
                 </p>
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all shrink-0 ml-2">
               <ArrowRight className="w-4 h-4" />
             </div>
           </div>
@@ -259,12 +263,14 @@ export default function ProductsClient() {
                 : "border-[#E5E0D5]"
             }`}
           >
-            <div className="flex items-center gap-3.5 min-w-0">
-              <div className="relative w-20 h-16 sm:w-24 sm:h-20 rounded-xl overflow-hidden bg-[#EAE6DD] flex-shrink-0">
+            <div className="flex items-center gap-3 sm:gap-3.5 min-w-0">
+              <div className="relative w-20 h-16 sm:w-24 sm:h-20 shrink-0 rounded-xl overflow-hidden bg-[#EAE6DD]">
                 <Image
                   src="/images/catalogue/page_10_img_1_87.jpeg"
                   alt="Industrial Minerals"
                   fill
+                  priority
+                  sizes="(max-width: 640px) 80px, 96px"
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
@@ -277,7 +283,7 @@ export default function ProductsClient() {
                 </p>
               </div>
             </div>
-            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all flex-shrink-0 ml-2">
+            <div className="w-8 h-8 rounded-full border border-[#D5CFBF] flex items-center justify-center text-[#181E1A] group-hover:border-[#274E37] group-hover:bg-[#274E37] group-hover:text-white transition-all shrink-0 ml-2">
               <ArrowRight className="w-4 h-4" />
             </div>
           </div>

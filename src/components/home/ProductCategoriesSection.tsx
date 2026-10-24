@@ -122,6 +122,7 @@ export default function ProductCategoriesSection() {
                   src="/images/cat-refractory-arch.png"
                   alt="Industrial refractory firebricks, powders, and high-temperature furnace lining components"
                   fill
+                  priority
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 35vw"
                   className={`object-cover object-center transition-transform duration-700 ease-out ${
                     isExpanded(1) ? "scale-[1.05]" : "group-hover:scale-[1.05]"
