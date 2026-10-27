@@ -535,11 +535,11 @@ export const PRODUCTS: ProductItem[] = [
       { label: "Iron (Fe₂O₃)", value: "0.30 - 1.80%" },
       { label: "Loss on Ignition", value: "1.00 - 5.00%" }
     ],
-    image: "/images/catalogue/page_11_img_2_95.jpeg",
+    image: "/images/catalogue/page_11_img_0_93.jpeg",
     thumbnails: [
-      "/images/catalogue/page_11_img_2_95.jpeg",
+      "/images/catalogue/page_11_img_0_93.jpeg",
       "/images/catalogue/page_11_img_1_94.jpeg",
-      "/images/catalogue/page_11_img_0_93.jpeg"
+      "/images/catalogue/page_11_img_2_95.jpeg"
     ],
     featured: true
   }

@@ -454,13 +454,13 @@ export default function ProductsClient() {
                   >
                     <div>
                       {/* Product Image Area */}
-                      <div className="relative h-44 sm:h-48 w-full bg-[#FAF9F6] p-4 flex items-center justify-center overflow-hidden border-b border-[#F0EEEA]">
+                      <div className="relative h-44 sm:h-48 w-full bg-[#FAF9F6] p-3 sm:p-4 flex items-center justify-center overflow-hidden border-b border-[#F0EEEA]">
                         <Image
                           src={product.image}
                           alt={product.name}
                           fill
                           unoptimized={product.image.endsWith(".svg")}
-                          className="object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+                          className="object-contain p-1.5 group-hover:scale-105 transition-transform duration-300"
                         />
                       </div>
 
@@ -530,13 +530,13 @@ export default function ProductsClient() {
             {/* Left Column: Big Product Image & Thumbnails */}
             <div className="lg:col-span-5 flex flex-col items-center">
               {/* Large Main Image Display */}
-              <div className="relative w-full aspect-[4/3] bg-white rounded-2xl p-6 border border-[#DDD7C9] shadow-xs flex items-center justify-center overflow-hidden">
+              <div className="relative w-full aspect-[4/3] bg-white rounded-2xl p-3 sm:p-5 border border-[#DDD7C9] shadow-xs flex items-center justify-center overflow-hidden">
                 <Image
                   src={currentDisplayImage}
                   alt={activeTitle}
                   fill
                   unoptimized={currentDisplayImage.endsWith(".svg")}
-                  className="object-contain p-4 transition-all duration-300"
+                  className="object-contain p-1 sm:p-2 transition-all duration-300"
                 />
               </div>
 
@@ -559,7 +559,7 @@ export default function ProductsClient() {
                         alt={`${activeTitle} thumbnail ${idx + 1}`}
                         fill
                         unoptimized={thumbUrl.endsWith(".svg")}
-                        className="object-cover p-1"
+                        className="object-cover"
                       />
                     </button>
                   ))}
